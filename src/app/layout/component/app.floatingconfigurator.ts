@@ -15,7 +15,8 @@ import { LayoutService } from '../service/layout.service';
                 <app-configurator />
             </div>
         </div>
-    `
+    `,
+    standalone:true
 })
 export class AppFloatingConfigurator {
     LayoutService = inject(LayoutService);
