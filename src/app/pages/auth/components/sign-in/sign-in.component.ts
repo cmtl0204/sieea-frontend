@@ -11,12 +11,14 @@ import { CustomMessageService } from '../../../../utils/services/custom-message.
 import { AuthHttpService } from '../../auth-http.service';
 import { handleError } from '../../../../utils/exceptions/handle-error';
 import { NgOptimizedImage } from '@angular/common';
+import { GoogleComponent } from '../../ui/auth-provider-button/auth-provider-button.component';
+import { Divider } from 'primeng/divider';
 
 @Component({
     selector: 'app-sign-in',
     templateUrl: './sign-in.component.html',
     standalone: true,
-    imports: [ButtonModule, CheckboxModule, InputTextModule, PasswordModule, FormsModule, RouterModule, RippleModule, AppFloatingConfigurator, ReactiveFormsModule, NgOptimizedImage]
+    imports: [ButtonModule, CheckboxModule, InputTextModule, PasswordModule, FormsModule, RouterModule, RippleModule, AppFloatingConfigurator, ReactiveFormsModule, NgOptimizedImage, GoogleComponent, Divider]
 })
 export default class SignInComponent {
     private readonly _formBuilder = inject(FormBuilder);

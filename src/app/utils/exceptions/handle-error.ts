@@ -18,6 +18,9 @@ export const handleError = (error: any) => {
         case 'auth/invalid-credential':
             errorMessage = 'Usuario y/o Contraseña no válidos';
             break;
+        case 'auth/user-disabled':
+            errorMessage = 'Usuario Suspendido';
+            break;
         default:
             errorMessage = 'Error desconocido: ' + error.message;
             break;

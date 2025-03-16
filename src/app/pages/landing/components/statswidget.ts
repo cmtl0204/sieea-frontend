@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'features-widget',
-    templateUrl:'./featureswidget.component.html',
+    selector: 'stats-widget',
+    templateUrl: './statswidget.component.html',
     standalone: true,
     imports: [CommonModule],
 })
-export class FeaturesWidget {}
+export class StatsWidget {}

@@ -1,0 +1,41 @@
+<div
+    id="hero"
+    class="flex flex-col pt-6 px-6 lg:px-20 overflow-hidden"
+    style="background: linear-gradient(0deg, rgba(0, 255, 0, 0.2), rgba(255, 0, 255, 0.2)), radial-gradient(77.36% 256.97% at 77.36% 57.52%, rgb(238, 239, 175) 0%, rgb(195, 227, 250) 100%); clip-path: ellipse(150% 87% at 93% 13%)">
+
+    <div class="mx-6 md:mx-20 mt-0 md:mt-6">
+        <h1 class="text-6xl font-bold text-gray-900 leading-tight">
+            <span class="font-light block">
+                Planting Future
+            </span>
+
+            Sembrando un Futuro para el Planeta
+        </h1>
+
+        <p class="font-normal text-2xl leading-normal md:mt-4 text-gray-700">
+            Planting Future es un programa global que busca combatir el cambio climático mediante la reforestación
+            estratégica y la participación activa de donantes individuales y organizaciones...
+        </p>
+
+        <p-button [rounded]="true" type="button" label="Dona ahora" class="!text-xl mt-8 !px-4" />
+
+        <p-button [rounded]="true" type="button" label="Conoce la Carbon Credit Card" class="!text-xl mt-8 !px-4"
+                  [text]="true" />
+
+        <p class="font-normal text-2xl leading-normal md:mt-4 text-gray-700">
+            Únete a la misión para salvar el planeta: Planta un árbol, cambia el futuro.
+        </p>
+    </div>
+
+    <div class="flex justify-center md:justify-end">
+        <p-imagecompare class="sm:!w-96 shadow-lg rounded-2xl">
+            <ng-template #left>
+                <img src="https://primefaces.org/cdn/primevue/images/compare/island1.jpg" />
+            </ng-template>
+
+            <ng-template #right>
+                <img src="https://primefaces.org/cdn/primevue/images/compare/island2.jpg" />
+            </ng-template>
+        </p-imagecompare>
+    </div>
+</div>
