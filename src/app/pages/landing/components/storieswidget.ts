@@ -8,7 +8,7 @@ import { Button } from 'primeng/button';
     selector: 'stories-widget',
     templateUrl: './storieswidget.component.html',
     standalone: true,
-    imports: [CommonModule, Carousel, Tag, Button]
+    imports: [CommonModule, Carousel, Tag]
 })
 export class Storieswidget implements OnInit {
     products: any[] = [];

@@ -410,6 +410,7 @@ export class AppConfigurator {
     }
 
     updateColors(event: any, type: string, color: any) {
+        console.log(color);
         if (type === 'primary') {
             this.layoutService.layoutConfig.update((state) => ({ ...state, primary: color.name }));
         } else if (type === 'surface') {

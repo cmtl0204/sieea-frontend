@@ -23,8 +23,7 @@ import { NgOptimizedImage } from '@angular/common';
         InputText,
         Password,
         ReactiveFormsModule,
-        RouterLink,
-        NgOptimizedImage
+        RouterLink
     ]
 })
 export default class SignUpComponent {
