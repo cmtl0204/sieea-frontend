@@ -2,5 +2,6 @@ export const environment = {
   production: false,
   API_URL: 'https://api-convenios-des.turismo.gob.ec',
   APP_NAME:'Pruebas QA Sistema Informático de Convenios',
-  APP_SHORT_NAME:'SIC'
+  APP_SHORT_NAME:'SIC',
+    RECAPTCHA_SITE_KEY: '6Lfw3v8qAAAAANpHVyPuWDDVbCUNryg9OxdfTsGg'
 };

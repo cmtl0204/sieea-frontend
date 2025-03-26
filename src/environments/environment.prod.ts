@@ -1,6 +1,7 @@
 export const environment = {
-  production: true,
-  API_URL: 'https://api-convenios.turismo.gob.ec',
-  APP_NAME:'Sistema Informático de Convenios',
-  APP_SHORT_NAME:'SIC'
+    production: true,
+    API_URL: 'http://api-sis-ecu-enaccion.turismo.gob.ec/api/v1',
+    APP_NAME: 'Sistema Informático Ecuatorianos en Acción',
+    APP_SHORT_NAME: 'SIEEA',
+    RECAPTCHA_SITE_KEY: '6Lfw3v8qAAAAANpHVyPuWDDVbCUNryg9OxdfTsGg'
 };
