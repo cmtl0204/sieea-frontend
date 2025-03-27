@@ -8,7 +8,7 @@
             style="border-radius: 56px; padding: 0.4rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 100%)">
             <div class="w-full bg-surface-0 dark:bg-surface-900 py-10 px-8 sm:px-6" style="border-radius: 53px">
                 <div class="text-center mb-0">
-                    @if (environment.production) {
+                    @if (!environment.production) {
                         <h1 class="text-red-500">
                             {{ environment.APP_SHORT_NAME }}
                         </h1>
@@ -58,17 +58,6 @@
                             [feedback]="false" />
                     </div>
 
-<!--                    <p-button-->
-<!--                        data-sitekey="AIzaSyCGUwCcM-LKjRK4rjbBJ06_GLmX2LaYzfg"-->
-<!--                        (onClick)="onSubmit($event)">ca-->
-<!--                    </p-button>-->
-
-<!--                    <p-button (onClick)="executeRecaptcha()"/>-->
-
-                    <re-captcha
-                        (resolved)="executeRecaptchaVisible($event)"
-                        [siteKey]="environment.RECAPTCHA_SITE_KEY"/>
-
                     <!--                    <div class="flex items-center justify-between mt-2 mb-8 gap-8">-->
                     <!--                        <span-->
                     <!--                            routerLink="/auth/sign-in"-->
@@ -83,11 +72,12 @@
                     <!--                        </span>-->
                     <!--                    </div>-->
 
-                    <p-button label="Iniciar Sesión"
-                              styleClass="w-full"
-                              (onClick)="onSubmit()"
-                              [icon]="PrimeIcons.SIGN_IN"
-                              [disabled]="!isRecaptcha" />
+                    <p-button
+                        type="submit"
+                        label="Iniciar Sesión"
+                        styleClass="w-full"
+                        [icon]="PrimeIcons.SIGN_IN"
+                        [disabled]="!isRecaptcha" />
                 </form>
 
                 <!--                <p-divider align="center" type="dotted">-->

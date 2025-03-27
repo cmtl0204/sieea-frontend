@@ -9,7 +9,7 @@ import { MessageService } from 'primeng/api';
     imports: [RouterModule, ToastModule],
     template: `
         <router-outlet />
-        <p-toast position="bottom-center" />
+        <p-toast position="top-center" />
     `
 })
 export class AppComponent {

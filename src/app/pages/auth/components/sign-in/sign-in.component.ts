@@ -17,6 +17,7 @@ import { RecaptchaModule, ReCaptchaV3Service } from 'ng-recaptcha';
 import { PrimeIcons } from 'primeng/api';
 import { KeyFilter } from 'primeng/keyfilter';
 import { AuthService } from '@modules/auth/auth.service';
+import { catchError, concatMap, EMPTY, of, throwError } from 'rxjs';
 
 @Component({
     selector: 'app-sign-in',
@@ -47,27 +48,69 @@ export default class SignInComponent {
     }
 
     executeRecaptcha() {
-        this._reCaptchaV3Service.execute('').subscribe((token) => {
-            console.log(token);
+        this._reCaptchaV3Service.execute('submit').subscribe((token) => {
+            this._authHttpService.verifyRecaptcha(token).subscribe((response: any) => {
+                if (response.success) {
+                    console.log(response);
+                } else {
+                    console.log('error');
+                }
+            });
         });
-    }
-
-    executeRecaptchaVisible(token: any) {
-        console.log(token);
-        this.isRecaptcha = true;
     }
 
     onSubmit() {
-        console.log(this.form.value);
-        this._authHttpService.signIn(this.form.value).subscribe((response) => {
-            if (this._authService.roles.length === 0) {
-                this._customMessageService.showError({ summary: 'Sin Rol', detail: 'No cuenta con un rol asignado' });
-                this._authService.removeLogin();
-                return;
-            }
+        // Primero crear usuario, luego con su ID crear un perfil
+        this._reCaptchaV3Service
+            .execute('login')
+            .pipe(
+                concatMap((token) => this._authHttpService.verifyRecaptcha(token).pipe(
+                    catchError((error) => {
+                        console.error('Error en reCAPTCHA:', error);
 
-            this._router.navigateByUrl('');
-        });
+                        this._customMessageService.showError({
+                            summary: 'Error de verificación',
+                            detail: 'No se pudo verificar el reCAPTCHA'
+                        });
+                        return throwError(() => error); // Propaga el error
+                    })
+                )),
+
+                concatMap((recaptchaResponse:any) => {
+                    if (recaptchaResponse?.success) {
+                        return this._authHttpService.signIn(this.form.value).pipe(
+                            catchError((error) => {
+                                console.error('Error en inicio de sesión:', error);
+
+                                this._customMessageService.showError({
+                                    summary: 'Error de inicio de sesión',
+                                    detail: 'No se pudo iniciar sesión'
+                                });
+                                return throwError(() => error); // Propaga el error
+                            })
+                        );
+                    }
+
+                    return of(null);
+                })
+            )
+            .subscribe({
+                next: (response) => {
+                    if (response && this._authService.roles.length === 0) {
+                        this._customMessageService.showError({
+                            summary: 'Sin Rol',
+                            detail: 'No cuenta con un rol asignado'
+                        });
+                        this._authService.removeLogin();
+                        return;
+                    }
+
+                    this._router.navigateByUrl('');
+                },
+                error: (error) => {
+                    console.error('Error general:', error);
+                }
+            });
     }
 
     getUsername() {

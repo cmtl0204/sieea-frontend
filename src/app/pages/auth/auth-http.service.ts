@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Auth, GoogleAuthProvider, OAuthProvider, FacebookAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from '@angular/fire/auth';
 import { SignInInterface, SignUpInterface } from './interfaces';
 import { environment } from '@env/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { AuthService } from '@modules/auth/auth.service';
 import { SignInResponseInterface } from '@modules/auth/interfaces';
@@ -63,5 +63,13 @@ export class AuthHttpService {
         provider.setCustomParameters({ prompt: 'select_account' });
 
         return signInWithPopup(this._auth, provider);
+    }
+
+    verifyRecaptcha(token: string) {
+        const url = `${this._apiUrl}/verify-recaptcha`;
+
+        const params = new HttpParams().set('token', token);
+
+        return this._httpClient.post(url, null, { params: params });
     }
 }
