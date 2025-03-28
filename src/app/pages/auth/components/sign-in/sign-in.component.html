@@ -1,4 +1,4 @@
-<app-floating-configurator />
+<!--<app-floating-configurator />-->
 
 <div
     class="bg-surface-50 dark:bg-surface-950 flex items-center justify-center min-h-screen min-w-[100vw] overflow-hidden">
@@ -76,8 +76,8 @@
                         type="submit"
                         label="Iniciar Sesión"
                         styleClass="w-full"
-                        [icon]="PrimeIcons.SIGN_IN"
-                        [disabled]="!isRecaptcha" />
+                        [loading]="_coreService.loading()"
+                        [icon]="PrimeIcons.SIGN_IN" />
                 </form>
 
                 <!--                <p-divider align="center" type="dotted">-->

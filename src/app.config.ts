@@ -1,4 +1,4 @@
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter, withEnabledBlockingInitialNavigation, withInMemoryScrolling } from '@angular/router';
@@ -11,6 +11,26 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { MessageService } from 'primeng/api';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 import { environment } from '@env/environment';
+import { HttpInterceptorProviders } from './app/interceptors';
+import { definePreset } from '@primeng/themes';
+
+const MyPreset = definePreset(Aura, {
+    semantic: {
+        primary: {
+            50: '{indigo.50}',
+            100: '{indigo.100}',
+            200: '{indigo.200}',
+            300: '{indigo.300}',
+            400: '{indigo.400}',
+            500: '{indigo.500}',
+            600: '{indigo.600}',
+            700: '{indigo.700}',
+            800: '{indigo.800}',
+            900: '{indigo.900}',
+            950: '{indigo.950}'
+        }
+    }
+});
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -27,11 +47,13 @@ export const appConfig: ApplicationConfig = {
             provide: RECAPTCHA_V3_SITE_KEY,
             useValue: environment.RECAPTCHA_SITE_KEY,
         },
-        provideHttpClient(),
+        provideHttpClient(
+            withInterceptors(HttpInterceptorProviders)
+        ),
         provideAnimationsAsync(),
         providePrimeNG({
             theme: {
-                preset: Aura,
+                preset: MyPreset,
                 options: { darkModeSelector: '.app-dark' }
             }
         }),

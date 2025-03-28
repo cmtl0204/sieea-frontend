@@ -2,7 +2,7 @@ import { RoleInterface } from '@modules/auth/interfaces';
 
 export interface AuthInterface {
   id: string;
-  roles: RoleInterface[];
+  roles?: RoleInterface[];
   avatar: string;
   email: string;
   emailVerifiedAt: Date;

@@ -5,11 +5,18 @@ import { environment } from '@env/environment';
 import { AuthInterface } from '@modules/auth/interfaces/auth.interface';
 import { RoleInterface } from '@modules/auth/interfaces/role.interface';
 import { RoleEnum } from '@utils/enums';
+import { Router } from '@angular/router';
+import { CustomMessageService } from '@utils/services/custom-message.service';
+import { CoreService } from '@utils/services/core.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
+    private readonly _coreService = inject(CoreService);
+    private readonly _router = inject(Router);
+    private readonly _customMessageService = inject(CustomMessageService);
+
     get accessToken(): string | null {
         let accessToken = sessionStorage.getItem('accessToken');
 
@@ -75,6 +82,16 @@ export class AuthService {
     removeLogin() {
         localStorage.clear();
         sessionStorage.clear();
+
+        this._coreService.showProcessing();
+
+        setTimeout(() => {
+            this._coreService.hideProcessing();
+
+            this._customMessageService.showInfo({ summary: 'Se cerró la sesión correctamente', detail: '' });
+
+            this._router.navigateByUrl('/auth/sign-in');
+        }, 1000);
     }
 
     selectDashboard() {
