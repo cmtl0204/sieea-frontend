@@ -44,6 +44,10 @@ export class CustomMessageService {
         this._messageService.add({ severity: 'warn', summary, detail });
     }
 
+    showHttpSuccess(response: string | string[] | any) {
+        this._messageService.add({ severity: 'success', summary: response.title, detail: response.message });
+    }
+
     showHttpError(error: string | string[] | any) {
         if (Array.isArray(error)) error.sort();
 

@@ -1,0 +1,202 @@
+@if (_coreService.loading()) {
+    <app-skeleton />
+} @else {
+    <p-toolbar>
+        <ng-template #start>
+
+        </ng-template>
+
+        <ng-template #center>
+        </ng-template>
+
+        <ng-template #end>
+            <p-button
+                type="button"
+                class="mr-2"
+                label="Regresar"
+                size="large"
+                [icon]="PrimeIcons.ARROW_LEFT"
+                iconPos="left"
+                severity="warn"
+                (onClick)="previous.emit(null)" />
+
+            @if (checked.value) {
+                <p-button
+                    type="button"
+                    label="Guardar y Continuar"
+                    size="large"
+                    severity="success"
+                    [icon]="PrimeIcons.SAVE"
+                    iconPos="right"
+                    (onClick)="onSubmit()" />
+            } @else {
+                <p-button
+                    type="button"
+                    label="Continuar"
+                    size="large"
+                    [icon]="PrimeIcons.ARROW_RIGHT"
+                    iconPos="right"
+                    (onClick)="next.emit(null)" />
+            }
+        </ng-template>
+    </p-toolbar>
+
+    <p-fluid>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="flex flex-col md:flex-row gap-8 mt-6">
+                <div class="w-full">
+                    <div class="card flex flex-col gap-4">
+                        <p-message severity="error" size="large">
+                            <ng-template #icon>
+                                <i class="pi pi-info-circle"></i>
+                            </ng-template>
+
+                            <span class="ml-2">Alerta: recuerde que los datos ingresados deberán estar a nombre del beneficiario registrado</span>
+                        </p-message>
+                    </div>
+
+                    @if (!accountChangedField?.value) {
+                        <div class="card flex flex-col gap-4">
+                            <div class="flex items-center">
+                                <p-checkbox inputId="checked" [formControl]="checked" [binary]="true" />
+
+                                <label for="checked" class="ml-2">
+                                    Click para editar su cuenta (Recuerde que solo puede editar una sola vez)
+                                </label>
+                            </div>
+                        </div>
+                    } @else {
+                        <div class="card flex flex-col gap-4">
+                            <p-message severity="warn" size="large">
+                                <ng-template #icon>
+                                    <i class="pi pi-info-circle"></i>
+                                </ng-template>
+
+                                <span class="ml-2">Atención: usted ya realizó el cambio de su cuenta bancaria</span>
+                            </p-message>
+                        </div>
+                    }
+
+                    <div formGroupName="additionalInformation" class="card flex flex-col gap-4">
+                        <div class="font-semibold text-xl">Datos cuenta bancaria</div>
+
+                        <p-divider />
+
+                        <!-- type -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="accountType"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Tipo de cuenta"
+                                [required]="accountTypeField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <input pInputText type="text" id="accountType" formControlName="accountType" />
+
+                                <p-message
+                                    appErrorMessage
+                                    [errors]="accountTypeField?.errors"
+                                    [touched]="accountTypeField?.touched"
+                                    [dirty]="accountTypeField?.dirty"
+                                    severity="error"
+                                    variant="simple"
+                                    size="small" />
+                            </div>
+                        </div>
+
+                        <!-- number -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="accountNumber"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Número de cuenta"
+                                [required]="accountNumberField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <input pInputText type="text" id="accountNumber" formControlName="accountNumber" />
+
+                                <p-message
+                                    appErrorMessage
+                                    [errors]="accountNumberField?.errors"
+                                    [touched]="accountNumberField?.touched"
+                                    [dirty]="accountNumberField?.dirty"
+                                    severity="error"
+                                    variant="simple"
+                                    size="small" />
+                            </div>
+                        </div>
+
+                        <!-- shortName -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="accountName"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Nombre corto"
+                                [required]="accountNameField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <input pInputText type="text" id="accountName" formControlName="accountName" />
+
+                                <p-message
+                                    appErrorMessage
+                                    [errors]="accountNameField?.errors"
+                                    [touched]="accountNameField?.touched"
+                                    [dirty]="accountNameField?.dirty"
+                                    severity="error"
+                                    variant="simple"
+                                    size="small" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </p-fluid>
+
+    <p-toolbar>
+        <ng-template #start>
+
+        </ng-template>
+
+        <ng-template #center>
+        </ng-template>
+
+        <ng-template #end>
+            <p-button
+                type="button"
+                class="mr-2"
+                label="Regresar"
+                size="large"
+                [icon]="PrimeIcons.ARROW_LEFT"
+                iconPos="left"
+                severity="warn"
+                (onClick)="previous.emit(null)" />
+
+            @if (checked.value) {
+                <p-button
+                    type="button"
+                    label="Guardar y Continuar"
+                    size="large"
+                    severity="success"
+                    [icon]="PrimeIcons.SAVE"
+                    iconPos="right"
+                    (onClick)="onSubmit()" />
+            } @else {
+                <p-button
+                    type="button"
+                    label="Continuar"
+                    size="large"
+                    [icon]="PrimeIcons.ARROW_RIGHT"
+                    iconPos="right"
+                    (onClick)="next.emit(null)" />
+
+            }
+        </ng-template>
+    </p-toolbar>
+}

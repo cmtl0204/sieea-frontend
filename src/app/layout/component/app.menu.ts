@@ -24,14 +24,14 @@ export class AppMenu {
 
     ngOnInit() {
         this.model = [
-            {
-                label: 'Home',
-                items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }]
-            },
+            // {
+            //     label: 'Home',
+            //     items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }]
+            // },
             {
                 label: 'Proceso de Vinculación',
                 items: [
-                    { label: 'Capacitación', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout'] }
+                    { label: 'Guía de Validación', icon: 'pi pi-fw pi-id-card', routerLink: ['/validation-guide'] }
                     // { label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input'] },
                     // { label: 'Button', icon: 'pi pi-fw pi-mobile', class: 'rotated-icon', routerLink: ['/uikit/button'] },
                     // { label: 'Table', icon: 'pi pi-fw pi-table', routerLink: ['/uikit/table'] },

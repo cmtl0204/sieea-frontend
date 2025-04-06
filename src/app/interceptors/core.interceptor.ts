@@ -27,10 +27,20 @@ export const coreInterceptor: HttpInterceptorFn = (req, next) => {
         headers = headers.append('Content-Type', 'application/json');
     }
 
+    switch (req.method) {
+        case 'POST':
+        case 'PUT':
+        case 'PATCH':
+        case 'DELETE':
+            coreService.showProcessing();
+            break;
+    }
+
     coreService.showLoading();
 
     return next(req.clone({ headers, params })).pipe(
         finalize(() => {
+            coreService.hideProcessing();
             coreService.hideLoading();
         })
     );

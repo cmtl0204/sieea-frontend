@@ -1,0 +1,457 @@
+@if (_coreService.loading()) {
+    <app-skeleton />
+} @else {
+    <p-toolbar>
+        <ng-template #start>
+
+        </ng-template>
+
+        <ng-template #center>
+        </ng-template>
+
+        <ng-template #end>
+            <p-button
+                type="button"
+                label="Guardar y Continuar"
+                size="large"
+                [icon]="PrimeIcons.ARROW_RIGHT"
+                iconPos="right"
+                (onClick)="onSubmit()" />
+        </ng-template>
+    </p-toolbar>
+
+    <p-divider />
+
+    <p-fluid>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/2">
+                    <div class="card flex flex-col gap-4">
+                        <div class="font-semibold text-xl">Datos personales</div>
+
+                        <p-divider />
+
+                        <!-- identification -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="identification"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Cédula"
+                                [required]="identificationField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <input pInputText type="text" id="identification" formControlName="identification" />
+                            </div>
+
+                            <span
+                                appErrorMessage
+                                [errors]="identificationField?.errors"
+                                [touched]="identificationField?.touched"
+                                [dirty]="identificationField?.dirty">
+                    </span>
+                        </div>
+
+                        <!-- birthdate -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="birthdate"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Fecha de nacimiento"
+                                [required]="birthdateField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <input pInputText type="text" id="birthdate" formControlName="birthdate" />
+                            </div>
+
+                            <span
+                                appErrorMessage
+                                [errors]="birthdateField?.errors"
+                                [touched]="birthdateField?.touched"
+                                [dirty]="birthdateField?.dirty">
+                    </span>
+                        </div>
+
+                        <!-- age -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="age"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Edad"
+                                [required]="ageField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <input pInputText type="text" id="age" formControlName="age" />
+                            </div>
+
+                            <span
+                                appErrorMessage
+                                [errors]="ageField?.errors"
+                                [touched]="ageField?.touched"
+                                [dirty]="ageField?.dirty">
+                    </span>
+                        </div>
+
+                        <!-- name -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="name"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Nombres"
+                                [required]="nameField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <input pInputText type="text" id="name" formControlName="name" />
+                            </div>
+
+                            <span
+                                appErrorMessage
+                                [touched]="nameField?.touched"
+                                [errors]="nameField?.errors"
+                                [dirty]="nameField?.dirty">
+                    </span>
+                        </div>
+
+                        <!-- lastname -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="lastname"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Apellidos"
+                                [required]="lastnameField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <input pInputText type="text" id="lastname" formControlName="lastname" />
+                            </div>
+
+                            <span
+                                appErrorMessage
+                                [errors]="lastnameField?.errors"
+                                [touched]="lastnameField?.touched"
+                                [dirty]="lastnameField?.dirty">
+                    </span>
+                        </div>
+
+                        <!-- gender -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="gender"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Género"
+                                [required]="genderField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <p-select
+                                    id="gender"
+                                    class="col-span-12 md:col-span-8"
+                                    [options]="[genderField?.value]"
+                                    formControlName="gender"
+                                    optionLabel="name" />
+                            </div>
+
+                            <span
+                                appErrorMessage
+                                [errors]="genderField?.errors"
+                                [touched]="genderField?.touched"
+                                [dirty]="genderField?.dirty">
+                    </span>
+                        </div>
+
+                        <!-- nationality -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="nationality"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Nacionalidad"
+                                [required]="nationalityField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <p-select
+                                    id="nationality"
+                                    class="col-span-12 md:col-span-8"
+                                    [options]="[nationalityField?.value]"
+                                    formControlName="nationality"
+                                    optionLabel="name" />
+                            </div>
+
+                            <span
+                                appErrorMessage
+                                [errors]="nationalityField?.errors"
+                                [touched]="nationalityField?.touched"
+                                [dirty]="nationalityField?.dirty">
+                    </span>
+                        </div>
+
+                        <!-- cellPhone -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="cellPhone"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Teléfono"
+                                [required]="cellPhoneField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <input pInputText type="text" id="cellPhone" formControlName="cellPhone" />
+                            </div>
+
+                            <span
+                                appErrorMessage
+                                [errors]="cellPhoneField?.errors"
+                                [touched]="cellPhoneField?.touched"
+                                [dirty]="cellPhoneField?.dirty">
+                    </span>
+                        </div>
+
+                        <!-- email -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="email"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Correo"
+                                [required]="emailField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <input pInputText type="text" id="email" formControlName="email" />
+                            </div>
+
+                            <span
+                                appErrorMessage
+                                [errors]="emailField?.errors"
+                                [touched]="emailField?.touched"
+                                [dirty]="emailField?.dirty">
+                    </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:w-1/2">
+                    <div formGroupName="additionalInformation" class="card flex flex-col gap-4">
+                        <div class="font-semibold text-xl">Contacto de emergencia:</div>
+
+                        <p-divider />
+
+                        <!-- contactName -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="contactName"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Nombre"
+                                [required]="contactNameField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <input pInputText type="text" id="contactName" formControlName="contactName" />
+                            </div>
+
+                            <span
+                                appErrorMessage
+                                [errors]="contactNameField?.errors"
+                                [touched]="contactNameField?.touched"
+                                [dirty]="contactNameField?.dirty">
+                    </span>
+                        </div>
+
+                        <!-- contactPhone -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="contactPhone"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Teléfono"
+                                [required]="contactPhoneField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <input pInputText type="text" id="contactPhone" formControlName="contactPhone" />
+                            </div>
+
+                            <span
+                                appErrorMessage
+                                [errors]="contactPhoneField?.errors"
+                                [touched]="contactPhoneField?.touched"
+                                [dirty]="contactPhoneField?.dirty">
+                    </span>
+                        </div>
+                    </div>
+
+                    <div formGroupName="address" class="card flex flex-col gap-4">
+                        <div class="font-semibold text-xl">Datos domicilio</div>
+
+                        <p-divider />
+
+                        <!-- province -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="province"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Provincia"
+                                [required]="provinceField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <input pInputText type="text" id="province" formControlName="province" />
+                            </div>
+
+                            <span
+                                appErrorMessage
+                                [errors]="provinceField?.errors"
+                                [touched]="provinceField?.touched"
+                                [dirty]="provinceField?.dirty">
+                    </span>
+                        </div>
+
+                        <!-- canton -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="canton"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Cantón"
+                                [required]="cantonField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <input pInputText type="text" id="canton" formControlName="canton" />
+                            </div>
+
+                            <span
+                                appErrorMessage
+                                [errors]="cantonField?.errors"
+                                [touched]="cantonField?.touched"
+                                [dirty]="cantonField?.dirty">
+                    </span>
+                        </div>
+
+                        <!-- parish -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="parish"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Parroquia"
+                                [required]="parishField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <input pInputText type="text" id="parish" formControlName="parish" />
+
+                                <span
+                                    appErrorMessage
+                                    [errors]="parishField?.errors"
+                                    [touched]="parishField?.touched"
+                                    [dirty]="parishField?.dirty">
+                    </span>
+                            </div>
+                        </div>
+
+                        <!-- neighborhood -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="neighborhood"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Barrio"
+                                [required]="neighborhoodField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <input pInputText type="text" id="neighborhood" formControlName="neighborhood" />
+
+                                <span
+                                    appErrorMessage
+                                    [errors]="neighborhoodField?.errors"
+                                    [touched]="neighborhoodField?.touched"
+                                    [dirty]="neighborhoodField?.dirty">
+                            </span>
+                            </div>
+                        </div>
+
+                        <!-- mainStreet -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="mainStreet"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Calle principal"
+                                [required]="mainStreetField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <input pInputText type="text" id="mainStreet" formControlName="mainStreet" />
+
+                                <span
+                                    appErrorMessage
+                                    [errors]="mainStreetField?.errors"
+                                    [touched]="mainStreetField?.touched"
+                                    [dirty]="mainStreetField?.dirty">
+                    </span>
+                            </div>
+                        </div>
+
+                        <!-- secondaryStreet -->
+                        <div class="grid grid-cols-12 gap-4">
+                            <label
+                                appLabel
+                                for="secondaryStreet"
+                                class="col-span-12 md:col-span-4 flex items-center"
+                                label="Calle secundaria"
+                                [required]="secondaryStreetField">
+                            </label>
+
+                            <div class="col-span-12 md:col-span-8">
+                                <input pInputText type="text" id="secondaryStreet" formControlName="secondaryStreet" />
+
+                                <span
+                                    appErrorMessage
+                                    [errors]="secondaryStreetField?.errors"
+                                    [touched]="secondaryStreetField?.touched"
+                                    [dirty]="secondaryStreetField?.dirty">
+                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </p-fluid>
+
+    <p-divider />
+
+    <p-toolbar>
+        <ng-template #start>
+
+        </ng-template>
+
+        <ng-template #center>
+        </ng-template>
+
+        <ng-template #end>
+            <p-button
+                type="button"
+                label="Guardar y Continuar"
+                size="large"
+                [icon]="PrimeIcons.ARROW_RIGHT"
+                iconPos="right"
+                (onClick)="onSubmit()" />
+        </ng-template>
+    </p-toolbar>
+}

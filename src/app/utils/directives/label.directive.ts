@@ -40,7 +40,7 @@ export class LabelDirective implements OnInit {
             // this.renderer.appendChild(requiredSymbol, asterisk);
             this.renderer.addClass(requiredSymbol, 'pi');
             this.renderer.addClass(requiredSymbol, 'pi-asterisk');
-            this.renderer.setStyle(requiredSymbol, 'font-size', '0.7rem');
+            this.renderer.setStyle(requiredSymbol, 'font-size', '0.6rem');
             this.renderer.addClass(requiredSymbol, 'text-red-500');
             this.renderer.addClass(requiredSymbol, 'text-lg');
             this.renderer.addClass(requiredSymbol, 'ml-1');

@@ -1,0 +1,123 @@
+<p-stepper [(value)]="activeStep" class="basis-[40rem]">
+    <p-step-list>
+        <p-step [value]="1" class="flex flex-row flex-auto gap-2">
+            <ng-template #content let-activateCallback="activateCallback" let-value="value">
+                <button class="bg-transparent border-0 inline-flex flex-col gap-2" (click)="activateCallback()">
+                    <span
+                        class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
+                        [ngClass]="{
+                            'bg-primary text-primary-contrast border-primary': value <= activeStep,
+                            'border-surface': value > activeStep
+                        }"
+                    >
+                        <i class="pi pi-user"></i>
+                    </span>
+                </button>
+                1: Datos Personales
+            </ng-template>
+        </p-step>
+
+        <p-step [value]="2" class="flex flex-row flex-auto gap-2">
+            <ng-template #content let-activateCallback="activateCallback" let-value="value">
+                <button class="bg-transparent border-0 inline-flex flex-col gap-2" (click)="activateCallback()">
+                    <span
+                        class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
+                        [ngClass]="{
+                            'bg-primary text-primary-contrast border-primary': value <= activeStep,
+                            'border-surface': value > activeStep
+                        }"
+                    >
+                        <i class="pi pi-money-bill"></i>
+                    </span>
+                </button>
+                2: Datos Bancarios
+            </ng-template>
+        </p-step>
+
+        <p-step [value]="3" class="flex flex-row flex-auto gap-2">
+            <ng-template #content let-activateCallback="activateCallback" let-value="value">
+                <button class="bg-transparent border-0 inline-flex flex-col gap-2" (click)="activateCallback()">
+                    <span
+                        class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
+                        [ngClass]="{
+                            'bg-primary text-primary-contrast border-primary': value <= activeStep,
+                            'border-surface': value > activeStep
+                        }"
+                    >
+                        <i class="pi pi-list-check"></i>
+                    </span>
+                </button>
+
+                3: Actividad
+            </ng-template>
+        </p-step>
+
+        <p-step [value]="4" class="flex flex-row flex-auto gap-2">
+            <ng-template #content let-activateCallback="activateCallback" let-value="value">
+                <button class="bg-transparent border-0 inline-flex flex-col gap-2" (click)="activateCallback()">
+                    <span
+                        class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
+                        [ngClass]="{
+                            'bg-primary text-primary-contrast border-primary': value <= activeStep,
+                            'border-surface': value > activeStep
+                        }"
+                    >
+                        <i class="pi pi-id-card"></i>
+                    </span>
+                </button>
+
+                4: Documentao y Aceptación
+            </ng-template>
+        </p-step>
+
+        <p-step [value]="5" class="flex flex-row flex-auto gap-2">
+            <ng-template #content let-activateCallback="activateCallback" let-value="value">
+                <button class="bg-transparent border-0 inline-flex flex-col gap-2" (click)="activateCallback()">
+                    <span
+                        class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
+                        [ngClass]="{
+                            'bg-primary text-primary-contrast border-primary': value <= activeStep,
+                            'border-surface': value > activeStep
+                        }"
+                    >
+                        <i class="pi pi-verified"></i>
+                    </span>
+                </button>
+
+                5: Inducción y Evaluación
+            </ng-template>
+        </p-step>
+    </p-step-list>
+
+    <p-step-panels>
+        <p-step-panel [value]="1">
+            <ng-template #content let-activateCallback="activateCallback">
+                <app-personal-information (next)="activateCallback(2)"/>
+            </ng-template>
+        </p-step-panel>
+
+        <p-step-panel [value]="2">
+            <ng-template #content let-activateCallback="activateCallback">
+                <app-bank-detail (previous)="activateCallback(1)" (next)="activateCallback(3)"/>
+            </ng-template>
+        </p-step-panel>
+
+        <p-step-panel [value]="3">
+            <ng-template #content let-activateCallback="activateCallback">
+                <app-activity (previous)="activateCallback(2)" (next)="activateCallback(4)"/>
+            </ng-template>
+        </p-step-panel>
+
+        <p-step-panel [value]="4">
+            <ng-template #content let-activateCallback="activateCallback">
+                <app-document (previous)="activateCallback(3)" (next)="activateCallback(5)"/>
+            </ng-template>
+        </p-step-panel>
+
+        <p-step-panel [value]="5">
+            <ng-template #content let-activateCallback="activateCallback">
+                <app-evaluation (previous)="activateCallback(4)" (next)="activateCallback(6)"/>
+            </ng-template>
+        </p-step-panel>
+    </p-step-panels>
+</p-stepper>

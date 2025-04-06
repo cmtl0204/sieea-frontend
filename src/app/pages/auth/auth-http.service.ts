@@ -32,14 +32,12 @@ export class AuthHttpService {
             map((response) => {
                 this._authService.accessToken = response.data.accessToken;
 
-                const { roles, ...auth } = response.data.auth;
+                this._authService.auth = response.data.auth;
 
-                this._authService.auth = auth;
+                this._authService.roles = response.data.roles;
 
-                this._authService.roles = roles;
-
-                if (response.data.auth.roles.length === 1) {
-                    this._authService.role = response.data.auth.roles[0];
+                if (response.data.roles.length === 1) {
+                    this._authService.role = response.data.roles[0];
                 }
 
                 this._customMessageService.showSuccess({ summary: response.title, detail: response.message });

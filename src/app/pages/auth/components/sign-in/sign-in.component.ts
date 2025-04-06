@@ -6,18 +6,14 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { RippleModule } from 'primeng/ripple';
-import { AppFloatingConfigurator } from '../../../../layout/component/app.floatingconfigurator';
 import { CustomMessageService } from '@utils/services/custom-message.service';
 import { AuthHttpService } from '../../auth-http.service';
 import { environment } from '@env/environment';
-import { RecaptchaModule, ReCaptchaV3Service } from 'ng-recaptcha';
-import { MessageService, PrimeIcons } from 'primeng/api';
-import { KeyFilter } from 'primeng/keyfilter';
-import { AuthService } from '@modules/auth/auth.service';
+// import { RecaptchaModule, ReCaptchaV3Service } from 'ng-recaptcha';
 import { concatMap, of } from 'rxjs';
+import { PrimeIcons } from 'primeng/api';
+import { AuthService } from '@modules/auth/auth.service';
 import { CoreService } from '@utils/services/core.service';
-import { ProgressBar } from 'primeng/progressbar';
-import { Toast } from 'primeng/toast';
 import { Card } from 'primeng/card';
 import { ErrorMessageDirective } from '@utils/directives/error-message.directive';
 import { LabelDirective } from '@utils/directives/label.directive';
@@ -27,7 +23,17 @@ import { Divider } from 'primeng/divider';
     selector: 'app-sign-in',
     templateUrl: './sign-in.component.html',
     standalone: true,
-    imports: [ButtonModule, CheckboxModule, InputTextModule, PasswordModule, FormsModule, RouterModule, RippleModule, ReactiveFormsModule, RecaptchaModule, Card, ErrorMessageDirective, LabelDirective, Divider]
+    imports: [
+        ButtonModule,
+        CheckboxModule,
+        InputTextModule,
+        PasswordModule,
+        FormsModule,
+        RouterModule,
+        RippleModule,
+        ReactiveFormsModule
+        // RecaptchaModule
+    ]
 })
 export default class SignInComponent {
     private readonly _formBuilder = inject(FormBuilder);
@@ -36,7 +42,7 @@ export default class SignInComponent {
     private readonly _authService = inject(AuthService);
     protected readonly _coreService = inject(CoreService);
     private readonly _router = inject(Router);
-    private readonly _reCaptchaV3Service = inject(ReCaptchaV3Service);
+    // private readonly _reCaptchaV3Service = inject(ReCaptchaV3Service);
     protected readonly environment = environment;
     protected form!: FormGroup;
     protected formErrors: string[] = [];
@@ -47,7 +53,7 @@ export default class SignInComponent {
 
     buildForm() {
         this.form = this._formBuilder.group({
-            username: [null, [Validators.required, Validators.maxLength(2)]],
+            username: [null, [Validators.required]],
             password: [null, [Validators.required]]
         });
     }
@@ -59,23 +65,40 @@ export default class SignInComponent {
             return;
         }
 
-        this._reCaptchaV3Service
-            .execute('login')
-            .pipe(
-                concatMap((token) => this._authHttpService.verifyRecaptcha(token)),
+        this.signIn();
+    }
 
-                concatMap((recaptchaResponse: any) => (recaptchaResponse?.success ? this._authHttpService.signIn(this.form.value) : of(null)))
-            )
-            .subscribe({
-                next: (responseSignIn) => {
-                    if (responseSignIn && this._authService.roles.length === 0) {
-                        this._authService.removeLogin();
-                        return;
-                    }
+    // signInBackup(){
+    //     this._reCaptchaV3Service
+    //         .execute('login')
+    //         .pipe(
+    //             concatMap((token) => this._authHttpService.verifyRecaptcha(token)),
+    //
+    //             concatMap((recaptchaResponse: any) => (recaptchaResponse?.success ? this._authHttpService.signIn(this.form.value) : of(null)))
+    //         )
+    //         .subscribe({
+    //             next: (responseSignIn) => {
+    //                 if (responseSignIn && this._authService.roles.length === 0) {
+    //                     this._authService.removeLogin();
+    //                     return;
+    //                 }
+    //
+    //                 this._router.navigateByUrl('');
+    //             }
+    //         });
+    // }
 
-                    this._router.navigateByUrl('');
+    signIn() {
+        this._authHttpService.signIn(this.form.value).subscribe({
+            next: (responseSignIn) => {
+                if (responseSignIn && this._authService.roles.length === 0) {
+                    this._authService.removeLogin();
+                    return;
                 }
-            });
+
+                this._router.navigateByUrl('validation-guide');
+            }
+        });
     }
 
     validateForm() {
