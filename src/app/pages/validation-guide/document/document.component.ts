@@ -23,7 +23,7 @@ interface FileInterface {
 
 @Component({
     selector: 'app-document',
-    imports: [Toast, FileUpload, Button, ProgressBar, Badge, ReactiveFormsModule, NgIf, NgForOf],
+    imports: [FileUpload, ReactiveFormsModule],
     templateUrl: './document.component.html',
     styleUrl: './document.component.scss',
     providers: [MessageService]

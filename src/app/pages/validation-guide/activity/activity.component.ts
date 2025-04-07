@@ -20,11 +20,11 @@ import { Checkbox } from 'primeng/checkbox';
 
 @Component({
     selector: 'app-activity',
-    imports: [Button, Divider, ErrorMessageDirective, Fluid, InputText, LabelDirective, ReactiveFormsModule, Select, SkeletonComponent, Toolbar, Message, Checkbox],
+    imports: [Button, Divider, ErrorMessageDirective, Fluid, InputText, LabelDirective, ReactiveFormsModule, SkeletonComponent, Toolbar, Message],
     templateUrl: './activity.component.html',
     styleUrl: './activity.component.scss'
 })
-export class ActivityComponent  implements OnInit {
+export class ActivityComponent implements OnInit {
     @Output() next: EventEmitter<null> = new EventEmitter();
     @Output() previous: EventEmitter<null> = new EventEmitter();
 
@@ -44,7 +44,7 @@ export class ActivityComponent  implements OnInit {
             next: (value) => {
                 if (value) {
                     this.form.enable();
-                }else{
+                } else {
                     this.form.disable();
                 }
             }

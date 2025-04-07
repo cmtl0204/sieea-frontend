@@ -20,7 +20,7 @@ import { Checkbox } from 'primeng/checkbox';
 
 @Component({
     selector: 'app-bank-detail',
-    imports: [Button, Divider, ErrorMessageDirective, Fluid, InputText, LabelDirective, ReactiveFormsModule, Select, SkeletonComponent, Toolbar, Message, Checkbox],
+    imports: [Button, Divider, ErrorMessageDirective, Fluid, InputText, LabelDirective, ReactiveFormsModule, SkeletonComponent, Toolbar, Message, Checkbox],
     templateUrl: './bank-detail.component.html',
     styleUrl: './bank-detail.component.scss'
 })
@@ -44,7 +44,7 @@ export class BankDetailComponent implements OnInit {
             next: (value) => {
                 if (value) {
                     this.form.enable();
-                }else{
+                } else {
                     this.form.disable();
                 }
             }
