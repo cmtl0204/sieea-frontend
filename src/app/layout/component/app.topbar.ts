@@ -10,7 +10,7 @@ import { environment } from '@env/environment';
 @Component({
     selector: 'app-topbar',
     standalone: true,
-    imports: [RouterModule, CommonModule, StyleClassModule, AppConfigurator],
+    imports: [RouterModule, CommonModule, StyleClassModule],
     template: ` <div class="layout-topbar">
         <div class="layout-topbar-logo-container">
             <button class="layout-menu-button layout-topbar-action" (click)="layoutService.onMenuToggle()">
@@ -39,7 +39,7 @@ import { environment } from '@env/environment';
 <!--                    >-->
 <!--                        <i class="pi pi-palette"></i>-->
 <!--                    </button>-->
-                    <app-configurator />
+<!--                    <app-configurator />-->
                 </div>
             </div>
 

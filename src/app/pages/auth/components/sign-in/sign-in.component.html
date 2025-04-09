@@ -1,4 +1,4 @@
-<!--<app-floating-configurator />-->
+<app-floating-configurator />
 
 <div
     class="bg-surface-50 dark:bg-surface-950 flex items-center justify-center min-h-screen min-w-[100vw] overflow-hidden">
@@ -42,21 +42,37 @@
                                formControlName="username" />
                     </div>
 
-                    <div>
-                        <label for="password"
-                               class="block text-surface-900 dark:text-surface-0 font-medium text-xl mb-2">
-                            Contraseña:
-                        </label>
+                    @if (identification) {
+                        <div>
+                            <label
+                                class="block text-surface-900 dark:text-surface-0 font-medium text-xl mb-2">
+                                {{ dateLabel }}
+                            </label>
 
-                        <p-password
-                            id="password"
-                            formControlName="password"
-                            placeholder="Ingrese su contraseña"
-                            [toggleMask]="true"
-                            styleClass="mb-4"
-                            [fluid]="true"
-                            [feedback]="false" />
-                    </div>
+                            <p-select
+                                id="year"
+                                [options]="years"
+                                formControlName="year"
+                                placeholder="Año"
+                                optionLabel="name"
+                                class="w-full md:w-56 mr-2" />
+
+                            <p-select
+                                id="month"
+                                [options]="months"
+                                formControlName="month"
+                                placeholder="Mes"
+                                optionLabel="name"
+                                class="w-full md:w-56 mr-2" />
+
+                            <p-select
+                                id="day"
+                                [options]="days"
+                                formControlName="day"
+                                placeholder="Día"
+                                class="w-full md:w-56 mr-2" />
+                        </div>
+                    }
 
                     <!--                    <div class="flex items-center justify-between mt-2 mb-8 gap-8">-->
                     <!--                        <span-->
@@ -71,6 +87,8 @@
                     <!--                            Crear Cuenta-->
                     <!--                        </span>-->
                     <!--                    </div>-->
+
+                    <p-divider />
 
                     <p-button
                         type="submit"

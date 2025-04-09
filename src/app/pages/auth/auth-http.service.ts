@@ -90,4 +90,14 @@ export class AuthHttpService {
             })
         );
     }
+
+    verifyIdentification(identification: string) {
+        const url = `${this._apiUrl}/verify-identification/${identification}`;
+
+        return this._httpClient.get<HttpResponseInterface>(url).pipe(
+            map((response) => {
+                return response.data;
+            })
+        );
+    }
 }

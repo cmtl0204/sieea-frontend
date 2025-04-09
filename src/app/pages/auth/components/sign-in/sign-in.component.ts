@@ -10,14 +10,18 @@ import { CustomMessageService } from '@utils/services/custom-message.service';
 import { AuthHttpService } from '../../auth-http.service';
 import { environment } from '@env/environment';
 // import { RecaptchaModule, ReCaptchaV3Service } from 'ng-recaptcha';
-import { concatMap, of } from 'rxjs';
+import { concatMap, debounceTime, delay, distinctUntilChanged, of } from 'rxjs';
 import { PrimeIcons } from 'primeng/api';
 import { AuthService } from '@modules/auth/auth.service';
 import { CoreService } from '@utils/services/core.service';
 import { Card } from 'primeng/card';
 import { ErrorMessageDirective } from '@utils/directives/error-message.directive';
 import { LabelDirective } from '@utils/directives/label.directive';
+import { DatePickerModule } from 'primeng/datepicker';
+import { AppFloatingConfigurator } from '../../../../layout/component/app.floatingconfigurator';
 import { Divider } from 'primeng/divider';
+import { InputMask } from 'primeng/inputmask';
+import { Select } from 'primeng/select';
 
 @Component({
     selector: 'app-sign-in',
@@ -31,7 +35,11 @@ import { Divider } from 'primeng/divider';
         FormsModule,
         RouterModule,
         RippleModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        AppFloatingConfigurator,
+        DatePickerModule,
+        Divider,
+        Select
         // RecaptchaModule
     ]
 })
@@ -46,16 +54,75 @@ export default class SignInComponent {
     protected readonly environment = environment;
     protected form!: FormGroup;
     protected formErrors: string[] = [];
+    protected validation: string = '';
+    protected dateLabel: string = '';
+    protected years: any[] = [];
+    protected months: any[] = [];
+    protected days: number[] = [];
+    protected identification!: any;
 
     constructor() {
         this.buildForm();
+
+        for (let i = 2035; i > 1950; i--) {
+            this.years.push({ code: i, name: i });
+        }
+
+        this.days = Array.from({ length: 31 }, (_, index) => index + 1);
+
+        this.months = [
+            { code: 1, name: 'Enero' },
+            { code: 2, name: 'Febrero' },
+            { code: 3, name: 'Marzo' },
+            { code: 4, name: 'Abril' },
+            { code: 5, name: 'Mayo' },
+            { code: 6, name: 'Junio' },
+            { code: 7, name: 'Julio' },
+            { code: 8, name: 'Agosto' },
+            { code: 9, name: 'Septiembre' },
+            { code: 10, name: 'Octubre' },
+            { code: 11, name: 'Noviembre' },
+            { code: 12, name: 'Diciembre' }
+        ];
+
+        this.usernameField?.valueChanges
+            .pipe(
+                debounceTime(1000), // Espera 500ms después de cada pulsación
+                distinctUntilChanged() // Solo emite si el valor cambió
+            )
+            .subscribe((value) => {
+                this.identification = null;
+
+                if (value.length == 10) {
+                    this._authHttpService.verifyIdentification(value).subscribe({
+                        next: (response) => {
+                            this.identification = response;
+                        }
+                    });
+                }
+            });
     }
 
     buildForm() {
         this.form = this._formBuilder.group({
             username: [null, [Validators.required]],
-            password: [null, [Validators.required]]
+            type: [null],
+            year: [null, [Validators.required]],
+            month: [null, [Validators.required]],
+            day: [null, [Validators.required]]
         });
+
+        this.validation = Math.floor(Math.random() * 2) + 1 === 1 ? 'issue' : 'expiration';
+
+        if (this.validation === 'issue') {
+            this.typeField?.setValue('issue');
+            this.dateLabel = 'Fecha de emisión de la cédula:';
+        }
+
+        if (this.validation === 'expiration') {
+            this.typeField?.setValue('expiration');
+            this.dateLabel = 'Fecha de expiración de la cédula:';
+        }
     }
 
     onSubmit() {
@@ -65,7 +132,8 @@ export default class SignInComponent {
             return;
         }
 
-        this.signIn();
+        // this.signIn();
+        this.validate();
     }
 
     // signInBackup(){
@@ -101,23 +169,62 @@ export default class SignInComponent {
         });
     }
 
+    validate() {
+        console.log(this.identification.fechaExpedicion);
+        console.log(this.identification);
+        console.log(this.identification.fechaExpedicion.substring(6, 10));
+
+        let year = this.identification.fechaExpedicion.substring(6, 10);
+        let month = this.identification.fechaExpedicion.substring(3, 5);
+        let day = this.identification.fechaExpedicion.substring(0, 2);
+
+        if (this.typeField.value === 'expiration') {
+            year = this.identification.fechaExpiracion.substring(6, 10);
+            month = this.identification.fechaExpiracion.substring(3, 5);
+            day = this.identification.fechaExpiracion.substring(0, 2);
+        }
+
+        if (parseInt(year) != this.yearField.value.code || parseInt(month) != this.monthField.value.code || parseInt(day) != this.dayField.value) {
+            this._customMessageService.showError({ summary: 'Error', detail: 'No coincide' });
+            return;
+        }
+
+        this._router.navigateByUrl('validation-guide');
+        this._customMessageService.showSuccess({ summary: 'Acceso Correcto', detail: 'Bienvenido' });
+    }
+
     validateForm() {
         this.formErrors = [];
 
         if (this.usernameField && this.usernameField.invalid) this.formErrors.push('Usuario');
 
-        if (this.passwordField && this.passwordField.invalid) this.formErrors.push('Contraseña');
+        if (this.yearField && this.yearField.invalid) this.formErrors.push('Año');
+        if (this.monthField && this.monthField.invalid) this.formErrors.push('Mes');
+        if (this.dayField && this.dayField.invalid) this.formErrors.push('Día');
 
         return this.formErrors.length === 0 && this.form.valid;
     }
 
-    get usernameField(): AbstractControl | null {
-        return this.form.get('username');
+    get usernameField(): AbstractControl {
+        return this.form.controls['username'];
     }
 
-    get passwordField(): AbstractControl | null {
-        return this.form.get('password');
+    get yearField(): AbstractControl {
+        return this.form.controls['year'];
+    }
+
+    get monthField(): AbstractControl {
+        return this.form.controls['month'];
+    }
+
+    get dayField(): AbstractControl {
+        return this.form.controls['day'];
+    }
+
+    get typeField(): AbstractControl {
+        return this.form.controls['type'];
     }
 
     protected readonly PrimeIcons = PrimeIcons;
+    protected readonly Validators = Validators;
 }
