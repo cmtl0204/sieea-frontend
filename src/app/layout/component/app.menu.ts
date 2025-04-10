@@ -31,7 +31,7 @@ export class AppMenu {
             {
                 label: 'Proceso de Vinculación',
                 items: [
-                    { label: 'Guía de Validación', icon: 'pi pi-fw pi-id-card', routerLink: ['/validation-guide'] }
+                    { label: 'Guía de Validación', icon: 'pi pi-fw pi-id-card', routerLink: ['/pages/validation-guide'] }
                     // { label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input'] },
                     // { label: 'Button', icon: 'pi pi-fw pi-mobile', class: 'rotated-icon', routerLink: ['/uikit/button'] },
                     // { label: 'Table', icon: 'pi pi-fw pi-table', routerLink: ['/uikit/table'] },
@@ -55,7 +55,7 @@ export class AppMenu {
                     {
                         label: 'Mi Perfil',
                         icon: 'pi pi-fw pi-user',
-                        routerLink: ['/auth/profile']
+                        routerLink: ['/pages/users/profile']
                     },
                     {
                         label: 'Cerrar Sesión',

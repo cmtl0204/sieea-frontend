@@ -3,4 +3,5 @@ import { ValidationGuideComponent } from '@modules/validation-guide/validation-g
 
 export default [
     { path: '', component: ValidationGuideComponent },
+    { path: 'profile', component: ValidationGuideComponent }
 ] as Routes;

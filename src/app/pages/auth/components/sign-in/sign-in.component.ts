@@ -22,6 +22,8 @@ import { AppFloatingConfigurator } from '../../../../layout/component/app.floati
 import { Divider } from 'primeng/divider';
 import { InputMask } from 'primeng/inputmask';
 import { Select } from 'primeng/select';
+import { KeyFilter } from 'primeng/keyfilter';
+import { UserHttpService } from '@modules/auth/user-http.service';
 
 @Component({
     selector: 'app-sign-in',
@@ -39,7 +41,8 @@ import { Select } from 'primeng/select';
         AppFloatingConfigurator,
         DatePickerModule,
         Divider,
-        Select
+        Select,
+        KeyFilter
         // RecaptchaModule
     ]
 })
@@ -47,6 +50,7 @@ export default class SignInComponent {
     private readonly _formBuilder = inject(FormBuilder);
     private readonly _customMessageService = inject(CustomMessageService);
     private readonly _authHttpService = inject(AuthHttpService);
+    private readonly _userHttpService = inject(UserHttpService);
     private readonly _authService = inject(AuthService);
     protected readonly _coreService = inject(CoreService);
     private readonly _router = inject(Router);
@@ -85,22 +89,9 @@ export default class SignInComponent {
             { code: 12, name: 'Diciembre' }
         ];
 
-        this.usernameField?.valueChanges
-            .pipe(
-                debounceTime(1000), // Espera 500ms después de cada pulsación
-                distinctUntilChanged() // Solo emite si el valor cambió
-            )
-            .subscribe((value) => {
-                this.identification = null;
-
-                if (value.length == 10) {
-                    this._authHttpService.verifyIdentification(value).subscribe({
-                        next: (response) => {
-                            this.identification = response;
-                        }
-                    });
-                }
-            });
+        this.usernameField.valueChanges.subscribe((value) => {
+            if (value.length != 10) this.identification = null;
+        });
     }
 
     buildForm() {
@@ -164,19 +155,15 @@ export default class SignInComponent {
                     return;
                 }
 
-                this._router.navigateByUrl('validation-guide');
+                this._router.navigateByUrl('pages/validation-guide');
             }
         });
     }
 
     validate() {
-        console.log(this.identification.fechaExpedicion);
-        console.log(this.identification);
-        console.log(this.identification.fechaExpedicion.substring(6, 10));
-
-        let year = this.identification.fechaExpedicion.substring(6, 10);
-        let month = this.identification.fechaExpedicion.substring(3, 5);
-        let day = this.identification.fechaExpedicion.substring(0, 2);
+        let year = this.identification.fechaEmision.substring(6, 10);
+        let month = this.identification.fechaEmision.substring(3, 5);
+        let day = this.identification.fechaEmision.substring(0, 2);
 
         if (this.typeField.value === 'expiration') {
             year = this.identification.fechaExpiracion.substring(6, 10);
@@ -185,12 +172,15 @@ export default class SignInComponent {
         }
 
         if (parseInt(year) != this.yearField.value.code || parseInt(month) != this.monthField.value.code || parseInt(day) != this.dayField.value) {
-            this._customMessageService.showError({ summary: 'Error', detail: 'No coincide' });
+            this._customMessageService.showError({ summary: this.dateLabel, detail: 'No coincide con su cédula' });
             return;
         }
 
-        this._router.navigateByUrl('validation-guide');
-        this._customMessageService.showSuccess({ summary: 'Acceso Correcto', detail: 'Bienvenido' });
+        this._authHttpService.signInByValidationIdentification(this.usernameField.value).subscribe({
+            next: (responseSignIn) => {
+                this._router.navigateByUrl('/pages/users/profile');
+            }
+        });
     }
 
     validateForm() {
@@ -203,6 +193,23 @@ export default class SignInComponent {
         if (this.dayField && this.dayField.invalid) this.formErrors.push('Día');
 
         return this.formErrors.length === 0 && this.form.valid;
+    }
+
+    verifyIdentification() {
+        this.identification = null;
+
+        if (this.usernameField.value.length == 10) {
+            this._authHttpService.verifyIdentification(this.usernameField.value).subscribe({
+                next: (response) => {
+                    this.identification = response;
+                }
+            });
+        } else {
+            this._customMessageService.showError({
+                summary: 'Debe ingresar una cédula válida',
+                detail: 'Intente de nuevo'
+            });
+        }
     }
 
     get usernameField(): AbstractControl {

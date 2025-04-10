@@ -9,4 +9,5 @@ export interface AuthInterface {
   lastname: string;
   name: string;
   username: string;
+  termsConditions: boolean;
 }

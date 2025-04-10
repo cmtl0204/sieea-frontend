@@ -32,14 +32,15 @@
                             Número de cédula:
                         </label>
 
-                        <input pInputText
-                               pKeyFilter="int"
-                               [maxlength]="10"
-                               id="username"
-                               type="text"
-                               placeholder="Ej. 1702030405"
-                               class="w-full md:w-[39rem] mb-4"
-                               formControlName="username" />
+                        <input
+                            pInputText
+                            pKeyFilter="int"
+                            [maxlength]="10"
+                            id="username"
+                            type="text"
+                            placeholder="Ej. 1702030405"
+                            class="w-full md:w-[39rem] mb-4"
+                            formControlName="username" />
                     </div>
 
                     @if (identification) {
@@ -90,12 +91,25 @@
 
                     <p-divider />
 
-                    <p-button
-                        type="submit"
-                        label="Iniciar Sesión"
-                        styleClass="w-full"
-                        [loading]="_coreService.loading()"
-                        [icon]="PrimeIcons.SIGN_IN" />
+                    @if (!identification) {
+                        <p-button
+                            type="button"
+                            label="Verificar"
+                            severity="success"
+                            styleClass="w-full"
+                            (onClick)="verifyIdentification()"
+                            [loading]="_coreService.loading()"
+                            [icon]="PrimeIcons.CHECK" />
+                    }
+
+                    @if (identification) {
+                        <p-button
+                            type="submit"
+                            label="Continuar"
+                            styleClass="w-full"
+                            [loading]="_coreService.loading()"
+                            [icon]="PrimeIcons.SIGN_IN" />
+                    }
                 </form>
 
                 <!--                <p-divider align="center" type="dotted">-->

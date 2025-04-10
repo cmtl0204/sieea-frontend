@@ -2,7 +2,7 @@ import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { Button } from 'primeng/button';
 import { Fluid } from 'primeng/fluid';
 import { InputText } from 'primeng/inputtext';
-import { Select } from 'primeng/select';
+import { InputOtpModule } from 'primeng/inputotp';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ErrorMessageDirective } from '@utils/directives/error-message.directive';
 import { LabelDirective } from '@utils/directives/label.directive';
@@ -18,16 +18,23 @@ import { CoreService } from '@utils/services/core.service';
 import { Message } from 'primeng/message';
 import { Textarea } from 'primeng/textarea';
 import { Checkbox } from 'primeng/checkbox';
+import { Dialog } from 'primeng/dialog';
+import { AuthHttpService } from '@modules/auth/auth-http.service';
+import { InputNumber } from 'primeng/inputnumber';
+import { NgIf } from '@angular/common';
+import { RadioButton } from 'primeng/radiobutton';
+import { Select } from 'primeng/select';
 
 @Component({
     selector: 'app-personal-information',
-    imports: [Button, Fluid, InputText, FormsModule, ErrorMessageDirective, LabelDirective, ReactiveFormsModule, Divider, Toolbar, SkeletonComponent, Message, Textarea, Checkbox],
+    imports: [Button, Fluid, InputText, FormsModule, ErrorMessageDirective, LabelDirective, ReactiveFormsModule, Divider, Toolbar, SkeletonComponent, Message, Textarea, Checkbox, InputOtpModule, Dialog, InputNumber, NgIf, RadioButton, Select],
     templateUrl: './personal-information.component.html',
     styleUrl: './personal-information.component.scss'
 })
 export class PersonalInformationComponent implements OnInit {
     @Output() next: EventEmitter<null> = new EventEmitter();
     private readonly _formBuilder = inject(FormBuilder);
+    private readonly _authHttpService = inject(AuthHttpService);
     private readonly _authService = inject(AuthService);
     private readonly _userHttpService = inject(UserHttpService);
     private readonly _customMessageService = inject(CustomMessageService);
@@ -35,6 +42,16 @@ export class PersonalInformationComponent implements OnInit {
     protected readonly _coreService = inject(CoreService);
     protected readonly PrimeIcons = PrimeIcons;
     protected editingControl: FormControl = new FormControl(false);
+    protected transactionalCodeControl: FormControl = new FormControl(
+        {
+            value: null,
+            disabled: true
+        },
+        [Validators.required]
+    );
+    protected emailControl: FormControl = new FormControl(null, [Validators.required, Validators.email]);
+    protected transactionalCode: string = '';
+    protected updateVisible = false;
 
     constructor() {
         this.buildForm();
@@ -44,6 +61,22 @@ export class PersonalInformationComponent implements OnInit {
                 this.correoField.enable();
             } else {
                 this.correoField.disable();
+            }
+        });
+
+        this.emailControl.valueChanges.subscribe(() => {
+            if (this.emailControl.invalid) {
+                this.transactionalCodeControl.setValue(null);
+            }
+        });
+
+        this.transactionalCodeControl.valueChanges.subscribe((value) => {
+            if (value && value.length === 6) {
+                this._authHttpService.verifyTransactionalCode(value, this.emailControl.value).subscribe({
+                    next: () => {
+                        this.updateEmail();
+                    }
+                });
             }
         });
     }
@@ -98,6 +131,29 @@ export class PersonalInformationComponent implements OnInit {
         this._userHttpService.updatePersonalInformation(this._authService.auth.id, this.form.value).subscribe({
             next: () => {
                 this.next.next(null);
+            }
+        });
+    }
+
+    updateEmail() {
+        this._userHttpService.updateEmail(this._authService.auth.id, this.emailControl.value).subscribe({
+            next: () => {
+                this.correoField.setValue(this.emailControl.value);
+                this.transactionalCodeControl.reset();
+                this.emailControl.reset();
+                this.updateVisible = false;
+            }
+        });
+    }
+
+    requestTransactionalCode() {
+        this.transactionalCodeControl.setValue(null);
+        this.transactionalCodeControl.disable();
+
+        this._authHttpService.requestTransactionalEmailCode(this.emailControl.value).subscribe({
+            next: (response) => {
+                this.transactionalCodeControl.setValue('');
+                this.transactionalCodeControl.enable();
             }
         });
     }

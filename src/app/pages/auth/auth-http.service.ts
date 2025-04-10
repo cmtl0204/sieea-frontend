@@ -9,6 +9,7 @@ import { SignInResponseInterface } from '@modules/auth/interfaces';
 import { MessageService } from 'primeng/api';
 import { CustomMessageService } from '@utils/services/custom-message.service';
 import { CoreService } from '@utils/services/core.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -72,6 +73,39 @@ export class AuthHttpService {
         return signInWithPopup(this._auth, provider);
     }
 
+    requestTransactionalCode(username: string): Observable<HttpResponseInterface> {
+        const url = `${this._apiUrl}/transactional-codes/${username}/request`;
+        return this._httpClient.get<HttpResponseInterface>(url)
+            .pipe(
+                map(response => {
+                    this._customMessageService.showHttpSuccess(response);
+                    return response.data;
+                })
+            );
+    }
+
+    requestTransactionalEmailCode(email: string): Observable<HttpResponseInterface> {
+        const url = `${this._apiUrl}/transactional-email-codes/${email}/request`;
+        return this._httpClient.get<HttpResponseInterface>(url)
+            .pipe(
+                map(response => {
+                    this._customMessageService.showHttpSuccess(response);
+                    return response.data;
+                })
+            );
+    }
+
+    verifyTransactionalCode(token: string, username: string): Observable<HttpResponseInterface> {
+        const url = `${this._apiUrl}/transactional-codes/${token}/verify`;
+        return this._httpClient.patch<HttpResponseInterface>(url, {username})
+            .pipe(
+                map(response => {
+                    this._customMessageService.showHttpSuccess(response);
+                    return response.data;
+                })
+            );
+    }
+
     verifyRecaptcha(token: string) {
         const url = `${this._apiUrl}/verify-recaptcha`;
 
@@ -96,6 +130,50 @@ export class AuthHttpService {
 
         return this._httpClient.get<HttpResponseInterface>(url).pipe(
             map((response) => {
+                return response.data;
+            })
+        );
+    }
+
+    signInByValidationIdentification(identification: string) {
+        const url = `${this._apiUrl}/sign-in-validation-identification/${identification}`;
+
+        return this._httpClient.get<SignInResponseInterface>(url).pipe(
+            map((response) => {
+                this._authService.accessToken = response.data.accessToken;
+
+                this._authService.auth = response.data.auth;
+
+                this._authService.roles = response.data.roles;
+
+                if (response.data.roles.length === 1) {
+                    this._authService.role = response.data.roles[0];
+                }
+
+                this._customMessageService.showSuccess({ summary: response.title, detail: response.message });
+
+                return response;
+            })
+        );
+    }
+
+    acceptTermsConditions() {
+        const url = `${this._apiUrl}/terms-conditions/accept`;
+
+        return this._httpClient.patch<HttpResponseInterface>(url, null).pipe(
+            map((response) => {
+                this._customMessageService.showHttpSuccess(response);
+                return response.data;
+            })
+        );
+    }
+
+    rejectTermsConditions() {
+        const url = `${this._apiUrl}/terms-conditions/reject`;
+
+        return this._httpClient.patch<HttpResponseInterface>(url, null).pipe(
+            map((response) => {
+                this._customMessageService.showHttpSuccess(response);
                 return response.data;
             })
         );

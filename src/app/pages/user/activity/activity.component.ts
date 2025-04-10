@@ -19,12 +19,12 @@ import { Message } from 'primeng/message';
 import { Checkbox } from 'primeng/checkbox';
 
 @Component({
-    selector: 'app-bank-detail',
-    imports: [Button, Divider, ErrorMessageDirective, Fluid, InputText, LabelDirective, ReactiveFormsModule, SkeletonComponent, Toolbar, Message, Checkbox, Select],
-    templateUrl: './bank-detail.component.html',
-    styleUrl: './bank-detail.component.scss'
+    selector: 'app-activity',
+    imports: [Button, Divider, ErrorMessageDirective, Fluid, InputText, LabelDirective, ReactiveFormsModule, SkeletonComponent, Toolbar, Message],
+    templateUrl: './activity.component.html',
+    styleUrl: './activity.component.scss'
 })
-export class BankDetailComponent implements OnInit {
+export class ActivityComponent implements OnInit {
     @Output() next: EventEmitter<null> = new EventEmitter();
     @Output() previous: EventEmitter<null> = new EventEmitter();
 
@@ -36,7 +36,6 @@ export class BankDetailComponent implements OnInit {
     protected readonly _coreService = inject(CoreService);
     protected readonly PrimeIcons = PrimeIcons;
     protected checked: FormControl = new FormControl(false);
-    protected accountTypes: string[] = ['CUENTA DE AHORRO', 'CUENTA CORRIENTE'];
 
     constructor() {
         this.buildForm();
@@ -53,28 +52,21 @@ export class BankDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.findBankDetail();
+        this.findPersonalInformation();
     }
 
     buildForm() {
         this.form = this._formBuilder.group({
-            additionalInformation: this.additionalInformationForm
+            type: ['asd', [Validators.required]],
+            number: [null, [Validators.required]],
+            shortName: [null, [Validators.required]]
         });
 
         this.form.disable();
     }
 
-    get additionalInformationForm() {
-        return this._formBuilder.group({
-            tipoCuenta: [null, [Validators.required]],
-            numeroCuenta: [null, [Validators.required]],
-            nombreCorto: [null, [Validators.required]],
-            cambioCuenta: [null, [Validators.required]]
-        });
-    }
-
-    findBankDetail() {
-        this._userHttpService.findBankDetail(this._authService.auth.id).subscribe({
+    findPersonalInformation() {
+        this._userHttpService.findPersonalInformation(this._authService.auth.id).subscribe({
             next: (response) => {
                 this.form.patchValue(response);
             }
@@ -83,16 +75,16 @@ export class BankDetailComponent implements OnInit {
 
     onSubmit() {
         if (this.validateForm) {
-            this.updateBankDetail();
+            this.updatePersonalInformation();
         }
     }
 
     get validateForm(): boolean {
         const errors = [];
 
-        if (this.accountTypeField?.invalid) errors.push('Tipo de cuenta');
-        if (this.accountNumberField?.invalid) errors.push('Número de cuenta');
-        if (this.accountNameField?.invalid) errors.push('Nombre corto');
+        if (this.typeField?.invalid) errors.push('Tipo de cuenta');
+        if (this.numberField?.invalid) errors.push('Número de cuenta');
+        if (this.shortNameField?.invalid) errors.push('Nombre corto');
 
         if (errors.length > 0) {
             this._customMessageService.showFormErrors(errors);
@@ -103,31 +95,23 @@ export class BankDetailComponent implements OnInit {
         return true;
     }
 
-    updateBankDetail() {
-        this._userHttpService.updateBankDetail(this._authService.auth.id, this.form.value).subscribe({
+    updatePersonalInformation() {
+        this._userHttpService.updatePersonalInformation(this._authService.auth.id, this.form.value).subscribe({
             next: () => {
                 this.next.emit(null);
             }
         });
     }
 
-    get additionalInformationFormField(): FormGroup {
-        return this.form.get('additionalInformation') as FormGroup;
+    get typeField(): AbstractControl | null {
+        return this.form.get('type');
     }
 
-    get accountTypeField(): AbstractControl | null {
-        return this.additionalInformationFormField.get('accountType');
+    get numberField(): AbstractControl | null {
+        return this.form.get('number');
     }
 
-    get accountNumberField(): AbstractControl | null {
-        return this.additionalInformationFormField.get('accountNumber');
-    }
-
-    get accountNameField(): AbstractControl | null {
-        return this.additionalInformationFormField.get('accountName');
-    }
-
-    get accountChangedField(): AbstractControl | null {
-        return this.additionalInformationFormField.get('cambioCuenta');
+    get shortNameField(): AbstractControl | null {
+        return this.form.get('shortName');
     }
 }

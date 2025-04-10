@@ -19,6 +19,14 @@ export class UserHttpService {
     private readonly _customMessageService = inject(CustomMessageService);
     protected readonly _coreService = inject(CoreService);
 
+    findAll() {
+        return this._httpClient.get<HttpResponseInterface>(`${this._apiUrl}`).pipe(
+            map((response) => {
+                return response.data;
+            })
+        );
+    }
+
     findPersonalInformation(id: string) {
         return this._httpClient.get<HttpResponseInterface>(`${this._apiUrl}/${id}/personal-information`).pipe(
             map((response) => {
@@ -27,8 +35,24 @@ export class UserHttpService {
         );
     }
 
+    findBankDetail(id: string) {
+        return this._httpClient.get<HttpResponseInterface>(`${this._apiUrl}/${id}/bank-detail`).pipe(
+            map((response) => {
+                return response.data;
+            })
+        );
+    }
+
     updatePersonalInformation(id: string, payload: any) {
         return this._httpClient.put<HttpResponseInterface>(`${this._apiUrl}/${id}/personal-information`, payload).pipe(
+            tap((response) => {
+                this._customMessageService.showHttpSuccess(response);
+            })
+        );
+    }
+
+    updateEmail(id: string, email: string) {
+        return this._httpClient.patch<HttpResponseInterface>(`${this._apiUrl}/${id}/email`, {email}).pipe(
             tap((response) => {
                 this._customMessageService.showHttpSuccess(response);
             })

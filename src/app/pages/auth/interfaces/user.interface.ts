@@ -26,6 +26,7 @@ export interface UserInterface {
   phone: string;
   suspendedAt: Date;
   username: string;
+  termsConditions: string;
 }
 
 export interface CreateUserDto extends Omit<UserInterface, 'id'> {
