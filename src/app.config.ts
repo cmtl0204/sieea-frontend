@@ -11,6 +11,8 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { MessageService } from 'primeng/api';
 // import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 import { HttpInterceptorProviders } from './app/interceptors';
+import { environment } from '@env/environment';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -27,9 +29,7 @@ export const appConfig: ApplicationConfig = {
         //     provide: RECAPTCHA_V3_SITE_KEY,
         //     useValue: environment.RECAPTCHA_SITE_KEY,
         // },
-        provideHttpClient(
-            withInterceptors(HttpInterceptorProviders)
-        ),
+        provideHttpClient(withInterceptors(HttpInterceptorProviders)),
         provideAnimationsAsync(),
         providePrimeNG({
             theme: {
@@ -37,18 +37,8 @@ export const appConfig: ApplicationConfig = {
                 options: { darkModeSelector: '.app-dark' }
             }
         }),
-        provideFirebaseApp(() =>
-            initializeApp({
-                projectId: 'planting-future',
-                appId: '1:655381624583:web:300977d361d4aa6519f7a2',
-                databaseURL: 'https://planting-future-default-rtdb.firebaseio.com',
-                storageBucket: 'planting-future.firebasestorage.app',
-                apiKey: 'AIzaSyDc_VU6TXCzPJJJy2NxN6WLOUfUyM9Y76c',
-                authDomain: 'planting-future.firebaseapp.com',
-                messagingSenderId: '655381624583',
-                measurementId: 'G-VTB1ZS7J7Z'
-            })
-        ),
+        provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+        provideStorage(() => getStorage()),
         provideAuth(() => getAuth()),
         provideFirestore(() => getFirestore()),
         MessageService

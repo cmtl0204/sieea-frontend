@@ -5,29 +5,38 @@
             <p-step-panel>
                 <ng-template #content let-activateCallback="activateCallback">
                     Actividad 1:
-                    <div class="flex flex-col h-48">
-                        <div
-                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
-                            <p-fileupload
-                                name="demo[]"
-                                (onUpload)="onUpload($event)"
-                                [multiple]="true" accept="image/*,.pdf"
-                                maxFileSize="1000000"
-                                mode="advanced"
-                                url="https://www.primefaces.org/cdn/api/upload.php">
-                                <ng-template #empty>
-                                    <div>Arrastre y suelte archivos aquí para cargarlos.</div>
-                                </ng-template>
-                                <ng-template #content>
-                                    <ul *ngIf="uploadedFiles.length">
-                                        <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }}bytes
-                                        </li>
-                                    </ul>
-                                </ng-template>
-                            </p-fileupload>
-                        </div>
+
+                    <div>
+                        <p-fileupload
+                            name="demo[]"
+                            (uploadHandler)="onUpload($event)"
+                            [customUpload]="true"
+                            [multiple]="true" accept="image/*,.pdf"
+                            maxFileSize="1000000"
+                            mode="advanced"
+                            url="https://www.primefaces.org/cdn/api/upload.php">
+                            <ng-template #empty>
+                                <div>Arrastre y suelte archivos aquí para cargarlos.</div>
+                            </ng-template>
+                            <ng-template #content>
+                                <ul *ngIf="uploadedFiles.length">
+                                    <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }}bytes
+                                    </li>
+                                </ul>
+                            </ng-template>
+                        </p-fileupload>
+
+                        {{ downloadURL }}
+                        <a *ngIf="downloadURL" [href]="downloadURL" target="_blank" download>
+                            Descargar archivo
+                        </a>
                     </div>
 
+                    <div>
+                        @for (file of archivos; track file.url) {
+                            <p-button [icon]="PrimeIcons.DOWNLOAD" (onClick)="download(file.url)" />
+                        }
+                    </div>
                     <div class="py-6">
                     </div>
                 </ng-template>

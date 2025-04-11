@@ -17,17 +17,12 @@ import { SkeletonComponent } from '@utils/components/skeleton/skeleton.component
 import { CoreService } from '@utils/services/core.service';
 import { Message } from 'primeng/message';
 import { Textarea } from 'primeng/textarea';
-import { Checkbox } from 'primeng/checkbox';
 import { Dialog } from 'primeng/dialog';
 import { AuthHttpService } from '@modules/auth/auth-http.service';
-import { InputNumber } from 'primeng/inputnumber';
-import { NgIf } from '@angular/common';
-import { RadioButton } from 'primeng/radiobutton';
-import { Select } from 'primeng/select';
 
 @Component({
     selector: 'app-personal-information',
-    imports: [Button, Fluid, InputText, FormsModule, ErrorMessageDirective, LabelDirective, ReactiveFormsModule, Divider, Toolbar, SkeletonComponent, Message, Textarea, Checkbox, InputOtpModule, Dialog, InputNumber, NgIf, RadioButton, Select],
+    imports: [Button, Fluid, InputText, FormsModule, ErrorMessageDirective, LabelDirective, ReactiveFormsModule, Divider, Toolbar, SkeletonComponent, Message, Textarea, InputOtpModule, Dialog],
     templateUrl: './personal-information.component.html',
     styleUrl: './personal-information.component.scss'
 })

@@ -478,7 +478,7 @@
                 <p-button label="Solicitar Código" (onClick)="requestTransactionalCode()" [fluid]="true" />
             }
 
-            @if (transactionalCodeControl?.value === '') {
+            @if (transactionalCodeControl.value === '') {
                 <label
                     appLabel
                     for="transactionalCode"

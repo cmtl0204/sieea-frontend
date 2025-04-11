@@ -24,6 +24,8 @@ import { InputMask } from 'primeng/inputmask';
 import { Select } from 'primeng/select';
 import { KeyFilter } from 'primeng/keyfilter';
 import { UserHttpService } from '@modules/auth/user-http.service';
+import { Badge } from 'primeng/badge';
+import { Tag } from 'primeng/tag';
 
 @Component({
     selector: 'app-sign-in',
@@ -42,7 +44,8 @@ import { UserHttpService } from '@modules/auth/user-http.service';
         DatePickerModule,
         Divider,
         Select,
-        KeyFilter
+        KeyFilter,
+        Tag
         // RecaptchaModule
     ]
 })
@@ -54,6 +57,7 @@ export default class SignInComponent {
     private readonly _authService = inject(AuthService);
     protected readonly _coreService = inject(CoreService);
     private readonly _router = inject(Router);
+    protected readonly PrimeIcons = PrimeIcons;
     // private readonly _reCaptchaV3Service = inject(ReCaptchaV3Service);
     protected readonly environment = environment;
     protected form!: FormGroup;
@@ -75,21 +79,35 @@ export default class SignInComponent {
         this.days = Array.from({ length: 31 }, (_, index) => index + 1);
 
         this.months = [
-            { code: 1, name: 'Enero' },
-            { code: 2, name: 'Febrero' },
-            { code: 3, name: 'Marzo' },
-            { code: 4, name: 'Abril' },
-            { code: 5, name: 'Mayo' },
-            { code: 6, name: 'Junio' },
-            { code: 7, name: 'Julio' },
-            { code: 8, name: 'Agosto' },
-            { code: 9, name: 'Septiembre' },
-            { code: 10, name: 'Octubre' },
-            { code: 11, name: 'Noviembre' },
-            { code: 12, name: 'Diciembre' }
+            { code: 1, name: '01 Enero' },
+            { code: 2, name: '02 Febrero' },
+            { code: 3, name: '03 Marzo' },
+            { code: 4, name: '04 Abril' },
+            { code: 5, name: '05 Mayo' },
+            { code: 6, name: '06 Junio' },
+            { code: 7, name: '07 Julio' },
+            { code: 8, name: '08 Agosto' },
+            { code: 9, name: '09 Septiembre' },
+            { code: 10, name: '10 Octubre' },
+            { code: 11, name: '11 Noviembre' },
+            { code: 12, name: '12 Diciembre' }
         ];
 
         this.usernameField.valueChanges.subscribe((value) => {
+            if (this.identification) {
+                console.log('1');
+                console.log(this.identification);
+                console.log(!this.identification.fechaExpiracion);
+                console.log(this.identification.fechaExpiracion=='');
+                if (!this.identification.fechaExpiracion || this.identification.fechaExpiracion === '') {
+                    console.log('2');
+                    this.validation = 'issue';
+                } else {
+                    console.log('3');
+                    this.validation = Math.floor(Math.random() * 2) + 1 === 1 ? 'issue' : 'expiration';
+                }
+            }
+
             if (value.length != 10) this.identification = null;
         });
     }
@@ -102,18 +120,6 @@ export default class SignInComponent {
             month: [null, [Validators.required]],
             day: [null, [Validators.required]]
         });
-
-        this.validation = Math.floor(Math.random() * 2) + 1 === 1 ? 'issue' : 'expiration';
-
-        if (this.validation === 'issue') {
-            this.typeField?.setValue('issue');
-            this.dateLabel = 'Fecha de emisión de la cédula:';
-        }
-
-        if (this.validation === 'expiration') {
-            this.typeField?.setValue('expiration');
-            this.dateLabel = 'Fecha de expiración de la cédula:';
-        }
     }
 
     onSubmit() {
@@ -147,25 +153,12 @@ export default class SignInComponent {
     //         });
     // }
 
-    signIn() {
-        this._authHttpService.signIn(this.form.value).subscribe({
-            next: (responseSignIn) => {
-                if (responseSignIn && this._authService.roles.length === 0) {
-                    this._authService.removeLogin();
-                    return;
-                }
-
-                this._router.navigateByUrl('pages/validation-guide');
-            }
-        });
-    }
-
     validate() {
         let year = this.identification.fechaEmision.substring(6, 10);
         let month = this.identification.fechaEmision.substring(3, 5);
         let day = this.identification.fechaEmision.substring(0, 2);
 
-        if (this.typeField.value === 'expiration') {
+        if (this.validation === 'expiration') {
             year = this.identification.fechaExpiracion.substring(6, 10);
             month = this.identification.fechaExpiracion.substring(3, 5);
             day = this.identification.fechaExpiracion.substring(0, 2);
@@ -227,11 +220,4 @@ export default class SignInComponent {
     get dayField(): AbstractControl {
         return this.form.controls['day'];
     }
-
-    get typeField(): AbstractControl {
-        return this.form.controls['type'];
-    }
-
-    protected readonly PrimeIcons = PrimeIcons;
-    protected readonly Validators = Validators;
 }

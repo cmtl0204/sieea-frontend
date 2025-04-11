@@ -47,7 +47,11 @@
                         <div>
                             <label
                                 class="block text-surface-900 dark:text-surface-0 font-medium text-xl mb-2">
-                                {{ dateLabel }}
+                                @if (validation === 'issue') {
+                                    Fecha de <p-tag value="EMISIÓN" severity="info"/> de la cédula:
+                                }@else{
+                                    Fecha de <p-tag value="EXPIRACIÓN" severity="danger"/> de la cédula:
+                                }
                             </label>
 
                             <p-select
