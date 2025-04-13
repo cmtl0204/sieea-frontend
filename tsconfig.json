@@ -18,6 +18,12 @@
         "target": "ES2022",
         "module": "ES2022",
         "paths": {
+            "@routes": [
+                "./src/my-routes"
+            ],
+            "@errorRoutes": [
+                "./src/app/layout/errors/*"
+            ],
             "@assets/*": [
                 "./src/assets/*"
             ],

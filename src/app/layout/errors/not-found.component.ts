@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
-import { AppFloatingConfigurator } from '../../layout/component/app.floatingconfigurator';
+import { AppFloatingConfigurator } from '../component/app.floatingconfigurator';
 
 @Component({
-    selector: 'app-notfound',
+    selector: 'app-not-found',
     standalone: true,
     imports: [RouterModule, AppFloatingConfigurator, ButtonModule],
     template: ` <app-floating-configurator />
@@ -65,4 +65,4 @@ import { AppFloatingConfigurator } from '../../layout/component/app.floatingconf
             </div>
         </div>`
 })
-export class Notfound {}
+export class NotFoundComponent {}

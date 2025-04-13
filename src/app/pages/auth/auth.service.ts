@@ -91,7 +91,7 @@ export class AuthService {
             this._customMessageService.showInfo({ summary: 'Se cerró la sesión correctamente', detail: '' });
 
             this._router.navigateByUrl('/auth/sign-in');
-        }, 1000);
+        }, 800);
     }
 
     selectDashboard() {
