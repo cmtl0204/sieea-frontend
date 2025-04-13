@@ -45,10 +45,8 @@
 
                             <span class="ml-2">Alerta: recuerde que los datos ingresados deberán estar a nombre del beneficiario registrado</span>
                         </p-message>
-                    </div>
 
-                    @if (!accountChangedField?.value) {
-                        <div class="card flex flex-col gap-4">
+                        @if (!accountChangedField?.value) {
                             <div class="flex items-center">
                                 <p-checkbox inputId="checked" [formControl]="checked" [binary]="true" />
 
@@ -56,18 +54,16 @@
                                     Click para editar su cuenta (Recuerde que solo puede editar una sola vez)
                                 </label>
                             </div>
-                        </div>
-                    } @else {
-                        <div class="card flex flex-col gap-4">
+                        } @else {
                             <p-message severity="warn" size="large">
                                 <ng-template #icon>
                                     <i class="pi pi-info-circle"></i>
                                 </ng-template>
 
-                                <span class="ml-2">Atención: usted ya realizó el cambio de su cuenta bancaria</span>
+                                <span class="ml-2">Atención: su cuenta bancaria se encuentra actualizada</span>
                             </p-message>
-                        </div>
-                    }
+                        }
+                    </div>
 
                     <div formGroupName="additionalInformation" class="card flex flex-col gap-4">
                         <div class="font-semibold text-xl">Datos cuenta bancaria</div>
@@ -86,10 +82,10 @@
 
                             <div class="col-span-12 md:col-span-8">
                                 <p-select
-                                id="accountType"
-                                [options]="accountTypes"
-                                formControlName="tipoCuenta"
-                                class="w-full" />
+                                    id="accountType"
+                                    [options]="accountTypes"
+                                    formControlName="tipoCuenta"
+                                    class="w-full" />
 
                                 <p-message
                                     appErrorMessage

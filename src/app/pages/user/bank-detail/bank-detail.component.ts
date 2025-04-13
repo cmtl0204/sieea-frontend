@@ -87,6 +87,14 @@ export class BankDetailComponent implements OnInit {
         }
     }
 
+    updateBankDetail() {
+        this._userHttpService.updateBankDetail(this._authService.auth.id, this.form.value).subscribe({
+            next: () => {
+                this.findBankDetail();
+            }
+        });
+    }
+
     get validateForm(): boolean {
         const errors = [];
 
@@ -101,14 +109,6 @@ export class BankDetailComponent implements OnInit {
         }
 
         return true;
-    }
-
-    updateBankDetail() {
-        this._userHttpService.updateBankDetail(this._authService.auth.id, this.form.value).subscribe({
-            next: () => {
-                this.next.emit(null);
-            }
-        });
     }
 
     get additionalInformationFormField(): FormGroup {

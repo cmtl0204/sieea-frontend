@@ -1,8 +1,8 @@
 export const environment = {
     production: false,
     API_URL: 'http://localhost:3000/api/v1',
-    APP_NAME: 'Pruebas Sistema Informático Ecuatorianos en Acción',
-    APP_SHORT_NAME: 'Pruebas SIEEA',
+    APP_NAME: '(Pruebas) Sistema Informático Ecuatorianos en Acción',
+    APP_SHORT_NAME: '(Pruebas) SIEEA',
     RECAPTCHA_SITE_KEY: '6Lfw3v8qAAAAANpHVyPuWDDVbCUNryg9OxdfTsGg',
     firebaseConfig: {
         apiKey: 'AIzaSyCUbyE7ZwmPUs7-VGYxow-DKjb_7fcxGHA',

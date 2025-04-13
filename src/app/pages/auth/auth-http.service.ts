@@ -75,35 +75,32 @@ export class AuthHttpService {
 
     requestTransactionalCode(username: string): Observable<HttpResponseInterface> {
         const url = `${this._apiUrl}/transactional-codes/${username}/request`;
-        return this._httpClient.get<HttpResponseInterface>(url)
-            .pipe(
-                map(response => {
-                    this._customMessageService.showHttpSuccess(response);
-                    return response.data;
-                })
-            );
+        return this._httpClient.get<HttpResponseInterface>(url).pipe(
+            map((response) => {
+                this._customMessageService.showHttpSuccess(response);
+                return response.data;
+            })
+        );
     }
 
     requestTransactionalEmailCode(email: string): Observable<HttpResponseInterface> {
         const url = `${this._apiUrl}/transactional-email-codes/${email}/request`;
-        return this._httpClient.get<HttpResponseInterface>(url)
-            .pipe(
-                map(response => {
-                    this._customMessageService.showHttpSuccess(response);
-                    return response.data;
-                })
-            );
+        return this._httpClient.get<HttpResponseInterface>(url).pipe(
+            map((response) => {
+                this._customMessageService.showHttpSuccess(response);
+                return response.data;
+            })
+        );
     }
 
     verifyTransactionalCode(token: string, username: string): Observable<HttpResponseInterface> {
         const url = `${this._apiUrl}/transactional-codes/${token}/verify`;
-        return this._httpClient.patch<HttpResponseInterface>(url, {username})
-            .pipe(
-                map(response => {
-                    this._customMessageService.showHttpSuccess(response);
-                    return response.data;
-                })
-            );
+        return this._httpClient.patch<HttpResponseInterface>(url, { username }).pipe(
+            map((response) => {
+                this._customMessageService.showHttpSuccess(response);
+                return response.data;
+            })
+        );
     }
 
     verifyRecaptcha(token: string) {
@@ -162,6 +159,7 @@ export class AuthHttpService {
 
         return this._httpClient.patch<HttpResponseInterface>(url, null).pipe(
             map((response) => {
+                this._authService.auth = { ...this._authService.auth, termsConditions: true };
                 this._customMessageService.showHttpSuccess(response);
                 return response.data;
             })

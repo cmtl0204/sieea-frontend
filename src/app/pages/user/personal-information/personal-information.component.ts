@@ -19,10 +19,11 @@ import { Message } from 'primeng/message';
 import { Textarea } from 'primeng/textarea';
 import { Dialog } from 'primeng/dialog';
 import { AuthHttpService } from '@modules/auth/auth-http.service';
+import { Tooltip } from 'primeng/tooltip';
 
 @Component({
     selector: 'app-personal-information',
-    imports: [Button, Fluid, InputText, FormsModule, ErrorMessageDirective, LabelDirective, ReactiveFormsModule, Divider, Toolbar, SkeletonComponent, Message, Textarea, InputOtpModule, Dialog],
+    imports: [Button, Fluid, InputText, FormsModule, ErrorMessageDirective, LabelDirective, ReactiveFormsModule, Divider, Toolbar, SkeletonComponent, Message, Textarea, InputOtpModule, Dialog, Tooltip],
     templateUrl: './personal-information.component.html',
     styleUrl: './personal-information.component.scss'
 })
@@ -141,7 +142,7 @@ export class PersonalInformationComponent implements OnInit {
         });
     }
 
-    requestTransactionalCode() {
+    requestTransactionalEmailCode() {
         this.transactionalCodeControl.setValue(null);
         this.transactionalCodeControl.disable();
 

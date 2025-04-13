@@ -26,6 +26,7 @@ import { KeyFilter } from 'primeng/keyfilter';
 import { UserHttpService } from '@modules/auth/user-http.service';
 import { Badge } from 'primeng/badge';
 import { Tag } from 'primeng/tag';
+import { Message } from 'primeng/message';
 
 @Component({
     selector: 'app-sign-in',
@@ -45,7 +46,9 @@ import { Tag } from 'primeng/tag';
         Divider,
         Select,
         KeyFilter,
-        Tag
+        Tag,
+        ErrorMessageDirective,
+        Message
         // RecaptchaModule
     ]
 })
@@ -62,7 +65,7 @@ export default class SignInComponent {
     protected readonly environment = environment;
     protected form!: FormGroup;
     protected formErrors: string[] = [];
-    protected validation: string = '';
+    protected validationType: string = '';
     protected dateLabel: string = '';
     protected years: any[] = [];
     protected months: any[] = [];
@@ -95,20 +98,14 @@ export default class SignInComponent {
 
         this.usernameField.valueChanges.subscribe((value) => {
             if (this.identification) {
-                console.log('1');
-                console.log(this.identification);
-                console.log(!this.identification.fechaExpiracion);
-                console.log(this.identification.fechaExpiracion=='');
-                if (!this.identification.fechaExpiracion || this.identification.fechaExpiracion === '') {
-                    console.log('2');
-                    this.validation = 'issue';
-                } else {
-                    console.log('3');
-                    this.validation = Math.floor(Math.random() * 2) + 1 === 1 ? 'issue' : 'expiration';
-                }
+                this.assignValidationType(this.identification);
             }
 
             if (value.length != 10) this.identification = null;
+
+            if (value.length === 10) {
+                this.verifyIdentification();
+            }
         });
     }
 
@@ -157,8 +154,10 @@ export default class SignInComponent {
         let year = this.identification.fechaEmision.substring(6, 10);
         let month = this.identification.fechaEmision.substring(3, 5);
         let day = this.identification.fechaEmision.substring(0, 2);
+        this.dateLabel = 'Fecha de emisión de la cédula';
 
-        if (this.validation === 'expiration') {
+        if (this.validationType === 'expiration') {
+            this.dateLabel = 'Fecha de expiración de la cédula';
             year = this.identification.fechaExpiracion.substring(6, 10);
             month = this.identification.fechaExpiracion.substring(3, 5);
             day = this.identification.fechaExpiracion.substring(0, 2);
@@ -195,6 +194,7 @@ export default class SignInComponent {
             this._authHttpService.verifyIdentification(this.usernameField.value).subscribe({
                 next: (response) => {
                     this.identification = response;
+                    this.assignValidationType(this.identification);
                 }
             });
         } else {
@@ -202,6 +202,14 @@ export default class SignInComponent {
                 summary: 'Debe ingresar una cédula válida',
                 detail: 'Intente de nuevo'
             });
+        }
+    }
+
+    assignValidationType(identification: any) {
+        if (!identification.fechaExpiracion || identification.fechaExpiracion === '') {
+            this.validationType = 'issue';
+        } else {
+            this.validationType = Math.floor(Math.random() * 2) + 1 === 1 ? 'issue' : 'expiration';
         }
     }
 

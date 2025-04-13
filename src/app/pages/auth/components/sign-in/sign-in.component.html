@@ -25,6 +25,8 @@
                     </span>
                 </div>
 
+                <p-divider/>
+
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <div>
                         <label for="username"
@@ -47,10 +49,12 @@
                         <div>
                             <label
                                 class="block text-surface-900 dark:text-surface-0 font-medium text-xl mb-2">
-                                @if (validation === 'issue') {
-                                    Fecha de <p-tag value="EMISIÓN" severity="info"/> de la cédula:
-                                }@else{
-                                    Fecha de <p-tag value="EXPIRACIÓN" severity="danger"/> de la cédula:
+                                @if (validationType === 'issue') {
+                                    Fecha de
+                                    <p-tag value="EMISIÓN" severity="info" /> de la cédula:
+                                } @else {
+                                    Fecha de
+                                    <p-tag value="EXPIRACIÓN" severity="danger" /> de la cédula:
                                 }
                             </label>
 
@@ -98,12 +102,12 @@
                     @if (!identification) {
                         <p-button
                             type="button"
-                            label="Verificar"
-                            severity="success"
+                            label="Continuar"
                             styleClass="w-full"
                             (onClick)="verifyIdentification()"
                             [loading]="_coreService.loading()"
-                            [icon]="PrimeIcons.CHECK" />
+                            iconPos="right"
+                            [icon]="PrimeIcons.ARROW_RIGHT" />
                     }
 
                     @if (identification) {

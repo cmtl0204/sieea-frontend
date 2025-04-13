@@ -63,8 +63,11 @@
                             </div>
 
                             <div class="col-span-12 md:col-span-1">
-                                <p-button [icon]="PrimeIcons.PENCIL" severity="warn"
-                                          (onClick)="updateVisible=true" />
+                                <p-button
+                                    [icon]="PrimeIcons.PENCIL"
+                                    severity="warn"
+                                    pTooltip="Actualizar correo"
+                                    (onClick)="updateVisible=true" />
                             </div>
                         </div>
 
@@ -475,7 +478,11 @@
 
 
             @if (emailControl.valid) {
-                <p-button label="Solicitar Código" (onClick)="requestTransactionalCode()" [fluid]="true" />
+                <p-button
+                    label="Solicitar Código"
+                    (onClick)="requestTransactionalEmailCode()"
+                    [loading]="_coreService.loading()"
+                    [fluid]="true" />
             }
 
             @if (transactionalCodeControl.value === '') {

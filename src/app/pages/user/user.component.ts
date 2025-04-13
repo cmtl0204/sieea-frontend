@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Step, StepList, StepPanel, StepPanels, Stepper } from 'primeng/stepper';
+import { Step, StepItem, StepList, StepPanel, StepPanels, Stepper } from 'primeng/stepper';
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Button } from 'primeng/button';
@@ -13,7 +13,7 @@ import { BankDetailComponent } from '@modules/user/bank-detail/bank-detail.compo
 
 @Component({
     selector: 'app-validation-guide',
-    imports: [Stepper, StepList, Step, NgClass, StepPanels, StepPanel, FormsModule, PersonalInformationComponent, BankDetailComponent, Drawer, Button, Dialog, PersonalInformationComponent, BankDetailComponent],
+    imports: [Stepper, StepList, Step, NgClass, StepPanels, StepPanel, FormsModule, PersonalInformationComponent, BankDetailComponent, Drawer, Button, Dialog, PersonalInformationComponent, BankDetailComponent, StepItem],
     templateUrl: './user.component.html',
     styleUrl: './user.component.scss',
     standalone: true
