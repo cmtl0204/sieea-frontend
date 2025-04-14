@@ -1,0 +1,15 @@
+<p-card [style]="{ width: '25rem', overflow: 'hidden' }">
+    <ng-template #header>
+        <img alt="Card" class="w-full" src="images/components/training/trainign_eea.png" height="200px"/>
+    </ng-template>
+    <ng-template #title> Ecuatorianos en Acción - turismo </ng-template>
+    <ng-template #subtitle> Este curso forma parte del Programa Ecuatorianos en Acción (sección Turismo). </ng-template>
+    <p>
+        Se lo ha estructurado en tres unidades: Unidad 1 Cultura turística, Unidad 2 Hospitalidad y Anfitrión turístico, Unidad 3 Calidad en el servicio
+    </p>
+    <ng-template #footer>
+        <div class="flex gap-4 mt-1">
+            <p-button label="Ir" [icon]="PrimeIcons.EXTERNAL_LINK" (onClick)="linkToMoodle()" class="w-full" styleClass="w-full" />
+        </div>
+    </ng-template>
+</p-card>

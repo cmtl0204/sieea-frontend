@@ -47,8 +47,6 @@ import { Message } from 'primeng/message';
         Select,
         KeyFilter,
         Tag,
-        ErrorMessageDirective,
-        Message
         // RecaptchaModule
     ]
 })

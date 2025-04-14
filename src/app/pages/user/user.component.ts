@@ -13,7 +13,7 @@ import { BankDetailComponent } from '@modules/user/bank-detail/bank-detail.compo
 
 @Component({
     selector: 'app-validation-guide',
-    imports: [Stepper, StepList, Step, NgClass, StepPanels, StepPanel, FormsModule, PersonalInformationComponent, BankDetailComponent, Drawer, Button, Dialog, PersonalInformationComponent, BankDetailComponent, StepItem],
+    imports: [Stepper, StepList, Step, NgClass, StepPanels, StepPanel, FormsModule, PersonalInformationComponent, BankDetailComponent, Drawer, Button, Dialog, PersonalInformationComponent, BankDetailComponent],
     templateUrl: './user.component.html',
     styleUrl: './user.component.scss',
     standalone: true

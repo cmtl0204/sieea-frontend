@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    margin: 0;
+}
+
+.sticky-note {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(182, 201, 251, 0.62);  /* Color amarillo típico de sticky note */
+    padding: 20px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);  /* Sombra para darle profundidad */
+    border-radius: 10px;  /* Bordes redondeados */
+    transform: rotate(-3deg);  /* Girar ligeramente para un toque más realista */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: #333;
+}
+
+.sticky-note p {
+    margin: 0;
+    text-align: center;
+}

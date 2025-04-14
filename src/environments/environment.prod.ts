@@ -1,5 +1,6 @@
 export const environment = {
     production: true,
+    URL: 'https://sis-ecu-enaccion.turismo.gob.ec',
     API_URL: 'https://api-sis-ecu-enaccion.turismo.gob.ec/api/v1',
     APP_NAME: 'Sistema Informático Ecuatorianos en Acción',
     APP_SHORT_NAME: 'SIEEA',

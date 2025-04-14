@@ -485,7 +485,7 @@
                     [fluid]="true" />
             }
 
-            @if (transactionalCodeControl.value === '') {
+            @if (emailControl.valid) {
                 <label
                     appLabel
                     for="transactionalCode"
@@ -496,6 +496,7 @@
 
                 <p-inputotp
                     id="transactionalCode"
+                    [disabled]="transactionalCodeControl.disabled"
                     [formControl]="transactionalCodeControl"
                     [length]="6"
                     [integerOnly]="true" />

@@ -61,6 +61,9 @@ export class PersonalInformationComponent implements OnInit {
         });
 
         this.emailControl.valueChanges.subscribe(() => {
+            this.transactionalCodeControl.reset();
+            this.transactionalCodeControl.disable();
+
             if (this.emailControl.invalid) {
                 this.transactionalCodeControl.setValue(null);
             }
@@ -148,7 +151,7 @@ export class PersonalInformationComponent implements OnInit {
 
         this._authHttpService.requestTransactionalEmailCode(this.emailControl.value).subscribe({
             next: (response) => {
-                this.transactionalCodeControl.setValue('');
+                this.transactionalCodeControl.setValue(null);
                 this.transactionalCodeControl.enable();
             }
         });

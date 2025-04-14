@@ -8,6 +8,7 @@ export interface AuthInterface {
   emailVerifiedAt: Date;
   lastname: string;
   name: string;
+  identification: string;
   username: string;
   termsConditions: boolean;
 }

@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, PrimeIcons } from 'primeng/api';
 import { AppMenuitem } from './app.menuitem';
 import { AuthService } from '@modules/auth/auth.service';
+import { MY_ROUTES } from '@routes';
 
 @Component({
     selector: 'app-menu',
@@ -29,9 +30,18 @@ export class AppMenu {
             //     items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }]
             // },
             {
-                label: 'Proceso de Vinculación',
+                label: 'MINTUR',
                 items: [
-                    { label: 'Guía de Validación', icon: 'pi pi-fw pi-id-card', routerLink: ['/pages/validation-guide'] }
+                    {
+                        label: 'Capacitación',
+                        icon: PrimeIcons.GRADUATION_CAP,
+                        routerLink: [MY_ROUTES.pages.trainings.absolute]
+                    },
+                    {
+                        label: 'Actividades',
+                        icon: PrimeIcons.LIST_CHECK,
+                        routerLink: [MY_ROUTES.pages.activities.absolute]
+                    }
                     // { label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input'] },
                     // { label: 'Button', icon: 'pi pi-fw pi-mobile', class: 'rotated-icon', routerLink: ['/uikit/button'] },
                     // { label: 'Table', icon: 'pi pi-fw pi-table', routerLink: ['/uikit/table'] },

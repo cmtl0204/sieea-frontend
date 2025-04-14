@@ -23,7 +23,23 @@ export const MY_ROUTES = {
         }
     },
     pages: {
-        base: 'pages'
+        base: 'pages',
+        users: {
+            absolute: 'pages/users',
+            base: 'users',
+        },
+        validationGuides: {
+            absolute: 'pages/validation-guide',
+            base: 'validation-guide',
+        },
+        trainings: {
+            absolute: 'pages/trainings',
+            base: 'trainings',
+        },
+        activities: {
+            absolute: 'pages/activities',
+            base: 'activities',
+        },
     },
     auth: {
         base: 'auth'
