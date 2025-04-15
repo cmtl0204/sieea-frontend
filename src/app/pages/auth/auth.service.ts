@@ -8,6 +8,7 @@ import { RoleEnum } from '@utils/enums';
 import { Router } from '@angular/router';
 import { CustomMessageService } from '@utils/services/custom-message.service';
 import { CoreService } from '@utils/services/core.service';
+import { AdditionalInformationInterface } from '@interfaces';
 
 @Injectable({
     providedIn: 'root'
@@ -106,5 +107,13 @@ export class AuthService {
                 console.log('no tiene roles');
             }
         }
+    }
+
+    get additionalInformation(): AdditionalInformationInterface {
+        return JSON.parse(String(sessionStorage.getItem('additionalInformation')));
+    }
+
+    set additionalInformation(additionalInformation: AdditionalInformationInterface | undefined | null) {
+        sessionStorage.setItem('additionalInformation', JSON.stringify(additionalInformation));
     }
 }

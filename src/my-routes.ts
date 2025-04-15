@@ -27,6 +27,8 @@ export const MY_ROUTES = {
         users: {
             absolute: 'pages/users',
             base: 'users',
+            profile: 'profile',
+            profileAbsolute: '/pages/users/profile',
         },
         validationGuides: {
             absolute: 'pages/validation-guide',

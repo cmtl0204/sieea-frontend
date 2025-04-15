@@ -143,6 +143,8 @@ export class AuthHttpService {
 
                 this._authService.roles = response.data.roles;
 
+                this._authService.additionalInformation = response.data.additionalInformation;
+
                 if (response.data.roles.length === 1) {
                     this._authService.role = response.data.roles[0];
                 }

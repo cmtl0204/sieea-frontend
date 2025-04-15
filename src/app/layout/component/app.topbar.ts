@@ -8,6 +8,7 @@ import { LayoutService } from '../service/layout.service';
 import { environment } from '@env/environment';
 import { Button } from 'primeng/button';
 import { AuthService } from '@modules/auth/auth.service';
+import { MY_ROUTES } from '@routes';
 
 @Component({
     selector: 'app-topbar',
@@ -65,11 +66,13 @@ import { AuthService } from '@modules/auth/auth.service';
                         <p-button
                             [icon]="PrimeIcons.USER"
                             [raised]="true" [text]="true"
+                            [routerLink]="[MY_ROUTES.pages.users.profileAbsolute]"
                             [label]="authService.auth.name" />
                         <p-button
                             [icon]="PrimeIcons.ID_CARD"
                             [raised]="true"
                             [text]="true"
+                            [routerLink]="[MY_ROUTES.pages.users.profileAbsolute]"
                             [label]="authService.auth.identification" />
                     </div>
                 </div>
@@ -88,4 +91,5 @@ export class AppTopbar {
 
     protected readonly environment = environment;
     protected readonly PrimeIcons = PrimeIcons;
+    protected readonly MY_ROUTES = MY_ROUTES;
 }

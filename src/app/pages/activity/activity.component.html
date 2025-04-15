@@ -1,11 +1,12 @@
-<p-dataview #dv [value]="products">
+<p-dataview #dv [value]="activities">
     <ng-template #header>
-        <h1>Actividades</h1>
-        <p-button label="Descargar Actividades" [icon]="PrimeIcons.DOWNLOAD" (onClick)="downloadActivities()"/>
+        <h1>{{ _authService.additionalInformation.nombreActividad }}</h1>
+        <!--        <p-button label="Descargar Actividades" [icon]="PrimeIcons.DOWNLOAD" (onClick)="downloadActivities()"/>-->
     </ng-template>
+
     <ng-template #list let-items>
         <div class="grid grid-cols-12 gap-4 grid-nogutter">
-            @for (item of items;track item.id;let first = $first; let indx = $index) {
+            @for (item of items; track item.id; let first = $first; let indx = $index) {
                 <div class="col-span-12" class="col-span-12">
                     <div
                         class="flex flex-col sm:flex-row sm:items-center p-6 gap-4"
@@ -13,11 +14,11 @@
                     >
                         <div class="md:w-40 relative">
                             <div class="sticky-note">
-                                <p>Actividad {{indx+1}}</p>
+                                <p>{{ item.label }}</p>
                             </div>
 
                             <p-tag
-                                [value]="item.completed?'Terminada':'Pendiente'"
+                                [value]="item.completed?'Descargado':'Pendiente'"
                                 [severity]="getSeverity(item)"
                                 class="absolute"
                                 styleClass="dark:!bg-surface-900"
@@ -28,17 +29,29 @@
                         <div class="flex flex-col md:flex-row justify-between md:items-center flex-1 gap-6">
                             <div class="flex flex-row md:flex-col justify-between items-start gap-2">
                                 <div>
-                                    <span class="font-medium text-secondary text-sm">{{item.name}}</span>
+                                    <span class="font-medium text-secondary text-sm">{{ item.name }}</span>
                                     <div
                                         class="text-lg font-medium text-surface-900 dark:text-surface-0 mt-2">{{ item.description }}
                                     </div>
+                                    <p-divider />
+                                    <div class="mb-2">
+                                        <p-button label="Descargar" [outlined]="true" [icon]="PrimeIcons.DOWNLOAD"
+                                                  (onClick)="downloadFile(item)" />
+                                    </div>
+                                    @if (item.registeredAt) {
+                                        <div>
+                                            <p-message>
+                                                <b class="mr-2">Última fecha de descarga:</b>
+                                                {{ item.registeredAt | date:'medium' }}
+                                            </p-message>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                             <div class="flex flex-col md:items-end gap-8">
                                 <div class="flex flex-row-reverse md:flex-row gap-2">
                                     <p-button
                                         [icon]="item.completed?PrimeIcons.HEART_FILL:PrimeIcons.HEART"
-                                        (onClick)="item.completed = !item.completed"
                                         [outlined]="true"
                                     />
                                 </div>

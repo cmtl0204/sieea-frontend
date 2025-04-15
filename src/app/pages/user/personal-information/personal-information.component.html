@@ -10,27 +10,27 @@
         </ng-template>
 
         <ng-template #end>
-            @if (editingControl.value) {
-                <p-button
-                    type="button"
-                    label="Guardar y Continuar"
-                    size="large"
-                    severity="success"
-                    [icon]="PrimeIcons.SAVE"
-                    (onClick)="onSubmit()" />
-            } @else {
-                <p-button
-                    type="button"
-                    label="Continuar"
-                    size="large"
-                    [icon]="PrimeIcons.ARROW_RIGHT"
-                    iconPos="right"
-                    (onClick)="onSubmit()" />
-            }
+            <!--            @if (editingControl.value) {-->
+            <!--                <p-button-->
+            <!--                    type="button"-->
+            <!--                    label="Guardar y Continuar"-->
+            <!--                    size="large"-->
+            <!--                    severity="success"-->
+            <!--                    [icon]="PrimeIcons.SAVE"-->
+            <!--                    (onClick)="onSubmit()" />-->
+            <!--            } @else {-->
+            <!--                <p-button-->
+            <!--                    type="button"-->
+            <!--                    label="Continuar"-->
+            <!--                    size="large"-->
+            <!--                    [icon]="PrimeIcons.ARROW_RIGHT"-->
+            <!--                    iconPos="right"-->
+            <!--                    (onClick)="onSubmit()" />-->
+            <!--            }-->
         </ng-template>
     </p-toolbar>
 
-    <p-divider />
+    <!--    <p-divider />-->
 
     <p-fluid>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -52,14 +52,20 @@
                             </label>
 
                             <div class="col-span-12 md:col-span-7">
-                                <input pInputText type="text" id="correo" formControlName="correo" />
+                                <input pInputText type="text" id="correo" formControlName="correo" class="mb-2" />
 
-                                <span
-                                    appErrorMessage
-                                    [errors]="correoField.errors"
-                                    [touched]="correoField.touched"
-                                    [dirty]="correoField.dirty">
-                    </span>
+                                <p-message severity="error" size="large"
+                                           appErrorMessage
+                                           [errors]="correoField.errors"
+                                           [touched]="correoField.touched"
+                                           [dirty]="correoField.dirty" />
+                                @if (fechaActualizacionCorreoField.value) {
+                                    <p-message severity="info" size="large">
+                                        <small>Última fecha de actualización:
+                                            <b>{{ fechaActualizacionCorreoField.value | date:'yyyy-MM-dd HH:mm:ss' }}</b>
+                                        </small>
+                                    </p-message>
+                                }
                             </div>
 
                             <div class="col-span-12 md:col-span-1">
@@ -85,56 +91,11 @@
                                 <input pInputText type="text" id="cedula" formControlName="cedula" />
                             </div>
 
-                            <span
-                                appErrorMessage
-                                [errors]="cedulaField.errors"
-                                [touched]="cedulaField.touched"
-                                [dirty]="cedulaField.dirty">
-                    </span>
-                        </div>
-
-                        <!-- birthdate -->
-                        <div class="grid grid-cols-12 gap-4">
-                            <label
-                                appLabel
-                                for="fechaNacimiento"
-                                class="col-span-12 md:col-span-4 flex items-center"
-                                label="Fecha de nacimiento"
-                                [required]="fechaNacimientoField">
-                            </label>
-
-                            <div class="col-span-12 md:col-span-8">
-                                <input pInputText type="text" id="fechaNacimiento" formControlName="fechaNacimiento" />
-                            </div>
-
-                            <span
-                                appErrorMessage
-                                [errors]="fechaNacimientoField.errors"
-                                [touched]="fechaNacimientoField.touched"
-                                [dirty]="fechaNacimientoField.dirty">
-                    </span>
-                        </div>
-
-                        <!-- age -->
-                        <div class="grid grid-cols-12 gap-4">
-                            <label
-                                appLabel
-                                for="edad"
-                                class="col-span-12 md:col-span-4 flex items-center"
-                                label="Edad"
-                                [required]="edadField">
-                            </label>
-
-                            <div class="col-span-12 md:col-span-8">
-                                <input pInputText type="text" id="edad" formControlName="edad" />
-                            </div>
-
-                            <span
-                                appErrorMessage
-                                [errors]="edadField.errors"
-                                [touched]="edadField.touched"
-                                [dirty]="edadField.dirty">
-                    </span>
+                            <p-message severity="error" size="large"
+                                       appErrorMessage
+                                       [errors]="cedulaField.errors"
+                                       [touched]="cedulaField.touched"
+                                       [dirty]="cedulaField.dirty" />
                         </div>
 
                         <!-- name -->
@@ -150,58 +111,13 @@
                             <div class="col-span-12 md:col-span-8">
                                 <input pInputText type="text" id="nombres" formControlName="nombres" />
 
-                                <span
+                                <p-message
+                                    severity="error"
+                                    size="large"
                                     appErrorMessage
-                                    [touched]="nombresField.touched"
                                     [errors]="nombresField.errors"
-                                    [dirty]="nombresField.dirty">
-                    </span>
-                            </div>
-
-
-                        </div>
-
-                        <!-- gender -->
-                        <div class="grid grid-cols-12 gap-4">
-                            <label
-                                appLabel
-                                for="genero"
-                                class="col-span-12 md:col-span-4 flex items-center"
-                                label="Género"
-                                [required]="generoField">
-                            </label>
-
-                            <div class="col-span-12 md:col-span-8">
-                                <input pInputText type="text" id="genero" formControlName="genero" />
-
-                                <span
-                                    appErrorMessage
-                                    [errors]="generoField.errors"
-                                    [touched]="generoField.touched"
-                                    [dirty]="generoField.dirty">
-                    </span>
-                            </div>
-                        </div>
-
-                        <!-- nationality -->
-                        <div class="grid grid-cols-12 gap-4">
-                            <label
-                                appLabel
-                                for="nacionalidad"
-                                class="col-span-12 md:col-span-4 flex items-center"
-                                label="Nacionalidad"
-                                [required]="nacionalidadField">
-                            </label>
-
-                            <div class="col-span-12 md:col-span-8">
-                                <input pInputText type="text" id="nacionalidad" formControlName="nacionalidad" />
-
-                                <span
-                                    appErrorMessage
-                                    [errors]="nacionalidadField.errors"
-                                    [touched]="nacionalidadField.touched"
-                                    [dirty]="nacionalidadField.dirty">
-                                </span>
+                                    [touched]="nombresField.touched"
+                                    [dirty]="nombresField.dirty" />
                             </div>
                         </div>
 
@@ -218,35 +134,13 @@
                             <div class="col-span-12 md:col-span-8">
                                 <input pInputText type="text" id="telefono" formControlName="telefono" />
 
-                                <span
+                                <p-message
+                                    severity="error"
+                                    size="large"
                                     appErrorMessage
                                     [errors]="telefonoField.errors"
                                     [touched]="telefonoField.touched"
-                                    [dirty]="telefonoField.dirty">
-                    </span>
-                            </div>
-                        </div>
-
-                        <!-- email -->
-                        <div class="grid grid-cols-12 gap-4">
-                            <label
-                                appLabel
-                                for="nombreInstitucion"
-                                class="col-span-12 md:col-span-4 flex items-center"
-                                label="Nombre Institución"
-                                [required]="nombreInstitucionField">
-                            </label>
-
-                            <div class="col-span-12 md:col-span-8">
-                                <input pInputText type="text" id="nombreInstitucion"
-                                       formControlName="nombreInstitucion" />
-
-                                <span
-                                    appErrorMessage
-                                    [errors]="nombreInstitucionField.errors"
-                                    [touched]="nombreInstitucionField.touched"
-                                    [dirty]="nombreInstitucionField.dirty">
-                    </span>
+                                    [dirty]="telefonoField.dirty" />
                             </div>
                         </div>
                     </div>
@@ -283,7 +177,7 @@
                     </div>
 
                     <div class="card flex flex-col gap-4">
-                        <div class="font-semibold text-xl">Datos domicilio</div>
+                        <div class="font-semibold text-xl">Datos postulación</div>
 
                         <p-divider />
 
@@ -300,12 +194,11 @@
                             <div class="col-span-12 md:col-span-8">
                                 <input pInputText type="text" id="provincia" formControlName="provincia" />
 
-                                <span
-                                    appErrorMessage
-                                    [errors]="provinciaField.errors"
-                                    [touched]="provinciaField.touched"
-                                    [dirty]="provinciaField.dirty">
-                    </span>
+                                <p-message severity="error" size="large"
+                                           appErrorMessage
+                                           [errors]="provinciaField.errors"
+                                           [touched]="provinciaField.touched"
+                                           [dirty]="provinciaField.dirty" />
                             </div>
                         </div>
 
@@ -322,100 +215,11 @@
                             <div class="col-span-12 md:col-span-8">
                                 <input pInputText type="text" id="canton" formControlName="canton" />
 
-                                <span
-                                    appErrorMessage
-                                    [errors]="cantonField.errors"
-                                    [touched]="cantonField.touched"
-                                    [dirty]="cantonField.dirty">
-                    </span>
-                            </div>
-                        </div>
-
-                        <!-- parish -->
-                        <div class="grid grid-cols-12 gap-4">
-                            <label
-                                appLabel
-                                for="parroquia"
-                                class="col-span-12 md:col-span-4 flex items-center"
-                                label="Parroquia"
-                                [required]="parroquiaField">
-                            </label>
-
-                            <div class="col-span-12 md:col-span-8">
-                                <input pInputText type="text" id="parroquia" formControlName="parroquia" />
-
-                                <span
-                                    appErrorMessage
-                                    [errors]="parroquiaField.errors"
-                                    [touched]="parroquiaField.touched"
-                                    [dirty]="parroquiaField.dirty">
-                    </span>
-                            </div>
-                        </div>
-
-                        <!-- neighborhood -->
-                        <div class="grid grid-cols-12 gap-4">
-                            <label
-                                appLabel
-                                for="barrio"
-                                class="col-span-12 md:col-span-4 flex items-center"
-                                label="Barrio"
-                                [required]="barrioField">
-                            </label>
-
-                            <div class="col-span-12 md:col-span-8">
-                                <input pInputText type="text" id="barrio" formControlName="barrio" />
-
-                                <span
-                                    appErrorMessage
-                                    [errors]="barrioField.errors"
-                                    [touched]="barrioField.touched"
-                                    [dirty]="barrioField.dirty">
-                            </span>
-                            </div>
-                        </div>
-
-                        <!-- mainStreet -->
-                        <div class="grid grid-cols-12 gap-4">
-                            <label
-                                appLabel
-                                for="callePrincipal"
-                                class="col-span-12 md:col-span-4 flex items-center"
-                                label="Calle principal"
-                                [required]="callePrincipalField">
-                            </label>
-
-                            <div class="col-span-12 md:col-span-8">
-                                <input pInputText type="text" id="callePrincipal" formControlName="callePrincipal" />
-
-                                <span
-                                    appErrorMessage
-                                    [errors]="callePrincipalField.errors"
-                                    [touched]="callePrincipalField.touched"
-                                    [dirty]="callePrincipalField.dirty">
-                    </span>
-                            </div>
-                        </div>
-
-                        <!-- secondaryStreet -->
-                        <div class="grid grid-cols-12 gap-4">
-                            <label
-                                appLabel
-                                for="calleSecundaria"
-                                class="col-span-12 md:col-span-4 flex items-center"
-                                label="Calle secundaria"
-                                [required]="calleSecundariaField">
-                            </label>
-
-                            <div class="col-span-12 md:col-span-8">
-                                <input pInputText type="text" id="calleSecundaria" formControlName="calleSecundaria" />
-
-                                <span
-                                    appErrorMessage
-                                    [errors]="calleSecundariaField.errors"
-                                    [touched]="calleSecundariaField.touched"
-                                    [dirty]="calleSecundariaField.dirty">
-                    </span>
+                                <p-message severity="error" size="large"
+                                           appErrorMessage
+                                           [errors]="cantonField.errors"
+                                           [touched]="cantonField.touched"
+                                           [dirty]="cantonField.dirty" />
                             </div>
                         </div>
                     </div>
@@ -475,7 +279,6 @@
                        [errors]="emailControl.errors"
                        [touched]="emailControl.touched"
                        [dirty]="emailControl.dirty" />
-
 
             @if (emailControl.valid) {
                 <p-button

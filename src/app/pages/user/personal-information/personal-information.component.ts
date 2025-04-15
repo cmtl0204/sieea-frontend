@@ -20,10 +20,11 @@ import { Textarea } from 'primeng/textarea';
 import { Dialog } from 'primeng/dialog';
 import { AuthHttpService } from '@modules/auth/auth-http.service';
 import { Tooltip } from 'primeng/tooltip';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'app-personal-information',
-    imports: [Button, Fluid, InputText, FormsModule, ErrorMessageDirective, LabelDirective, ReactiveFormsModule, Divider, Toolbar, SkeletonComponent, Message, Textarea, InputOtpModule, Dialog, Tooltip],
+    imports: [Button, Fluid, InputText, FormsModule, ErrorMessageDirective, LabelDirective, ReactiveFormsModule, Divider, Toolbar, SkeletonComponent, Message, Textarea, InputOtpModule, Dialog, Tooltip, DatePipe],
     templateUrl: './personal-information.component.html',
     styleUrl: './personal-information.component.scss'
 })
@@ -141,6 +142,7 @@ export class PersonalInformationComponent implements OnInit {
                 this.transactionalCodeControl.reset();
                 this.emailControl.reset();
                 this.updateVisible = false;
+                this.findPersonalInformation();
             }
         });
     }
@@ -191,7 +193,8 @@ export class PersonalInformationComponent implements OnInit {
             fechaCorte: [null, [Validators.required]],
             numeroPago: [null, [Validators.required]],
             monto: [null, [Validators.required]],
-            estadoOpi: [null, [Validators.required]]
+            estadoOpi: [null, [Validators.required]],
+            fechaActualizacionCorreo: [null]
         });
     }
 
@@ -326,5 +329,9 @@ export class PersonalInformationComponent implements OnInit {
 
     get estadoOpiField(): AbstractControl {
         return this.additionalInformationFormField.controls['estadoOpi'];
+    }
+
+    get fechaActualizacionCorreoField(): AbstractControl {
+        return this.additionalInformationFormField.controls['fechaActualizacionCorreo'];
     }
 }

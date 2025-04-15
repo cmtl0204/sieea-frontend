@@ -20,7 +20,7 @@ import { Checkbox } from 'primeng/checkbox';
 
 @Component({
     selector: 'app-bank-detail',
-    imports: [Button, Divider, ErrorMessageDirective, Fluid, InputText, LabelDirective, ReactiveFormsModule, SkeletonComponent, Toolbar, Message, Checkbox, Select],
+    imports: [Button, Divider, ErrorMessageDirective, Fluid, InputText, LabelDirective, ReactiveFormsModule, SkeletonComponent, Toolbar, Message, Select],
     templateUrl: './bank-detail.component.html',
     styleUrl: './bank-detail.component.scss'
 })
@@ -93,6 +93,10 @@ export class BankDetailComponent implements OnInit {
                 this.findBankDetail();
             }
         });
+    }
+
+    linkToEEA(){
+        window.open('https://ecuatorianosenaccion.inclusion.gob.ec/SIIMIESPUBLIC/views/public/actualizacionEcuatorianosEnAccion.jsf','_blank');
     }
 
     get validateForm(): boolean {
