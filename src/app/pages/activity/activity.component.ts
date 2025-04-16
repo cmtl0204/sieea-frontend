@@ -66,7 +66,7 @@ export class ActivityComponent implements OnInit {
                         label: 'Cronograma',
                         name: 'CRONOGRAMA DE ACTIVACIONES "ECUATORIANOS EN ACCIÓN"',
                         description:
-                            `Cronograma de actividades del mecanismo Ecuatorianos en Acción en la preservación de sitios de interés turístico en las jornadas convocadas por el Ministerio de Turismo; para la provincia en la cual postuló`,
+                            `Cronograma de actividades del mecanismo Ecuatorianos en Acción en la preservación de sitios de interés turístico en las jornadas convocadas por el Ministerio de Turismo; para la provincia y el cantón en la cual usted postuló`,
                         category: '1',
                         completed: false,
                         sort: 2
