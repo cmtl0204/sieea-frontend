@@ -53,8 +53,10 @@ export class ActivityComponent implements OnInit {
                         id: '1',
                         code: 'protocol1',
                         label: 'Protocolo',
-                        name: '1. PROTOCOLO A EJECUTAR DE LA ACTIVIDAD DE PRESERVACIÓNDESITIOSDE INTERÉS TURÍSTICO EN EL MARCO DEL MECANISMO',
-                        description: `PROTOCOLO A EJECUTAR DE LA ACTIVIDAD DE PRESERVACIÓNDESITIOSDE INTERÉS TURÍSTICO EN EL MARCO DEL MECANISMO`,
+                        name: '1. PROTOCOLO A EJECUTAR DE LA ACTIVIDAD DE PRESERVACIÓN DE SITIOS DE INTERÉS TURÍSTICO EN EL MARCO DEL MECANISMO "ECUATORIANOS EN ACCIÓN"',
+                        description:
+                            `Promover la participación de los beneficiarios del mecanismo Ecuatorianos en Acción en la
+                             preservación de sitios de interés turístico en las jornadas convocadas por el Ministerio de Turismo`,
                         category: '1',
                         completed: false,
                         sort: 1
@@ -64,7 +66,7 @@ export class ActivityComponent implements OnInit {
                         code: '2',
                         label: 'Cronograma',
                         name: 'Cronograma',
-                        description: 'Cronograma',
+                        description: 'Cronograma de activaciones "Ecuatorianos en Acción"',
                         category: '1',
                         completed: false,
                         sort: 2
