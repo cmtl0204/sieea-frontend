@@ -53,4 +53,8 @@ export class UserComponent {
             });
         }
     }
+
+    downloadTermsConditions(){
+        window.open('files/terms_conditions.pdf', '_blank');
+    }
 }

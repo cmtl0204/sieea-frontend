@@ -54,7 +54,7 @@
     <p-dialog [(visible)]="visibleBanner" [modal]="true" [style]="{ width: '25rem' }">
         <ng-template #header>
             <div class="inline-flex items-center justify-center gap-2">
-                <span class="font-bold whitespace-nowrap">texto aqui</span>
+                <span class="font-bold whitespace-nowrap">Bienvenido</span>
             </div>
         </ng-template>
 
@@ -67,24 +67,81 @@
 }
 
 @if (!termsConditions) {
-    <p-drawer [(visible)]="visible" styleClass="!w-full md:!w-80 lg:!w-[30rem]" [closable]="false"
+    <p-drawer [(visible)]="visible" styleClass="!w-full md:!w-80 lg:!w-[70rem]" [closable]="false"
               (onHide)="rejectTermsConditions()">
         <ng-template #header>
             <div class="flex items-center gap-2">
-                <h1>Términos y Condiciones</h1>
+                <h5 class="text-justify">TÉRMINOS Y CONDICIONES DEL MECANISMO “ECUATORIANOS EN
+                    ACCIÓN”, PRIVACIDAD DE LA PLATAFORMA DIGITAL Y AUTORIZACIÓN
+                    DE TRATAMIENTO DE DATOS PERSONALES
+                </h5>
             </div>
         </ng-template>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore
-            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            commodo
-            consequat.
-        </p>
+        <div class="text-justify">
+            <p>
+                Yo, en mi calidad de “USUARIO”, otorgo mi aceptación expresa y voluntaria de los
+                términos y condiciones de uso y privacidad de la plataforma digital del Ministerio de
+                Turismo y autorización de tratamiento de mis datos personales en los siguientes términos:
+            </p>
+
+            <p>
+                De conformidad con las disposiciones de la Ley Orgánica de Protección de Datos
+                Personales, publicada en el 5to Suplemento del Registro Oficial Nro. 459, de 26 de mayo
+                de 2021, y demás normativa conexa en materia de protección de datos vigente en el
+                Ecuador, he sido informado sobre los términos y condiciones de uso y privacidad de la
+                plataforma digital del Ministerio de Turismo y autorización de tratamiento de mis datos
+                personales, al que se accede por medio de la
+                URL https://capacitacion.turismo.gob.ec:8443/moodle/login/index.php
+            </p>
+
+            <p>
+                El acceso a la plataforma institucional tiene por objeto conceder al “USUARIO” la facultad
+                de utilizar la misma para acceder a la información y actividades que determine la Autoridad
+                Nacional de Turismo en el mecanismo denominado "ECUATORIANOS EN ACCIÓN "
+                (en adelante, "LA PLATAFORMA DIGITAL").
+            </p>
+
+            <p>
+                El “USUARIO” deberá crear una cuenta y será el único responsable y custodio de la
+                contraseña, mediante la cual tendrá acceso a la información y actividades determinadas en
+                el marco del mecanismo denominado "ECUATORIANOS EN ACCIÓN ", conforme a la
+                normativa vigente. El “USUARIO” será el responsable único de cualquier actividad
+                asociada a su cuenta y a la contraseña registrada para el uso de la “PLATAFORMA
+                DIGITAL”.
+            </p>
+
+            <p>
+                Cualquier uso no autorizado o violación de seguridad que el “USUARIO” haya detectado
+                sobre su cuenta deberá ser notificado inmediatamente al Ministerio de Turismo al correo
+                electrónico: {{ 'ecuatorianosenaccion@turismo.gob.ec' }}
+            </p>
+
+            <p>
+                Toda comunicación dirigida al “USUARIO” por parte de la “PLATAFORMA DIGITAL”
+                que tenga relación con el mecanismo "ECUATORIANOS EN ACCIÓN " se enviará a la
+                dirección de correo electrónico que el “USUARIO” registró al momento de la inscripción.
+                Es responsabilidad del “USUARIO” notificar cualquier modificación respecto a la
+                dirección de correo electrónico registrado y no podrá alegar desconocimiento de
+                información que le hubiese sido enviada a través de la “PLATAFORMA DIGITAL”.
+            </p>
+
+            <p>
+                Por lo expuesto, el “USUARIO” reconoce la validez jurídica de los mensajes de datos
+                autorizados o expedidos por el Ministerio de Turismo a través de la “PLATAFORMA
+                DIGITAL”, conforme lo determina el artículo 2 de la Ley de Comercio Electrónico, Firmas
+                Electrónicas y Mensajes de Datos. La documentación e información proporcionada por el
+                “USUARIO”, podrá ser utilizada por el Ministerio de Turismo cuando este lo requiera.
+            </p>
+        </div>
         <ng-template #footer>
             <div class="flex items-center gap-2">
                 <p-button label="Aceptar" [icon]="PrimeIcons.CHECK" class="w-full"
                           (onClick)="acceptTermsConditions()" />
+                <p-button
+                    label="Seguir leyendo" [icon]="PrimeIcons.DOWNLOAD"
+                    severity="info"
+                    class="w-full"
+                    (onClick)="downloadTermsConditions()" />
                 <p-button label="Rechazar" [icon]="PrimeIcons.BAN" class="w-full" severity="danger"
                           (onClick)="rejectTermsConditions()" />
             </div>

@@ -260,7 +260,7 @@
     </p-toolbar>
 }
 
-<p-dialog [(visible)]="updateVisible" [style]="{ width: '450px' }" header="Actualiazción de Correo" [modal]="true">
+<p-dialog [(visible)]="updateVisible" [style]="{ width: '450px' }" header="Actualización de Correo" [modal]="true">
     <ng-template #content>
         <div class="flex flex-col gap-6">
             <label
@@ -280,15 +280,14 @@
                        [touched]="emailControl.touched"
                        [dirty]="emailControl.dirty" />
 
-            @if (emailControl.valid) {
-                <p-button
-                    label="Solicitar Código"
-                    (onClick)="requestTransactionalEmailCode()"
-                    [loading]="_coreService.loading()"
-                    [fluid]="true" />
-            }
+            <p-button
+                label="Solicitar Código"
+                [disabled]="emailControl.invalid"
+                (onClick)="requestTransactionalEmailCode()"
+                [loading]="_coreService.loading()"
+                [fluid]="true" />
 
-            @if (emailControl.valid) {
+            @if (emailControl.valid && transactionalCodeControl.enabled) {
                 <label
                     appLabel
                     for="transactionalCode"
