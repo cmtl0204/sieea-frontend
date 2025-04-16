@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MenuItem, PrimeIcons } from 'primeng/api';
@@ -19,7 +19,7 @@ import { MY_ROUTES } from '@routes';
         </ul>
     `
 })
-export class AppMenu {
+export class AppMenu implements OnInit{
     private _authService = inject(AuthService);
     model: MenuItem[] = [];
 
@@ -30,7 +30,7 @@ export class AppMenu {
             //     items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }]
             // },
             {
-                label: 'MINTUR',
+                label: 'MINTUR (obligatorio)',
                 items: [
                     {
                         label: 'Capacitación',

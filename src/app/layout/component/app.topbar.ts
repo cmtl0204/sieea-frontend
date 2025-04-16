@@ -74,6 +74,13 @@ import { MY_ROUTES } from '@routes';
                             [text]="true"
                             [routerLink]="[MY_ROUTES.pages.users.profileAbsolute]"
                             [label]="authService.auth.identification" />
+                        <p-button
+                            [icon]="PrimeIcons.POWER_OFF"
+                            severity="danger"
+                            [raised]="true"
+                            [text]="true"
+                            (onClick)="signOut()"
+                            label="Cerrar Sesión" />
                     </div>
                 </div>
             </div>
@@ -87,6 +94,10 @@ export class AppTopbar {
 
     toggleDarkMode() {
         this.layoutService.layoutConfig.update((state) => ({ ...state, darkTheme: !state.darkTheme }));
+    }
+
+    signOut(){
+        this.authService.removeLogin();
     }
 
     protected readonly environment = environment;

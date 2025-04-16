@@ -53,9 +53,9 @@ export class ActivityComponent implements OnInit {
                         id: '1',
                         code: 'protocol1',
                         label: 'Protocolo',
-                        name: 'Campañas de promoción turística nacional e internacional',
-                        description: 'Organizar campañas de marketing para promocionar destinos turísticos, tanto a nivel local como internacional, a través de plataformas digitales, medios de comunicación y agencias de viajes.',
-                        category: 'Accessories',
+                        name: '1. PROTOCOLO A EJECUTAR DE LA ACTIVIDAD DE PRESERVACIÓNDESITIOSDE INTERÉS TURÍSTICO EN EL MARCO DEL MECANISMO',
+                        description: `PROTOCOLO A EJECUTAR DE LA ACTIVIDAD DE PRESERVACIÓNDESITIOSDE INTERÉS TURÍSTICO EN EL MARCO DEL MECANISMO`,
+                        category: '1',
                         completed: false,
                         sort: 1
                     },
@@ -63,10 +63,9 @@ export class ActivityComponent implements OnInit {
                         id: '2',
                         code: '2',
                         label: 'Cronograma',
-                        name: 'Festivales y eventos culturales',
-                        description:
-                            'Apoyar la organización de festivales de música, danza, cine, gastronomía, y tradiciones locales. Estos eventos no solo atraen turistas, sino que también ayudan a preservar y divulgar las costumbres y tradiciones locales.',
-                        category: 'Accessories',
+                        name: 'Cronograma',
+                        description: 'Cronograma',
+                        category: '1',
                         completed: false,
                         sort: 2
                     }
@@ -79,13 +78,9 @@ export class ActivityComponent implements OnInit {
                         id: '1',
                         code: '1',
                         label: 'Protocolo',
-                        name: 'PROTOCOLO INTERNO PARA LA DEPURACIÓN - CONSOLIDACIÓN DEL LEVANTAMIENTO DE INFORMACIÓN PROMOCIÓN TURÍSTICA',
-                        description:
-                            `Involucrar activamente a los beneficiarios del mecanismo Ecuatorianos en Acción pararealizar las actividades
-                            de levantamiento de información y así dar cumplimiento con el mandato del Decreto Ejecutivo Nº 578 de
-                            fecha 22 de marzo de 2025 y del oficio Nro T.SGJ-25-001-D de fecha 24 de marzo de 2025, emitido por el
-                            Sr. Presidente de la República.`,
-                        category: 'Accessories',
+                        name: '1. PROTOCOLO INTERNO PARA LA DEPURACIÓN - CONSOLIDACIÓN DEL LEVANTAMIENTO DE INFORMACIÓN PROMOCIÓN TURÍSTICA',
+                        description: `Recopilar información sobre el conocimiento de campañas promocionales nacionales, así como preferencias e intención de viaje en el Ecuador`,
+                        category: '2',
                         completed: false,
                         sort: 1
                     },
@@ -93,13 +88,11 @@ export class ActivityComponent implements OnInit {
                         id: '2',
                         code: '2',
                         label: 'Protocolo',
-                        name: `PROTOCOLO A EJECUTAR POR PARTE DE LOS BENEFICIARIOS DEL PROGRAMA "ECUATORIANOS EN ACCIÓN"`,
-                        description:
-                            `Involucrar a los beneficiarios del mecanismo “Ecuatorianos en Acción”, para realizar las actividades
-                             de levantamiento de información y dar cumplimiento a lo dispuesto en el Decreto Ejecutivo Nº 578,
-                             de fecha 22 de marzo de 2025 y del oficio Nro. T.SGJ-25- 001-D de fecha 24 de marzo de 2025, emitido
-                             por el señor Presidente de la República.`,
-                        category: 'Accessories',
+                        name: `2. PROTOCOLO A EJECUTAR POR PARTE DE LOS BENEFICIARIOS DEL PROGRAMA "ECUATORIANOS EN ACCIÓN"`,
+                        description: `Recopilar información a nivel continental, en el marco del mecanismo "Ecuatorianos en Acción",
+                            con base en el Acuerdo No. 20150021 respecto a la declaratoria de los baños de las gasolineras,
+                            como sitios de interés turístico`,
+                        category: '2',
                         completed: false,
                         sort: 2
                     },
@@ -107,12 +100,12 @@ export class ActivityComponent implements OnInit {
                         id: '3',
                         code: '3',
                         label: 'Base Gasolineras',
-                        name: 'Base de datos de Gasolineras',
-                        description: '',
-                        category: 'Accessories',
+                        name: '2.1 Base de datos de Gasolineras',
+                        description: `Actividad - levantamiento de información en baños de gasolineras a nivel nacional con excepción de la provincia de galápagos`,
+                        category: '2',
                         completed: false,
                         sort: 3
-                    },
+                    }
                 ];
                 break;
         }
@@ -160,10 +153,10 @@ export class ActivityComponent implements OnInit {
     getSeverity(product: ActivityInterface) {
         switch (product.completed) {
             case true:
-                return 'success';
+                return undefined;
 
             case false:
-                return 'warn';
+                return 'danger';
 
             default:
                 return undefined;
