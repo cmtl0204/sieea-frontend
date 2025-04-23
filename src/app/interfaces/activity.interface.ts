@@ -8,4 +8,5 @@ export interface ActivityInterface{
     completed: boolean;
     sort: number;
     registeredAt?: Date;
+    filePublished?: Date;
 }

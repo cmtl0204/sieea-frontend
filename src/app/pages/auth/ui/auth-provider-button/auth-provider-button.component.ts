@@ -22,16 +22,8 @@ export class GoogleComponent {
     signInWithGoogle() {
         this._authHttpService.signInWithPopup('google').then((userCredential: UserCredential) => {
             const user = userCredential.user;
-            console.log('UID:', user.uid);
-            console.log('Nombre:', user.displayName);
-            console.log('Email:', user.email);
-            console.log('Foto:', user.photoURL);
-            console.log('Teléfono:', user.phoneNumber);
-            console.log('Email verificado:', user.emailVerified);
-            console.log('Proveedor:', user.providerData);
 
             // También puedes ver todas las propiedades en la consola
-            console.log('Usuario completo:', user);
         }).catch(err => {
             this._customMessageService.showError({ summary: 'Error al acceder', detail: handleError(err) });
         });
@@ -40,16 +32,8 @@ export class GoogleComponent {
     signInWithMicrosoft() {
         this._authHttpService.signInWithPopup('microsoft').then((userCredential: UserCredential) => {
             const user = userCredential.user;
-            console.log('UID:', user.uid);
-            console.log('Nombre:', user.displayName);
-            console.log('Email:', user.email);
-            console.log('Foto:', user.photoURL);
-            console.log('Teléfono:', user.phoneNumber);
-            console.log('Email verificado:', user.emailVerified);
-            console.log('Proveedor:', user.providerData);
 
             // También puedes ver todas las propiedades en la consola
-            console.log('Usuario completo:', user);
         }).catch(err => {
             console.log(err);
         });
@@ -58,16 +42,8 @@ export class GoogleComponent {
     signInWithFacebook() {
         this._authHttpService.signInWithPopup('facebook').then((userCredential: UserCredential) => {
             const user = userCredential.user;
-            console.log('UID:', user.uid);
-            console.log('Nombre:', user.displayName);
-            console.log('Email:', user.email);
-            console.log('Foto:', user.photoURL);
-            console.log('Teléfono:', user.phoneNumber);
-            console.log('Email verificado:', user.emailVerified);
-            console.log('Proveedor:', user.providerData);
 
             // También puedes ver todas las propiedades en la consola
-            console.log('Usuario completo:', user);
         }).catch(err => {
             console.log(err);
         });

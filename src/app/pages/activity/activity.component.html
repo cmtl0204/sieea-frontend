@@ -35,13 +35,14 @@
                                     </div>
                                     <p-divider />
                                     <div class="mb-2">
+                                        <p class="text-gray-500">Fecha de publicación del archivo: {{item.filePublished | date:'yyyy-MM-dd'}}</p>
                                         <p-button label="Descargar" [outlined]="true" [icon]="PrimeIcons.DOWNLOAD"
                                                   (onClick)="downloadFile(item)" />
                                     </div>
                                     @if (item.registeredAt) {
                                         <div>
                                             <p-message>
-                                                <b class="mr-2">Última fecha de descarga:</b>
+                                                <b class="mr-2">Última fecha de descarga por parte del usuario:</b>
                                                 {{ item.registeredAt | date:'medium' }}
                                             </p-message>
                                         </div>

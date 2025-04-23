@@ -55,7 +55,6 @@ export class ValidationGuideComponent implements OnInit {
         const storageRef = ref(this.storage, filePath);
         const result = await uploadBytes(storageRef, file);
         const url = await getDownloadURL(result.ref);
-        console.log(url);
         return url;
     }
 
@@ -80,7 +79,6 @@ export class ValidationGuideComponent implements OnInit {
             });
         }
 
-        console.log(resultados);
         return resultados;
     }
 
@@ -89,7 +87,6 @@ export class ValidationGuideComponent implements OnInit {
 
         try {
             await deleteObject(archivoRef);
-            console.log('✅ Archivo eliminado:', 'tasks/1744392880395.pdf');
         } catch (error) {
             console.error('❌ Error al eliminar el archivo:', error);
         }

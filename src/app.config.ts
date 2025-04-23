@@ -14,6 +14,11 @@ import { HttpInterceptorProviders } from './app/interceptors';
 import { environment } from '@env/environment';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+import { LOCALE_ID } from '@angular/core';
+registerLocaleData(localeEs); // 👈 Esto es importante
+
 export const appConfig: ApplicationConfig = {
     providers: [
         provideRouter(
@@ -41,6 +46,7 @@ export const appConfig: ApplicationConfig = {
         provideStorage(() => getStorage()),
         provideAuth(() => getAuth()),
         provideFirestore(() => getFirestore()),
-        MessageService
+        MessageService,
+        { provide: LOCALE_ID, useValue: 'es' },
     ]
 };

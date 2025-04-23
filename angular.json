@@ -100,6 +100,9 @@
                         "production": {
                             "buildTarget": "eea-frontend:build:production"
                         },
+                        "qa": {
+                            "buildTarget": "eea-frontend:build:qa"
+                        },
                         "development": {
                             "buildTarget": "eea-frontend:build:development"
                         }

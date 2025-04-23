@@ -56,7 +56,6 @@ export class TrainingComponent implements OnInit {
         const storageRef = ref(this.storage, filePath);
         const result = await uploadBytes(storageRef, file);
         const url = await getDownloadURL(result.ref);
-        console.log(url);
         return url;
     }
 
@@ -81,7 +80,6 @@ export class TrainingComponent implements OnInit {
             });
         }
 
-        console.log(resultados);
         return resultados;
     }
 
@@ -90,7 +88,6 @@ export class TrainingComponent implements OnInit {
 
         try {
             await deleteObject(archivoRef);
-            console.log('✅ Archivo eliminado:', 'tasks/1744392880395.pdf');
         } catch (error) {
             console.error('❌ Error al eliminar el archivo:', error);
         }

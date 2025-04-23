@@ -35,6 +35,7 @@ import { Message } from 'primeng/message';
 })
 export class ActivityComponent implements OnInit {
     protected readonly _authService = inject(AuthService);
+    protected readonly _customMessageService = inject(CustomMessageService);
     protected readonly activityHttpService = inject(ActivityHttpService);
     layout: 'grid' | 'list' = 'grid';
 
@@ -58,18 +59,19 @@ export class ActivityComponent implements OnInit {
                              preservación de sitios de interés turístico en las jornadas convocadas por el Ministerio de Turismo`,
                         category: '1',
                         completed: false,
-                        sort: 1
+                        sort: 1,
+                        filePublished: new Date('2025-04-15')
                     },
                     {
                         id: '2',
                         code: '2',
                         label: 'Cronograma',
                         name: 'CRONOGRAMA DE ACTIVACIONES "ECUATORIANOS EN ACCIÓN"',
-                        description:
-                            `Cronograma de actividades del mecanismo Ecuatorianos en Acción en la preservación de sitios de interés turístico en las jornadas convocadas por el Ministerio de Turismo; para la provincia y el cantón en la cual usted postuló`,
+                        description: `Cronograma de actividades del mecanismo Ecuatorianos en Acción en la preservación de sitios de interés turístico en las jornadas convocadas por el Ministerio de Turismo; para la provincia y el cantón en la cual usted postuló`,
                         category: '1',
                         completed: false,
-                        sort: 2
+                        sort: 2,
+                        filePublished: new Date('2025-04-15')
                     }
                 ];
                 break;
@@ -84,7 +86,8 @@ export class ActivityComponent implements OnInit {
                         description: `Recopilar información sobre el conocimiento de campañas promocionales nacionales, así como preferencias e intención de viaje en el Ecuador`,
                         category: '2',
                         completed: false,
-                        sort: 1
+                        sort: 1,
+                        filePublished: new Date('2025-04-15')
                     },
                     {
                         id: '2',
@@ -96,7 +99,8 @@ export class ActivityComponent implements OnInit {
                             como sitios de interés turístico`,
                         category: '2',
                         completed: false,
-                        sort: 2
+                        sort: 2,
+                        filePublished: new Date('2025-04-24')
                     },
                     {
                         id: '3',
@@ -106,7 +110,8 @@ export class ActivityComponent implements OnInit {
                         description: `Actividad - levantamiento de información en baños de gasolineras a nivel nacional con excepción de la provincia de galápagos`,
                         category: '2',
                         completed: false,
-                        sort: 3
+                        sort: 3,
+                        filePublished: new Date('2025-04-15')
                     }
                 ];
                 break;
@@ -118,38 +123,42 @@ export class ActivityComponent implements OnInit {
     verifyActivities2() {
         this.activityHttpService.findActivitiesByAdditionalInformation(this._authService.additionalInformation.id).subscribe({
             next: (response) => {
-                console.log(response);
                 this.userActivities = response;
 
                 if (response.length > 0) {
                     this.activities = this.activities.filter((activityLocal) => {
-                        console.log(response.find((activityBase) => activityBase.code === activityLocal.code) == undefined);
-
                         return response.find((activityBase) => activityBase.code === activityLocal.code) == undefined;
                     });
                 }
             }
         });
-
-        console.log(this.activities);
     }
 
     verifyActivities() {
         this.activityHttpService.findActivitiesByAdditionalInformation(this._authService.additionalInformation.id).subscribe({
             next: (response) => {
-                console.log(response);
                 this.userActivities = response;
+
+                const totalDownloads = this.userActivities.every((activityBase) => activityBase.completed);
+
+                console.log(totalDownloads);
+                console.log(this.userActivities.length);
+                console.log(this.activities.length);
+                if (this.userActivities.length < this.activities.length || !totalDownloads) {
+                    this._customMessageService.showWarning({
+                        summary: 'Descargas Pendientes',
+                        detail: 'Tiene archivos pendientes de descargar'
+                    });
+                }
                 this.userActivities.forEach((activityBase) => {
                     const index = this.activities.findIndex((activityLocal) => activityLocal.code === activityBase.code);
                     if (index > -1) {
-                        this.activities[index].completed = true;
+                        this.activities[index].completed = activityBase.completed;
                         this.activities[index].registeredAt = activityBase.registeredAt;
                     }
                 });
             }
         });
-
-        console.log(this.activities);
     }
 
     getSeverity(product: ActivityInterface) {
@@ -166,7 +175,6 @@ export class ActivityComponent implements OnInit {
     }
 
     downloadFile(activity: ActivityInterface) {
-        console.log(activity);
         if (this._authService.additionalInformation.codigoActividad === '1') {
             switch (activity.code) {
                 case 'protocol1':
