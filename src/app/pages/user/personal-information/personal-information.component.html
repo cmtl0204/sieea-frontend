@@ -272,7 +272,8 @@
             </label>
 
             <input pInputText id="email" class="col-span-12 md:col-span-4 flex items-center"
-                   [formControl]="emailControl" autocomplete="off" autofocus fluid />
+                   [pKeyFilter]="blockSpace"
+                   [formControl]="emailControl" autocomplete="on" autofocus fluid />
 
             <p-message severity="error" size="large"
                        appErrorMessage

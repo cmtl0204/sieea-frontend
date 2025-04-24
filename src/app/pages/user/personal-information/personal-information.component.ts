@@ -21,10 +21,11 @@ import { Dialog } from 'primeng/dialog';
 import { AuthHttpService } from '@modules/auth/auth-http.service';
 import { Tooltip } from 'primeng/tooltip';
 import { DatePipe } from '@angular/common';
+import { KeyFilter } from 'primeng/keyfilter';
 
 @Component({
     selector: 'app-personal-information',
-    imports: [Button, Fluid, InputText, FormsModule, ErrorMessageDirective, LabelDirective, ReactiveFormsModule, Divider, Toolbar, SkeletonComponent, Message, Textarea, InputOtpModule, Dialog, Tooltip, DatePipe],
+    imports: [Button, Fluid, InputText, FormsModule, ErrorMessageDirective, LabelDirective, ReactiveFormsModule, Divider, Toolbar, SkeletonComponent, Message, Textarea, InputOtpModule, Dialog, Tooltip, DatePipe, KeyFilter],
     templateUrl: './personal-information.component.html',
     styleUrl: './personal-information.component.scss'
 })
@@ -49,6 +50,7 @@ export class PersonalInformationComponent implements OnInit {
     protected emailControl: FormControl = new FormControl(null, [Validators.required, Validators.email]);
     protected transactionalCode: string = '';
     protected updateVisible = false;
+    protected blockSpace: RegExp = /^\S*$/;
 
     constructor() {
         this.buildForm();
