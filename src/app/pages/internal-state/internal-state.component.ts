@@ -1,19 +1,20 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomMessageService } from '@utils/services/custom-message.service';
-import { Button } from 'primeng/button';
 import { PrimeIcons } from 'primeng/api';
 import { AuthService } from '@modules/auth/auth.service';
 import { Tag } from 'primeng/tag';
-import { Message } from 'primeng/message';
 import { StateHttpService } from '@modules/state/state-http.service';
-import { Textarea } from 'primeng/textarea';
 import { InputText } from 'primeng/inputtext';
 import { debounceTime } from 'rxjs';
+import { Select } from 'primeng/select';
+import { AutoComplete, AutoCompleteCompleteEvent } from 'primeng/autocomplete';
+import { JsonPipe } from '@angular/common';
+import { Fluid } from 'primeng/fluid';
 
 @Component({
     selector: 'app-state',
-    imports: [FormsModule, Button, Tag, Message, ReactiveFormsModule, Textarea, InputText],
+    imports: [FormsModule, Tag, ReactiveFormsModule, InputText, AutoComplete, JsonPipe, Fluid],
     templateUrl: './internal-state.component.html',
     styleUrl: './internal-state.component.scss',
     standalone: true
@@ -27,27 +28,36 @@ export class InternalStateComponent implements OnInit {
     protected identification: FormControl = new FormControl('');
 
     userState!: any;
+    userStates: any[] = [];
 
     options: string[] = ['list', 'grid'];
 
     constructor() {
-        this.identification.valueChanges.pipe(debounceTime(300)).subscribe((value) => {
-            if (value && value.length == 10) {
-                this.findStatesByCedula();
+        this.identification.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
+            if (value?.cedula) {
+                this.userState = value;
             }
         });
     }
 
-    ngOnInit() {
-        this.findStatesByCedula();
-    }
+    ngOnInit() {}
 
-    findStatesByCedula() {
-        this.stateHttpService.findStatesByIdentification(this.identification.value).subscribe({
+    findStatesByCedula(search: AutoCompleteCompleteEvent) {
+        this.userState = null;
+
+        this.stateHttpService.findStatesByIdentification(search.query).subscribe({
             next: (response) => {
-                this.userState = response;
-                if(!this.userState) {
-                    this._customMessageService.showError({ summary: 'Cédula no encontrada', detail: 'Por favor intente de nuevo' });
+                this.userStates = response;
+
+                if (response && response.length == 1) {
+                    this.userState = response[0];
+                }
+
+                if (response.length == 0) {
+                    this._customMessageService.showError({
+                        summary: 'Cédula no encontrada',
+                        detail: 'Por favor intente de nuevo'
+                    });
                 }
             }
         });
