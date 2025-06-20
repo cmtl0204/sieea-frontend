@@ -42,6 +42,10 @@ export const MY_ROUTES = {
             absolute: 'pages/activities',
             base: 'activities',
         },
+        states: {
+            absolute: 'pages/states',
+            base: 'states',
+        },
     },
     auth: {
         base: 'auth'

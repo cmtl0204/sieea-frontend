@@ -41,6 +41,11 @@ export class AppMenu implements OnInit{
                         label: 'Actividades',
                         icon: PrimeIcons.LIST_CHECK,
                         routerLink: [MY_ROUTES.pages.activities.absolute]
+                    },
+                    {
+                        label: 'Estado Proceso',
+                        icon: PrimeIcons.CHECK,
+                        routerLink: [MY_ROUTES.pages.states.absolute]
                     }
                     // { label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input'] },
                     // { label: 'Button', icon: 'pi pi-fw pi-mobile', class: 'rotated-icon', routerLink: ['/uikit/button'] },
