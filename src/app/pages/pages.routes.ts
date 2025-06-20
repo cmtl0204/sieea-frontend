@@ -7,4 +7,5 @@ export default [
     { path: MY_ROUTES.pages.activities.base, loadChildren: () => import('./activity/activity.routes') },
     { path: MY_ROUTES.pages.trainings.base, loadChildren: () => import('./training/training.routes') },
     { path: MY_ROUTES.pages.states.base, loadChildren: () => import('./state/state.routes') },
+    { path: MY_ROUTES.pages.internalStates.base, loadChildren: () => import('./internal-state/internal-state.routes') },
 ] as Routes;

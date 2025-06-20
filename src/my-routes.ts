@@ -46,6 +46,10 @@ export const MY_ROUTES = {
             absolute: 'pages/states',
             base: 'states',
         },
+        internalStates: {
+            absolute: 'pages/internal-states',
+            base: 'internal-states',
+        },
     },
     auth: {
         base: 'auth'

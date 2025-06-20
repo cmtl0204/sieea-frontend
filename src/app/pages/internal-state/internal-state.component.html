@@ -1,3 +1,13 @@
+<div class="card flex flex-col gap-6 w-full">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <div class="md:col-span-3 flex flex-col gap-2">
+            <label>Número de cédula:</label>
+
+            <input type="text" pInputText [formControl]="identification">
+        </div>
+    </div>
+</div>
+
 @if (userState) {
     <div class="card flex flex-col gap-6 w-full">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
@@ -22,7 +32,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="grid grid-cols-12 gap-4 grid-nogutter">
         <div class="col-span-4">
@@ -158,19 +167,4 @@
             </div>
         }
     </div>
-
-    <div class="card">
-        <label for="">
-            Comentario:
-        </label>
-
-        <textarea class="w-full" rows="8" cols="100" pTextarea [formControl]="commentary"></textarea>
-
-        <p-button label="Enviar" [icon]="PrimeIcons.SEND" (onClick)="createCommentary()" [disabled]="commentary.disabled"/>
-    </div>
-}
-
-@if (!userState) {
-    <p-message severity="error">No cuenta con registro de su actividad</p-message>
-
 }

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class StateHttpService {
+export class InternalStateHttpService {
     private readonly _httpClient = inject(HttpClient);
     private readonly _apiUrl = `${environment.API_URL}/states`;
     private readonly _customMessageService = inject(CustomMessageService);

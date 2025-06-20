@@ -19,68 +19,95 @@ import { MY_ROUTES } from '@routes';
         </ul>
     `
 })
-export class AppMenu implements OnInit{
+export class AppMenu implements OnInit {
     private _authService = inject(AuthService);
     model: MenuItem[] = [];
 
     ngOnInit() {
-        this.model = [
-            // {
-            //     label: 'Home',
-            //     items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }]
-            // },
-            {
-                label: 'MINTUR (obligatorio)',
-                items: [
+        switch (this._authService.role.code) {
+            case 'internal':
+                this.model = [
                     {
-                        label: 'Capacitación',
-                        icon: PrimeIcons.GRADUATION_CAP,
-                        routerLink: [MY_ROUTES.pages.trainings.absolute]
+                        label: 'MINTUR (obligatorio)',
+                        items: [
+                            {
+                                label: 'Estado Proceso',
+                                icon: PrimeIcons.WAVE_PULSE,
+                                routerLink: [MY_ROUTES.pages.internalStates.absolute]
+                            }
+                        ]
                     },
-                    {
-                        label: 'Actividades',
-                        icon: PrimeIcons.LIST_CHECK,
-                        routerLink: [MY_ROUTES.pages.activities.absolute]
-                    },
-                    {
-                        label: 'Estado Proceso',
-                        icon: PrimeIcons.CHECK,
-                        routerLink: [MY_ROUTES.pages.states.absolute]
-                    }
-                    // { label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input'] },
-                    // { label: 'Button', icon: 'pi pi-fw pi-mobile', class: 'rotated-icon', routerLink: ['/uikit/button'] },
-                    // { label: 'Table', icon: 'pi pi-fw pi-table', routerLink: ['/uikit/table'] },
-                    // { label: 'List', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/list'] },
-                    // { label: 'Tree', icon: 'pi pi-fw pi-share-alt', routerLink: ['/uikit/tree'] },
-                    // { label: 'Panel', icon: 'pi pi-fw pi-tablet', routerLink: ['/uikit/panel'] },
-                    // { label: 'Overlay', icon: 'pi pi-fw pi-clone', routerLink: ['/uikit/overlay'] },
-                    // { label: 'Media', icon: 'pi pi-fw pi-image', routerLink: ['/uikit/media'] },
-                    // { label: 'Menu', icon: 'pi pi-fw pi-bars', routerLink: ['/uikit/menu'] },
-                    // { label: 'Message', icon: 'pi pi-fw pi-comment', routerLink: ['/uikit/message'] },
-                    // { label: 'File', icon: 'pi pi-fw pi-file', routerLink: ['/uikit/file'] },
-                    // { label: 'Chart', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/uikit/charts'] },
-                    // { label: 'Timeline', icon: 'pi pi-fw pi-calendar', routerLink: ['/uikit/timeline'] },
-                    // { label: 'Misc', icon: 'pi pi-fw pi-circle', routerLink: ['/uikit/misc'] }
-                ]
-            },
 
-            {
-                label: 'Mis Datos',
-                items: [
                     {
-                        label: 'Mi Perfil',
-                        icon: 'pi pi-fw pi-user',
-                        routerLink: ['/pages/users/profile']
-                    },
-                    {
-                        label: 'Cerrar Sesión',
-                        icon: 'pi pi-fw pi-power-off',
-                        command: () => {
-                            this._authService.removeLogin();
-                        }
+                        label: 'Mis Datos',
+                        items: [
+                            {
+                                label: 'Cerrar Sesión',
+                                icon: 'pi pi-fw pi-power-off',
+                                command: () => {
+                                    this._authService.removeLogin();
+                                }
+                            }
+                        ]
                     }
-                ]
-            }
-        ];
+                ];
+                break;
+
+            default:
+                this.model = [
+                    {
+                        label: 'MINTUR (obligatorio)',
+                        items: [
+                            {
+                                label: 'Capacitación',
+                                icon: PrimeIcons.GRADUATION_CAP,
+                                routerLink: [MY_ROUTES.pages.trainings.absolute]
+                            },
+                            {
+                                label: 'Actividades',
+                                icon: PrimeIcons.LIST_CHECK,
+                                routerLink: [MY_ROUTES.pages.activities.absolute]
+                            },
+                            {
+                                label: 'Estado Proceso',
+                                icon: PrimeIcons.WAVE_PULSE,
+                                routerLink: [MY_ROUTES.pages.states.absolute]
+                            }
+                            // { label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input'] },
+                            // { label: 'Button', icon: 'pi pi-fw pi-mobile', class: 'rotated-icon', routerLink: ['/uikit/button'] },
+                            // { label: 'Table', icon: 'pi pi-fw pi-table', routerLink: ['/uikit/table'] },
+                            // { label: 'List', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/list'] },
+                            // { label: 'Tree', icon: 'pi pi-fw pi-share-alt', routerLink: ['/uikit/tree'] },
+                            // { label: 'Panel', icon: 'pi pi-fw pi-tablet', routerLink: ['/uikit/panel'] },
+                            // { label: 'Overlay', icon: 'pi pi-fw pi-clone', routerLink: ['/uikit/overlay'] },
+                            // { label: 'Media', icon: 'pi pi-fw pi-image', routerLink: ['/uikit/media'] },
+                            // { label: 'Menu', icon: 'pi pi-fw pi-bars', routerLink: ['/uikit/menu'] },
+                            // { label: 'Message', icon: 'pi pi-fw pi-comment', routerLink: ['/uikit/message'] },
+                            // { label: 'File', icon: 'pi pi-fw pi-file', routerLink: ['/uikit/file'] },
+                            // { label: 'Chart', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/uikit/charts'] },
+                            // { label: 'Timeline', icon: 'pi pi-fw pi-calendar', routerLink: ['/uikit/timeline'] },
+                            // { label: 'Misc', icon: 'pi pi-fw pi-circle', routerLink: ['/uikit/misc'] }
+                        ]
+                    },
+
+                    {
+                        label: 'Mis Datos',
+                        items: [
+                            {
+                                label: 'Mi Perfil',
+                                icon: 'pi pi-fw pi-user',
+                                routerLink: ['/pages/users/profile']
+                            },
+                            {
+                                label: 'Cerrar Sesión',
+                                icon: 'pi pi-fw pi-power-off',
+                                command: () => {
+                                    this._authService.removeLogin();
+                                }
+                            }
+                        ]
+                    }
+                ];
+        }
     }
 }

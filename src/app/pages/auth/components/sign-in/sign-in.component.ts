@@ -27,6 +27,7 @@ import { UserHttpService } from '@modules/auth/user-http.service';
 import { Badge } from 'primeng/badge';
 import { Tag } from 'primeng/tag';
 import { Message } from 'primeng/message';
+import { MY_ROUTES } from '@routes';
 
 @Component({
     selector: 'app-sign-in',
@@ -168,7 +169,7 @@ export default class SignInComponent {
 
         this._authHttpService.signInByValidationIdentification(this.usernameField.value).subscribe({
             next: (responseSignIn) => {
-                this._router.navigateByUrl('/pages/users/profile');
+                this._router.navigateByUrl(MY_ROUTES.pages.states.absolute);
             }
         });
     }

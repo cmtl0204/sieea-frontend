@@ -43,7 +43,7 @@ export class AuthHttpService {
 
                 this._customMessageService.showSuccess({ summary: response.title, detail: response.message });
 
-                return response;
+                return response.data;
             })
         );
     }
