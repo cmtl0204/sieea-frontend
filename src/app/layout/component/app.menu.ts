@@ -69,7 +69,7 @@ export class AppMenu implements OnInit {
                                 routerLink: [MY_ROUTES.pages.activities.absolute]
                             },
                             {
-                                label: 'Estado Proceso',
+                                label: 'Estado/Proceso',
                                 icon: PrimeIcons.WAVE_PULSE,
                                 routerLink: [MY_ROUTES.pages.states.absolute]
                             }

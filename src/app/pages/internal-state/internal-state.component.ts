@@ -12,12 +12,14 @@ import { AutoComplete, AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 import { JsonPipe } from '@angular/common';
 import { Fluid } from 'primeng/fluid';
 import { Divider } from 'primeng/divider';
-import { Button } from 'primeng/button';
+import { Button, ButtonDirective } from 'primeng/button';
 import { Textarea } from 'primeng/textarea';
+import { Tooltip } from 'primeng/tooltip';
+import { Popover } from 'primeng/popover';
 
 @Component({
     selector: 'app-state',
-    imports: [FormsModule, Tag, ReactiveFormsModule, InputText, AutoComplete, JsonPipe, Fluid, Divider, Button, Textarea],
+    imports: [FormsModule, Tag, ReactiveFormsModule, InputText, AutoComplete, JsonPipe, Fluid, Divider, Button, Textarea, ButtonDirective, Tooltip, Popover],
     templateUrl: './internal-state.component.html',
     styleUrl: './internal-state.component.scss',
     standalone: true
@@ -39,7 +41,7 @@ export class InternalStateComponent implements OnInit {
         this.identification.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
             if (value?.cedula) {
                 this.userState = value;
-            }else{
+            } else {
                 this.userState = null;
             }
         });

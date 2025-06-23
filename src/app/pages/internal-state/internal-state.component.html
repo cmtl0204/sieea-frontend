@@ -48,16 +48,27 @@
             </div>
 
             <div class="md:col-span-3 flex flex-col gap-2">
-                <p><b>ESTADO:</b> {{ userState.habilitado }} (Unidad Registro Social)</p>
+                <p>
+                    <b>
+                        ESTADO:
+                    </b>
+                    {{ userState.habilitado }} (Unidad Registro Social)
+
+                    <p-button [icon]="PrimeIcons.INFO_CIRCLE"
+                              [outlined]="true"
+                              size="small"
+                              label="Haga click aquí"
+                              (click)="op.toggle($event)"/>
+                </p>
             </div>
 
             <div class="md:col-span-6 flex flex-col gap-2">
                 <p><b>ACTIVIDAD:</b> {{ userState.actividad }}</p>
             </div>
 
-            <div class="md:col-span-3 flex flex-col gap-2">
+            <div class="md:col-span-2 flex flex-col gap-2">
                 <h6>PROGRESO:</h6>
-                <p-tag [severity]="userState.cumple!='Completo'?'danger':undefined">{{ userState.cumple }}</p-tag>
+                <p-tag [severity]="userState.cumple!='Completo'?'danger':'success'">{{ userState.cumple }}</p-tag>
             </div>
         </div>
 
@@ -124,7 +135,7 @@
                     </div>
 
                     <p-tag
-                        [severity]="userState.curso!='completa'?'danger':undefined"
+                        [severity]="userState.curso!='completa'?'danger':'success'"
                         class="absolute"
                         styleClass="dark:!bg-surface-900"
                         [style.left.px]="4"
@@ -150,7 +161,7 @@
                         </div>
 
                         <p-tag
-                            [severity]="userState.actividadA1!='completa'?'danger':undefined"
+                            [severity]="userState.actividadA1!='completa'?'danger':'success'"
                             class="absolute"
                             styleClass="dark:!bg-surface-900"
                             [style.left.px]="4"
@@ -175,7 +186,7 @@
                         </div>
 
                         <p-tag
-                            [severity]="userState.actividadA2!='completa'?'danger':undefined"
+                            [severity]="userState.actividadA2!='completa'?'danger':'success'"
                             class="absolute"
                             styleClass="dark:!bg-surface-900"
                             [style.left.px]="4"
@@ -202,7 +213,7 @@
                         </div>
 
                         <p-tag
-                            [severity]="userState.actividadB1!='completa'?'danger':undefined"
+                            [severity]="userState.actividadB1!='completa'?'danger':'success'"
                             class="absolute"
                             styleClass="dark:!bg-surface-900"
                             [style.left.px]="4"
@@ -227,7 +238,7 @@
                         </div>
 
                         <p-tag
-                            [severity]="userState.actividadB2!='completa'?'danger':undefined"
+                            [severity]="userState.actividadB2!='completa'?'danger':'success'"
                             class="absolute"
                             styleClass="dark:!bg-surface-900"
                             [style.left.px]="4"
@@ -254,7 +265,7 @@
                         </div>
 
                         <p-tag
-                            [severity]="userState.actividadB1!='completa'?'danger':undefined"
+                            [severity]="userState.actividadB1!='completa'?'danger':'success'"
                             class="absolute"
                             styleClass="dark:!bg-surface-900"
                             [style.left.px]="4"
@@ -279,7 +290,7 @@
                         </div>
 
                         <p-tag
-                            [severity]="userState.actividadB2!='completa'?'danger':undefined"
+                            [severity]="userState.actividadB2!='completa'?'danger':'success'"
                             class="absolute"
                             styleClass="dark:!bg-surface-900"
                             [style.left.px]="4"
@@ -306,7 +317,7 @@
                         </div>
 
                         <p-tag
-                            [severity]="userState.actividadB1!='completa'?'danger':undefined"
+                            [severity]="userState.actividadB1!='completa'?'danger':'success'"
                             class="absolute"
                             styleClass="dark:!bg-surface-900"
                             [style.left.px]="4"
@@ -331,7 +342,7 @@
                         </div>
 
                         <p-tag
-                            [severity]="userState.actividadB2!='completa'?'danger':undefined"
+                            [severity]="userState.actividadB2!='completa'?'danger':'success'"
                             class="absolute"
                             styleClass="dark:!bg-surface-900"
                             [style.left.px]="4"
@@ -347,5 +358,10 @@
             </div>
         }
     </div>
-
 }
+
+<p-popover #op>
+    <div class="flex flex-col gap-4 w-[25rem]">
+        El estado de la URS siginifica que cumple con todos los requisitos mínimos para poder aplicar a ecuatorianos en acción
+    </div>
+</p-popover>

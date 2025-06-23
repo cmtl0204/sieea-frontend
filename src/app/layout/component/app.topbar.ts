@@ -80,11 +80,12 @@ export class AppTopbar {
     }
 
     signOut() {
-        this.authService.removeLogin();
         if (this.authService.role?.code=='internal') {
             this._router.navigateByUrl('/auth/internal-sign-in');
             return;
         }
+
+        this.authService.removeLogin();
 
         this._router.navigateByUrl('/auth/sign-in');
     }
