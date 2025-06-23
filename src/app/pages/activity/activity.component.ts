@@ -141,9 +141,6 @@ export class ActivityComponent implements OnInit {
 
                 const totalDownloads = this.userActivities.every((activityBase) => activityBase.completed);
 
-                console.log(totalDownloads);
-                console.log(this.userActivities.length);
-                console.log(this.activities.length);
                 if (this.userActivities.length < this.activities.length || !totalDownloads) {
                     this._customMessageService.showWarning({
                         summary: 'Descargas Pendientes',

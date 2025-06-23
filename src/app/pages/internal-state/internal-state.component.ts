@@ -39,6 +39,8 @@ export class InternalStateComponent implements OnInit {
         this.identification.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
             if (value?.cedula) {
                 this.userState = value;
+            }else{
+                this.userState = null;
             }
         });
     }
