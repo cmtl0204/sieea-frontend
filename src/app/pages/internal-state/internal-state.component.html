@@ -1,8 +1,8 @@
 <p-fluid>
     <div class="card flex flex-col gap-6 w-full">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-            <div class="md:col-span-5 flex flex-col gap-2">
-                <label>Ingrese el número de cédula del beneficiario:</label>
+            <div class="md:col-span-4 flex flex-col gap-2">
+                <label>Ingrese el número de cédula o nombre del beneficiario:</label>
 
                 <p-autocomplete [formControl]="identification"
                                 [suggestions]="userStates"
@@ -28,26 +28,90 @@
     <div class="card flex flex-col gap-6 w-full">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
             <div class="md:col-span-3 flex flex-col gap-2">
-                <h6>DIRECCIÓN ZONAL:</h6>
-                {{ userState.direccionZonal }}
+                <p><b>PROVINCIA:</b> {{ userState.provincia }}</p>
             </div>
 
             <div class="md:col-span-3 flex flex-col gap-2">
-                <h6>PROVINCIA:</h6>
-                {{ userState.provincia }}
+                <p><b>NÚMERO DE CÉDULA:</b> {{ userState.cedula }}</p>
             </div>
 
-            <div class="md:col-span-3 flex flex-col gap-2">
-                <h6>NÚMERO DE CÉDULA:</h6>
-                {{ userState.cedula }}
-            </div>
-
-            <div class="md:col-span-3 flex flex-col gap-2">
-                <h6>NOMBRES Y APELLIDOS :</h6>
-                {{ userState.nombres }}
+            <div class="md:col-span-6 flex flex-col gap-2">
+                <p><b>APELLIDOS Y NOMBRES:</b> {{ userState.nombres }}</p>
             </div>
         </div>
+
+        <p-divider />
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+            <div class="md:col-span-3 flex flex-col gap-2">
+                <p><b>DIRECCIÓN ZONAL:</b> {{ userState.direccionZonal }}</p>
+            </div>
+
+            <div class="md:col-span-3 flex flex-col gap-2">
+                <p><b>ESTADO:</b> {{ userState.habilitado }} (Unidad Registro Social)</p>
+            </div>
+
+            <div class="md:col-span-6 flex flex-col gap-2">
+                <p><b>ACTIVIDAD:</b> {{ userState.actividad }}</p>
+            </div>
+
+            <div class="md:col-span-3 flex flex-col gap-2">
+                <h6>PROGRESO:</h6>
+                <p-tag [severity]="userState.cumple!='Completo'?'danger':undefined">{{ userState.cumple }}</p-tag>
+            </div>
+        </div>
+
+        <p-divider />
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 text-center">
+            @if (userState.actividadA1 || userState.actividadA2) {
+                <div class="md:col-span-3 flex flex-col gap-2">
+                    <p># de actividades preservación en abril: <b>{{ userState.cantidadA1 }}</b></p>
+                    <p>Meta: {{ userState.metaA1 }}</p>
+                </div>
+
+                <div class="md:col-span-3 flex flex-col gap-2">
+                    <p># de actividades preservación en mayo: <b>{{ userState.cantidadA2 }}</b></p>
+                    <p>Meta: {{ userState.metaA2 }}</p>
+                </div>
+            }
+
+            @if (userState.actividadB1 || userState.actividadB2) {
+                <div class="md:col-span-3 flex flex-col gap-2">
+                    <p># de encuestas levantadas en digital en abril: <b>{{ userState.cantidadB1 }}</b></p>
+                </div>
+
+                <div class="md:col-span-3 flex flex-col gap-2">
+                    <p># de encuestas levantadas en físico en abril: <b>{{ userState.cantidadC1 }}</b></p>
+                </div>
+
+                <div class="md:col-span-3 flex flex-col gap-2">
+                    <p># de encuestas levantadas en digital en mayo: <b>{{ userState.cantidadB2 }}</b></p>
+                </div>
+
+                <div class="md:col-span-3 flex flex-col gap-2">
+                    <p># de encuestas levantadas en físico en mayo: <b>{{ userState.cantidadC2 }}</b></p>
+                </div>
+
+                <div class="md:col-span-6 flex flex-col gap-2">
+                    <p>Meta Abril: <b>20</b></p>
+                </div>
+
+                <div class="md:col-span-6 flex flex-col gap-2">
+                    <p>Meta Mayo: <b>100</b></p>
+                </div>
+
+            }
+        </div>
     </div>
+
+<!--    <div class="card">-->
+<!--        <label for="">-->
+<!--            Comentario:-->
+<!--        </label>-->
+
+<!--        <p>{{ userState.comentario }}</p>-->
+<!--    </div>-->
 
     <div class="grid grid-cols-12 gap-4 grid-nogutter">
         <div class="col-span-4">
@@ -60,14 +124,14 @@
                     </div>
 
                     <p-tag
-                        [severity]="userState.curso!='si'?'danger':undefined"
+                        [severity]="userState.curso!='completa'?'danger':undefined"
                         class="absolute"
                         styleClass="dark:!bg-surface-900"
                         [style.left.px]="4"
                         [style.top.px]="4">
                         <div class="flex items-center gap-2 px-1">
                                 <span class="text-base" style="font-size: 22px;width: 120px">
-                                    {{ userState.curso == 'si' ? 'Cumple' : 'No Cumple' }}
+                                    {{ userState.curso == 'completa' ? 'Cumple' : 'No Cumple' }}
                                 </span>
                         </div>
                     </p-tag>
@@ -75,7 +139,7 @@
             </div>
         </div>
 
-        @if (userState.actividadA1) {
+        @if (userState.actividadA1 || userState.actividadA2) {
             <div class="col-span-4">
                 <div
                     class="flex flex-col sm:flex-row sm:items-center p-6 gap-4 border-t border-surface-200 dark:border-surface-700"
@@ -86,23 +150,21 @@
                         </div>
 
                         <p-tag
-                            [severity]="userState.actividadA1!='si'?'danger':undefined"
+                            [severity]="userState.actividadA1!='completa'?'danger':undefined"
                             class="absolute"
                             styleClass="dark:!bg-surface-900"
                             [style.left.px]="4"
                             [style.top.px]="4">
                             <div class="flex items-center gap-2 px-1">
                                 <span class="text-base" style="font-size: 22px;width: 120px">
-                                    {{ userState.actividadA1 == 'si' ? 'Cumple' : 'No Cumple' }}
+                                    {{ userState.actividadA1 == 'completa' ? 'Cumple' : 'No Cumple' }}
                                 </span>
                             </div>
                         </p-tag>
                     </div>
                 </div>
             </div>
-        }
 
-        @if (userState.actividadA2) {
             <div class="col-span-4">
                 <div
                     class="flex flex-col sm:flex-row sm:items-center p-6 gap-4 border-t border-surface-200 dark:border-surface-700"
@@ -113,14 +175,14 @@
                         </div>
 
                         <p-tag
-                            [severity]="userState.actividadA2!='si'?'danger':undefined"
+                            [severity]="userState.actividadA2!='completa'?'danger':undefined"
                             class="absolute"
                             styleClass="dark:!bg-surface-900"
                             [style.left.px]="4"
                             [style.top.px]="4">
                             <div class="flex items-center gap-2 px-1">
                                 <span class="text-base" style="font-size: 22px;width: 120px">
-                                    {{ userState.actividadA2 == 'si' ? 'Cumple' : 'No Cumple' }}
+                                    {{ userState.actividadA2 == 'completa' ? 'Cumple' : 'No Cumple' }}
                                 </span>
                             </div>
                         </p-tag>
@@ -129,7 +191,7 @@
             </div>
         }
 
-        @if (userState.actividadB1) {
+        @if (userState.actividadB1 || userState.actividadB2) {
             <div class="col-span-4">
                 <div
                     class="flex flex-col sm:flex-row sm:items-center p-6 gap-4 border-t border-surface-200 dark:border-surface-700"
@@ -140,23 +202,21 @@
                         </div>
 
                         <p-tag
-                            [severity]="userState.actividadB1!='si'?'danger':undefined"
+                            [severity]="userState.actividadB1!='completa'?'danger':undefined"
                             class="absolute"
                             styleClass="dark:!bg-surface-900"
                             [style.left.px]="4"
                             [style.top.px]="4">
                             <div class="flex items-center gap-2 px-1">
                                 <span class="text-base" style="font-size: 22px;width: 120px">
-                                    {{ userState.actividadB1 == 'si' ? 'Cumple' : 'No Cumple' }}
+                                    {{ userState.actividadB1 == 'completa' ? 'Cumple' : 'No Cumple' }}
                                 </span>
                             </div>
                         </p-tag>
                     </div>
                 </div>
             </div>
-        }
 
-        @if (userState.actividadB2) {
             <div class="col-span-4">
                 <div
                     class="flex flex-col sm:flex-row sm:items-center p-6 gap-4 border-t border-surface-200 dark:border-surface-700"
@@ -167,14 +227,118 @@
                         </div>
 
                         <p-tag
-                            [severity]="userState.actividadB2!='si'?'danger':undefined"
+                            [severity]="userState.actividadB2!='completa'?'danger':undefined"
                             class="absolute"
                             styleClass="dark:!bg-surface-900"
                             [style.left.px]="4"
                             [style.top.px]="4">
                             <div class="flex items-center gap-2 px-1">
                                 <span class="text-base" style="font-size: 22px;width: 120px">
-                                    {{ userState.actividadB2 == 'si' ? 'Cumple' : 'No Cumple' }}
+                                    {{ userState.actividadB2 == 'completa' ? 'Cumple' : 'No Cumple' }}
+                                </span>
+                            </div>
+                        </p-tag>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (!userState.actividadB1 && !userState.actividadB2 && userState.actividad=='Levantamiento de información') {
+            <div class="col-span-4">
+                <div
+                    class="flex flex-col sm:flex-row sm:items-center p-6 gap-4 border-t border-surface-200 dark:border-surface-700"
+                >
+                    <div class="md:w-40 relative">
+                        <div class="sticky-note">
+                            <p>Levantamiento Abril</p>
+                        </div>
+
+                        <p-tag
+                            [severity]="userState.actividadB1!='completa'?'danger':undefined"
+                            class="absolute"
+                            styleClass="dark:!bg-surface-900"
+                            [style.left.px]="4"
+                            [style.top.px]="4">
+                            <div class="flex items-center gap-2 px-1">
+                                <span class="text-base" style="font-size: 22px;width: 120px">
+                                    {{ userState.actividadB1 == 'completa' ? 'Cumple' : 'No Cumple' }}
+                                </span>
+                            </div>
+                        </p-tag>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-4">
+                <div
+                    class="flex flex-col sm:flex-row sm:items-center p-6 gap-4 border-t border-surface-200 dark:border-surface-700"
+                >
+                    <div class="md:w-40 relative">
+                        <div class="sticky-note">
+                            <p>Levantamiento Mayo</p>
+                        </div>
+
+                        <p-tag
+                            [severity]="userState.actividadB2!='completa'?'danger':undefined"
+                            class="absolute"
+                            styleClass="dark:!bg-surface-900"
+                            [style.left.px]="4"
+                            [style.top.px]="4">
+                            <div class="flex items-center gap-2 px-1">
+                                <span class="text-base" style="font-size: 22px;width: 120px">
+                                    {{ userState.actividadB2 == 'completa' ? 'Cumple' : 'No Cumple' }}
+                                </span>
+                            </div>
+                        </p-tag>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (!userState.actividadA1 && !userState.actividadA2 && userState.actividad=='Actividades de preservación de sitios de interés turístico') {
+            <div class="col-span-4">
+                <div
+                    class="flex flex-col sm:flex-row sm:items-center p-6 gap-4 border-t border-surface-200 dark:border-surface-700"
+                >
+                    <div class="md:w-40 relative">
+                        <div class="sticky-note">
+                            <p>Levantamiento Abril</p>
+                        </div>
+
+                        <p-tag
+                            [severity]="userState.actividadB1!='completa'?'danger':undefined"
+                            class="absolute"
+                            styleClass="dark:!bg-surface-900"
+                            [style.left.px]="4"
+                            [style.top.px]="4">
+                            <div class="flex items-center gap-2 px-1">
+                                <span class="text-base" style="font-size: 22px;width: 120px">
+                                    {{ userState.actividadB1 == 'completa' ? 'Cumple' : 'No Cumple' }}
+                                </span>
+                            </div>
+                        </p-tag>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-4">
+                <div
+                    class="flex flex-col sm:flex-row sm:items-center p-6 gap-4 border-t border-surface-200 dark:border-surface-700"
+                >
+                    <div class="md:w-40 relative">
+                        <div class="sticky-note">
+                            <p>Levantamiento Mayo</p>
+                        </div>
+
+                        <p-tag
+                            [severity]="userState.actividadB2!='completa'?'danger':undefined"
+                            class="absolute"
+                            styleClass="dark:!bg-surface-900"
+                            [style.left.px]="4"
+                            [style.top.px]="4">
+                            <div class="flex items-center gap-2 px-1">
+                                <span class="text-base" style="font-size: 22px;width: 120px">
+                                    {{ userState.actividadB2 == 'completa' ? 'Cumple' : 'No Cumple' }}
                                 </span>
                             </div>
                         </p-tag>
@@ -183,4 +347,5 @@
             </div>
         }
     </div>
+
 }

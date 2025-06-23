@@ -11,10 +11,13 @@ import { Select } from 'primeng/select';
 import { AutoComplete, AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 import { JsonPipe } from '@angular/common';
 import { Fluid } from 'primeng/fluid';
+import { Divider } from 'primeng/divider';
+import { Button } from 'primeng/button';
+import { Textarea } from 'primeng/textarea';
 
 @Component({
     selector: 'app-state',
-    imports: [FormsModule, Tag, ReactiveFormsModule, InputText, AutoComplete, JsonPipe, Fluid],
+    imports: [FormsModule, Tag, ReactiveFormsModule, InputText, AutoComplete, JsonPipe, Fluid, Divider, Button, Textarea],
     templateUrl: './internal-state.component.html',
     styleUrl: './internal-state.component.scss',
     standalone: true
@@ -55,7 +58,7 @@ export class InternalStateComponent implements OnInit {
 
                 if (response.length == 0) {
                     this._customMessageService.showError({
-                        summary: 'Cédula no encontrada',
+                        summary: 'Beneficiario no encontrado',
                         detail: 'Por favor intente de nuevo'
                     });
                 }

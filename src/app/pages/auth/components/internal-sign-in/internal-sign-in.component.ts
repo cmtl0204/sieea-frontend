@@ -10,28 +10,19 @@ import { CustomMessageService } from '@utils/services/custom-message.service';
 import { AuthHttpService } from '../../auth-http.service';
 import { environment } from '@env/environment';
 // import { RecaptchaModule, ReCaptchaV3Service } from 'ng-recaptcha';
-import { concatMap, debounceTime, delay, distinctUntilChanged, of } from 'rxjs';
 import { PrimeIcons } from 'primeng/api';
 import { AuthService } from '@modules/auth/auth.service';
 import { CoreService } from '@utils/services/core.service';
-import { Card } from 'primeng/card';
-import { ErrorMessageDirective } from '@utils/directives/error-message.directive';
-import { LabelDirective } from '@utils/directives/label.directive';
 import { DatePickerModule } from 'primeng/datepicker';
 import { AppFloatingConfigurator } from '../../../../layout/component/app.floatingconfigurator';
 import { Divider } from 'primeng/divider';
-import { InputMask } from 'primeng/inputmask';
-import { Select } from 'primeng/select';
-import { KeyFilter } from 'primeng/keyfilter';
 import { UserHttpService } from '@modules/auth/user-http.service';
-import { Badge } from 'primeng/badge';
-import { Tag } from 'primeng/tag';
-import { Message } from 'primeng/message';
 import { MY_ROUTES } from '@routes';
+import { Fluid } from 'primeng/fluid';
 
 @Component({
-    selector: 'app-sign-in',
-    templateUrl: './sign-in-internal.component.html',
+    selector: 'app-internal-sign-in',
+    templateUrl: './internal-sign-in.component.html',
     standalone: true,
     imports: [
         ButtonModule,
@@ -45,13 +36,11 @@ import { MY_ROUTES } from '@routes';
         AppFloatingConfigurator,
         DatePickerModule,
         Divider,
-        Select,
-        KeyFilter,
-        Tag
+        Fluid
         // RecaptchaModule
     ]
 })
-export default class SignInInternalComponent {
+export default class InternalSignInComponent {
     private readonly _formBuilder = inject(FormBuilder);
     private readonly _customMessageService = inject(CustomMessageService);
     private readonly _authHttpService = inject(AuthHttpService);

@@ -24,7 +24,7 @@ export class AppMenu implements OnInit {
     model: MenuItem[] = [];
 
     ngOnInit() {
-        switch (this._authService.role.code) {
+        switch (this._authService.role?.code) {
             case 'internal':
                 this.model = [
                     {

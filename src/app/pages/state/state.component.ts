@@ -43,7 +43,7 @@ export class StateComponent implements OnInit {
     findStatesByCedula() {
         this.stateHttpService.findStatesByIdentification(this._authService.auth.identification).subscribe({
             next: (response) => {
-                this.userState = response;
+                this.userState = response[0];
 
                 if (this.userState?.comentario) {
                     this.commentary.patchValue(this.userState.comentario);
