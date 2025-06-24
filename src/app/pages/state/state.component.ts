@@ -14,10 +14,11 @@ import { ActivityInterface } from '@interfaces';
 import { Message } from 'primeng/message';
 import { StateHttpService } from '@modules/state/state-http.service';
 import { Textarea } from 'primeng/textarea';
+import { Popover } from 'primeng/popover';
 
 @Component({
     selector: 'app-state',
-    imports: [FormsModule, Button, DataView, NgClass, Tag, Divider, DatePipe, Message, ReactiveFormsModule, Textarea],
+    imports: [FormsModule, Button, DataView, NgClass, Tag, Divider, DatePipe, Message, ReactiveFormsModule, Textarea, Popover],
     templateUrl: './state.component.html',
     styleUrl: './state.component.scss',
     standalone: true

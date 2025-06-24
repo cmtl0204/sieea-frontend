@@ -24,6 +24,11 @@
             <div class="md:col-span-2 flex flex-col gap-2">
                 <h6>Estado:</h6>
                 {{ userState.habilitado }} (Unidad Registro Social)
+                <p-button [icon]="PrimeIcons.INFO_CIRCLE"
+                          [outlined]="true"
+                          size="small"
+                          label="Haga click aquí"
+                          (click)="op.toggle($event)"/>
             </div>
 
             <div class="md:col-span-4 flex flex-col gap-2">
@@ -187,3 +192,13 @@
 @if (!userState) {
     <p-message severity="error">No cuenta con registro de su actividad</p-message>
 }
+
+<p-popover #op>
+    <div class="flex flex-col gap-4 w-[25rem] text-justify">
+        Habilitado significa que cumple con los criterios generales establecidos en el Artículo 2 del Decreto
+        Presidencial 578 los cuales son; una edad comprendida entre 30 y 64 años con 11 meses, que no se encuentren
+        aportando al Instituto Ecuatoriano de Seguridad Social, que no sean beneficiarios de ninguna transferencia
+        monetaria pagada por el Ministerio de Inclusión Económica y Social; que no conste como fallecido; y que no tenga
+        antecedentes penales
+    </div>
+</p-popover>
