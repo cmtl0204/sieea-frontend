@@ -28,7 +28,7 @@
                           [outlined]="true"
                           size="small"
                           label="Haga click aquí"
-                          (click)="op.toggle($event)"/>
+                          (click)="op.toggle($event)" />
             </div>
 
             <div class="md:col-span-4 flex flex-col gap-2">
@@ -69,7 +69,8 @@
             </div>
         </div>
 
-        @if (userState.actividadA1) {
+        @if (userState.actividad == 'Actividades de preservación de sitios de interés turístico') {
+
             <div class="col-span-3">
                 <div
                     class="flex flex-col sm:flex-row sm:items-center p-6 gap-4 border-t border-surface-200 dark:border-surface-700"
@@ -94,9 +95,7 @@
                     </div>
                 </div>
             </div>
-        }
 
-        @if (userState.actividadA2) {
             <div class="col-span-3">
                 <div
                     class="flex flex-col sm:flex-row sm:items-center p-6 gap-4 border-t border-surface-200 dark:border-surface-700"
@@ -123,7 +122,8 @@
             </div>
         }
 
-        @if (userState.actividadB1) {
+        @if (userState.actividad == 'Levantamiento de información') {
+
             <div class="col-span-3">
                 <div
                     class="flex flex-col sm:flex-row sm:items-center p-6 gap-4 border-t border-surface-200 dark:border-surface-700"
@@ -148,9 +148,7 @@
                     </div>
                 </div>
             </div>
-        }
 
-        @if (userState.actividadB2) {
             <div class="col-span-3">
                 <div
                     class="flex flex-col sm:flex-row sm:items-center p-6 gap-4 border-t border-surface-200 dark:border-surface-700"
@@ -175,6 +173,7 @@
                     </div>
                 </div>
             </div>
+
         }
     </div>
 
