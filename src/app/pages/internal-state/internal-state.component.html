@@ -75,7 +75,7 @@
         <p-divider />
 
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6 text-center">
-            @if (userState.actividadA1 || userState.actividadA2) {
+            @if (userState.actividadA1 || userState.actividadA2 || userState.actividad == 'Actividades de preservación de sitios de interés turístico') {
                 <div class="md:col-span-3 flex flex-col gap-2">
                     <p># de actividades preservación en abril: <b>{{ userState.cantidadA1 }}</b></p>
                     <p>Meta: {{ userState.metaA1 }}</p>
@@ -87,7 +87,7 @@
                 </div>
             }
 
-            @if (userState.actividadB1 || userState.actividadB2) {
+            @if (userState.actividadB1 || userState.actividadB2 || userState.actividad == 'Levantamiento de información') {
                 <div class="md:col-span-3 flex flex-col gap-2">
                     <p># de encuestas levantadas en digital en abril: <b>{{ userState.cantidadB1 }}</b></p>
                 </div>
