@@ -3,4 +3,6 @@ export interface AdditionalInformationInterface{
     codigoActividad:string;
     nombreActividad:string;
     idProvincia:string;
+    numeroCuenta:string;
+    nombreCorto:string;
 }

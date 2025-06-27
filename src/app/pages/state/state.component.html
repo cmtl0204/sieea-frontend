@@ -16,14 +16,14 @@
                 {{ userState.cedula }}
             </div>
 
-            <div class="md:col-span-4 flex flex-col gap-2">
+            <div class="md:col-span-3 flex flex-col gap-2">
                 <h6>APELLIDOS Y NOMBRES:</h6>
                 {{ userState.nombres }}
             </div>
 
-            <div class="md:col-span-2 flex flex-col gap-2">
-                <h6>Estado:</h6>
-                {{ userState.habilitado }} (Unidad Registro Social)
+            <div class="md:col-span-3 flex flex-col gap-2">
+                <h6>Estado (Unidad Registro Social):</h6>
+                {{ userState.habilitado }}
                 <p-button [icon]="PrimeIcons.INFO_CIRCLE"
                           [outlined]="true"
                           size="small"
@@ -31,7 +31,7 @@
                           (click)="op.toggle($event)" />
             </div>
 
-            <div class="md:col-span-4 flex flex-col gap-2">
+            <div class="md:col-span-3 flex flex-col gap-2">
                 <h6>ACTIVIDAD:</h6>
                 {{ userState.actividad }}
             </div>
@@ -39,6 +39,37 @@
             <div class="md:col-span-2 flex flex-col gap-2">
                 <h6>PROGRESO:</h6>
                 <p-tag [severity]="userState.cumple!='Completo'?'danger':'success'">{{ userState.cumple }}</p-tag>
+            </div>
+
+            <div class="md:col-span-2 flex flex-col gap-2">
+                <h6>CUENTA BANCARIA:</h6>
+                {{ _authService.additionalInformation.nombreCorto }}
+                {{ _authService.additionalInformation.numeroCuenta }}
+            </div>
+
+            <!--            <div class="md:col-span-5 flex flex-col gap-2">-->
+            <!--                <p-message severity="info" size="large">-->
+            <!--                    <span class="ml-2 mr-2">-->
+            <!--                                <b>Informativo:</b> si su cuenta bancaria no es correcta dirigirse al siguiente enlace-->
+            <!--                            </span>-->
+
+            <!--                    <p-button (onClick)="linkToEEA()" [outlined]="true" severity="warn">-->
+            <!--                        Actualización Ecuatorianos en Acción-->
+            <!--                    </p-button>-->
+            <!--                </p-message>-->
+            <!--            </div>-->
+        </div>
+    </div>
+
+    <div class=" flex flex-col gap-6 w-full">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+            <div class="md:col-span-12 flex flex-col gap-2">
+                <p-message size="large" severity="error">
+                    <h4>Estimado benificiario, el plazo para la recepción de inconvenientes del
+                        Mecanismo Ecuatorianos en Acción es del <b class="ml-1"> 27 de junio al 09 de julio de 2025</b>,
+                        horario de atención, 08:00 a 16:30
+                    </h4>
+                </p-message>
             </div>
         </div>
     </div>
@@ -50,7 +81,12 @@
             >
                 <div class="md:w-40 relative">
                     <div class="sticky-note">
-                        <p>Curso en línea</p>
+                        <p>Curso en línea
+                            <p-button label="Repotar Inconvenientes"
+                                      [icon]="PrimeIcons.INFO_CIRCLE"
+                                      [raised]="true"
+                                      (onClick)="filterPhones(userState.provincia)"></p-button>
+                        </p>
                     </div>
 
                     <p-tag
@@ -77,7 +113,12 @@
                 >
                     <div class="md:w-40 relative">
                         <div class="sticky-note">
-                            <p>Preservación Abril</p>
+                            <p>Preservación Abril
+                                <p-button label="Repotar Inconvenientes"
+                                          [icon]="PrimeIcons.INFO_CIRCLE"
+                                          [raised]="true"
+                                          (onClick)="filterPhones(userState.provincia)" />
+                            </p>
                         </div>
 
                         <p-tag
@@ -102,7 +143,12 @@
                 >
                     <div class="md:w-40 relative">
                         <div class="sticky-note">
-                            <p>Preservación Mayo</p>
+                            <p>Preservación Mayo
+                                <p-button label="Repotar Inconvenientes"
+                                          [icon]="PrimeIcons.INFO_CIRCLE"
+                                          [raised]="true"
+                                          (onClick)="filterPhones(userState.provincia)" />
+                            </p>
                         </div>
 
                         <p-tag
@@ -130,7 +176,12 @@
                 >
                     <div class="md:w-40 relative">
                         <div class="sticky-note">
-                            <p>Levantamiento Abril</p>
+                            <p>Gasolineras Abril
+                                <p-button label="Repotar Inconvenientes"
+                                          [icon]="PrimeIcons.INFO_CIRCLE"
+                                          [raised]="true"
+                                          (onClick)="filterPhones(userState.provincia)" />
+                            </p>
                         </div>
 
                         <p-tag
@@ -153,9 +204,16 @@
                 <div
                     class="flex flex-col sm:flex-row sm:items-center p-6 gap-4 border-t border-surface-200 dark:border-surface-700"
                 >
+
                     <div class="md:w-40 relative">
                         <div class="sticky-note">
-                            <p>Levantamiento Mayo</p>
+
+                            <p>Encuestas Turísticas Mayo
+                                <p-button label="Repotar Inconvenientes"
+                                          [icon]="PrimeIcons.INFO_CIRCLE"
+                                          [raised]="true"
+                                          (onClick)="filterPhones(userState.provincia)" />
+                            </p>
                         </div>
 
                         <p-tag
@@ -201,3 +259,26 @@
         antecedentes penales
     </div>
 </p-popover>
+
+<p-dialog
+    [modal]="true"
+    [visible]="isVisible"
+    [closable]="false"
+    [style]="{ width: '30rem' }">
+
+    <ng-template #header>
+        <h4>{{ filteredPhones?.province }}</h4>
+    </ng-template>
+
+    @for (phone of filteredPhones?.phones; track phone) {
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <i [class]="PrimeIcons.PHONE"></i>
+            </p-inputgroup-addon>
+            <input pInputText [ngModel]="phone" readonly />
+        </p-inputgroup>
+        <p-divider />
+    }
+
+    <p-button label="Cerrar" (onClick)="isVisible=false" />
+</p-dialog>

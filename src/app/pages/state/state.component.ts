@@ -15,10 +15,14 @@ import { Message } from 'primeng/message';
 import { StateHttpService } from '@modules/state/state-http.service';
 import { Textarea } from 'primeng/textarea';
 import { Popover } from 'primeng/popover';
+import { Dialog } from 'primeng/dialog';
+import { InputGroup } from 'primeng/inputgroup';
+import { InputGroupAddon } from 'primeng/inputgroupaddon';
+import { InputText } from 'primeng/inputtext';
 
 @Component({
     selector: 'app-state',
-    imports: [FormsModule, Button, DataView, NgClass, Tag, Divider, DatePipe, Message, ReactiveFormsModule, Textarea, Popover],
+    imports: [FormsModule, Button, DataView, NgClass, Tag, Divider, DatePipe, Message, ReactiveFormsModule, Textarea, Popover, Dialog, InputGroup, InputGroupAddon, InputText],
     templateUrl: './state.component.html',
     styleUrl: './state.component.scss',
     standalone: true
@@ -35,10 +39,15 @@ export class StateComponent implements OnInit {
 
     options: string[] = ['list', 'grid'];
 
+    protected phones: any[] = [];
+    protected filteredPhones: any = null;
+    protected isVisible = false;
+
     constructor() {}
 
     ngOnInit() {
         this.findStatesByCedula();
+        this.loadPhones();
     }
 
     findStatesByCedula() {
@@ -54,11 +63,125 @@ export class StateComponent implements OnInit {
         });
     }
 
+    filterPhones(province: string) {
+        this.filteredPhones = this.phones.find((phone) => phone.province.toLowerCase() === province.toLowerCase());
+        this.isVisible = true;
+    }
+
+    loadPhones() {
+        this.phones = [
+            {
+                province: 'AZUAY',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'GALÁPAGOS',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'ZAMORA CHINCHIPE',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'SANTA ELENA',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'MANABÍ',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'LOJA',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'GUAYAS',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'NAPO',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'PICHINCHA',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'ESMERALDAS',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'CARCHI',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'COTOPAXI',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'IMBABURA',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'BOLÍVAR',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'SANTO DOMINGO DE LOS TSÁCHILAS',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'EL ORO',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'SUCUMBÍOS',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'TUNGURAHUA',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'CAÑAR',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'MORONA SANTIAGO',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'ORELLANA',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'PASTAZA',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'CHIMBORAZO',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'LOS RÍOS',
+                phones: ['0987654321', '0987654322']
+            },
+            {
+                province: 'QUITO',
+                phones: ['0987654321', '0987654322']
+            }
+        ];
+    }
+
     createCommentary() {
         this.stateHttpService.createCommentary(this._authService.auth.identification, this.commentary.value).subscribe({
             next: (response) => {
                 this.findStatesByCedula();
             }
         });
+    }
+
+    linkToEEA(){
+        window.open('https://ecuatorianosenaccion.inclusion.gob.ec/SIIMIESPUBLIC/views/public/actualizacionEcuatorianosEnAccion.jsf','_blank');
     }
 }

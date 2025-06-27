@@ -16,10 +16,11 @@ import { Button, ButtonDirective } from 'primeng/button';
 import { Textarea } from 'primeng/textarea';
 import { Tooltip } from 'primeng/tooltip';
 import { Popover } from 'primeng/popover';
+import { Message } from 'primeng/message';
 
 @Component({
     selector: 'app-state',
-    imports: [FormsModule, Tag, ReactiveFormsModule, InputText, AutoComplete, JsonPipe, Fluid, Divider, Button, Textarea, ButtonDirective, Tooltip, Popover],
+    imports: [FormsModule, Tag, ReactiveFormsModule, InputText, AutoComplete, JsonPipe, Fluid, Divider, Button, Textarea, ButtonDirective, Tooltip, Popover, Message],
     templateUrl: './internal-state.component.html',
     styleUrl: './internal-state.component.scss',
     standalone: true
