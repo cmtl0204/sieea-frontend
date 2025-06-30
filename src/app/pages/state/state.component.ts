@@ -63,114 +63,142 @@ export class StateComponent implements OnInit {
         });
     }
 
-    filterPhones(province: string) {
+    filterPhones(actividad: string) {
         this.createReview();
-        this.filteredPhones = this.phones.find((phone) => phone.province.toLowerCase() === province.toLowerCase());
+        this.filteredPhones = this.phones.find((phone) => phone.actividad.toLowerCase() === actividad.toLowerCase());
         this.isVisible = true;
     }
 
     loadPhones() {
+        // this.phones = [
+        //     {
+        //         province: 'AZUAY',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'GALÁPAGOS',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'ZAMORA CHINCHIPE',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'SANTA ELENA',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'MANABÍ',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'LOJA',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'GUAYAS',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'NAPO',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'PICHINCHA',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'ESMERALDAS',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'CARCHI',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'COTOPAXI',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'IMBABURA',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'BOLÍVAR',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'SANTO DOMINGO DE LOS TSÁCHILAS',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'EL ORO',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'SUCUMBÍOS',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'TUNGURAHUA',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'CAÑAR',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'MORONA SANTIAGO',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'ORELLANA',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'PASTAZA',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'CHIMBORAZO',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'LOS RÍOS',
+        //         phones: ['0987654321', '0987654322']
+        //     },
+        //     {
+        //         province: 'QUITO',
+        //         phones: ['0987654321', '0987654322']
+        //     }
+        // ];
+
         this.phones = [
             {
-                province: 'AZUAY',
-                phones: ['0987654321', '0987654322']
+                label: 'Contacto Curso en Línea',
+                actividad: 'curso',
+                phones: ['0939426332']
             },
             {
-                province: 'GALÁPAGOS',
-                phones: ['0987654321', '0987654322']
+                label: 'Contacto Levantamiento Gasolineras Abril',
+                actividad: 'levantamiento_abril',
+                phones: ['0967028974']
             },
             {
-                province: 'ZAMORA CHINCHIPE',
-                phones: ['0987654321', '0987654322']
+                label: 'Contacto Levantamiento Promoción Mayo',
+                actividad: 'levantamiento_mayo',
+                phones: ['0982094520']
             },
             {
-                province: 'SANTA ELENA',
-                phones: ['0987654321', '0987654322']
+                label: 'Preservación',
+                actividad: 'preservacion_abril',
+                phones: ['0983289118']
             },
             {
-                province: 'MANABÍ',
-                phones: ['0987654321', '0987654322']
+                label: 'Preservación',
+                actividad: 'preservacion_mayo',
+                phones: ['0983289118']
             },
-            {
-                province: 'LOJA',
-                phones: ['0987654321', '0987654322']
-            },
-            {
-                province: 'GUAYAS',
-                phones: ['0987654321', '0987654322']
-            },
-            {
-                province: 'NAPO',
-                phones: ['0987654321', '0987654322']
-            },
-            {
-                province: 'PICHINCHA',
-                phones: ['0987654321', '0987654322']
-            },
-            {
-                province: 'ESMERALDAS',
-                phones: ['0987654321', '0987654322']
-            },
-            {
-                province: 'CARCHI',
-                phones: ['0987654321', '0987654322']
-            },
-            {
-                province: 'COTOPAXI',
-                phones: ['0987654321', '0987654322']
-            },
-            {
-                province: 'IMBABURA',
-                phones: ['0987654321', '0987654322']
-            },
-            {
-                province: 'BOLÍVAR',
-                phones: ['0987654321', '0987654322']
-            },
-            {
-                province: 'SANTO DOMINGO DE LOS TSÁCHILAS',
-                phones: ['0987654321', '0987654322']
-            },
-            {
-                province: 'EL ORO',
-                phones: ['0987654321', '0987654322']
-            },
-            {
-                province: 'SUCUMBÍOS',
-                phones: ['0987654321', '0987654322']
-            },
-            {
-                province: 'TUNGURAHUA',
-                phones: ['0987654321', '0987654322']
-            },
-            {
-                province: 'CAÑAR',
-                phones: ['0987654321', '0987654322']
-            },
-            {
-                province: 'MORONA SANTIAGO',
-                phones: ['0987654321', '0987654322']
-            },
-            {
-                province: 'ORELLANA',
-                phones: ['0987654321', '0987654322']
-            },
-            {
-                province: 'PASTAZA',
-                phones: ['0987654321', '0987654322']
-            },
-            {
-                province: 'CHIMBORAZO',
-                phones: ['0987654321', '0987654322']
-            },
-            {
-                province: 'LOS RÍOS',
-                phones: ['0987654321', '0987654322']
-            },
-            {
-                province: 'QUITO',
-                phones: ['0987654321', '0987654322']
-            }
         ];
     }
 
