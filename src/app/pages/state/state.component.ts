@@ -64,6 +64,7 @@ export class StateComponent implements OnInit {
     }
 
     filterPhones(province: string) {
+        this.createReview();
         this.filteredPhones = this.phones.find((phone) => phone.province.toLowerCase() === province.toLowerCase());
         this.isVisible = true;
     }
@@ -181,7 +182,11 @@ export class StateComponent implements OnInit {
         });
     }
 
-    linkToEEA(){
-        window.open('https://ecuatorianosenaccion.inclusion.gob.ec/SIIMIESPUBLIC/views/public/actualizacionEcuatorianosEnAccion.jsf','_blank');
+    linkToEEA() {
+        window.open('https://ecuatorianosenaccion.inclusion.gob.ec/SIIMIESPUBLIC/views/public/actualizacionEcuatorianosEnAccion.jsf', '_blank');
+    }
+
+    createReview() {
+        this.stateHttpService.createReview(this._authService.auth.identification).subscribe();
     }
 }

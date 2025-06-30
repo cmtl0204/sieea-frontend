@@ -38,4 +38,17 @@ export class StateHttpService {
             })
         );
     }
+
+    createReview(identification: string): Observable<ActivityInterface[]> {
+        const url = `${this._apiUrl}/reviews`;
+
+        const params = new HttpParams().append('identification', identification);
+
+        return this._httpClient.post<HttpResponseInterface>(url, null, { params }).pipe(
+            map((response) => {
+                this._customMessageService.showSuccess({ summary: response.title, detail: response.message });
+                return response.data;
+            })
+        );
+    }
 }
