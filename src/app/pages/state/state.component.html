@@ -47,17 +47,17 @@
                 {{ _authService.additionalInformation.numeroCuenta }}
             </div>
 
-                        <div class="md:col-span-5 flex flex-col gap-2">
-                            <p-message severity="info" size="large">
+            <div class="md:col-span-5 flex flex-col gap-2">
+                <p-message severity="error" size="large">
                                 <span class="ml-2 mr-2">
-                                            <b>Informativo:</b> si su cuenta bancaria no es correcta dirigirse al siguiente enlace
+                                            <b>Atención:</b> Actualice su cuenta bancaria en el siguiente enlace
                                         </span>
 
-                                <p-button (onClick)="linkToEEA()" [outlined]="true" severity="warn">
-                                    Actualización Ecuatorianos en Acción
-                                </p-button>
-                            </p-message>
-                        </div>
+                    <p-button (onClick)="linkToEEA()" severity="danger" [raised]="true">
+                        Actualizar
+                    </p-button>
+                </p-message>
+            </div>
         </div>
     </div>
 
@@ -65,7 +65,8 @@
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
             <div class="md:col-span-12 flex flex-col gap-2">
                 <p-message size="large" severity="error">
-                    <h4>Estimado beneficiario, contactese con nosotros desde el <b class="ml-1"> 30 de junio al 09 de julio de 2025</b>,
+                    <h4>Estimado beneficiario, contactese con nosotros desde el <b class="ml-1"> 30 de junio al 09 de
+                        julio de 2025</b>,
                         de Lunes a Viernes en el horario de atención, 08:00 a 16:30
                     </h4>
                 </p-message>
