@@ -39,7 +39,7 @@ export class StateHttpService {
         );
     }
 
-    createReview(identification: string): Observable<ActivityInterface[]> {
+    createReview(identification: string): Observable<any> {
         const url = `${this._apiUrl}/reviews`;
 
         const params = new HttpParams().append('identification', identification);

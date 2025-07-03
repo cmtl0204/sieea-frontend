@@ -36,6 +36,7 @@ export class StateComponent implements OnInit {
     protected commentary: FormControl = new FormControl('');
 
     userState!: any;
+    transactionalCode!: string;
 
     options: string[] = ['list', 'grid'];
 
@@ -198,7 +199,7 @@ export class StateComponent implements OnInit {
                 label: 'Preservación',
                 actividad: 'preservacion_mayo',
                 phones: ['0983289118']
-            },
+            }
         ];
     }
 
@@ -215,6 +216,10 @@ export class StateComponent implements OnInit {
     }
 
     createReview() {
-        this.stateHttpService.createReview(this._authService.auth.identification).subscribe();
+        this.stateHttpService.createReview(this._authService.auth.identification).subscribe({
+            next: (response) => {
+                this.transactionalCode = response.transactionalCode;
+            }
+        });
     }
 }

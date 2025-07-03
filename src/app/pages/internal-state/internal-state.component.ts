@@ -50,10 +50,10 @@ export class InternalStateComponent implements OnInit {
 
     ngOnInit() {}
 
-    findStatesByCedula(search: AutoCompleteCompleteEvent) {
+    findStatesByCedula(search: string) {
         this.userState = null;
 
-        this.stateHttpService.findStatesByIdentification(search.query).subscribe({
+        this.stateHttpService.findStatesByIdentification(search).subscribe({
             next: (response) => {
                 this.userStates = response;
 

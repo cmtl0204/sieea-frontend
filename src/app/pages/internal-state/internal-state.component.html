@@ -4,10 +4,12 @@
             <div class="md:col-span-4 flex flex-col gap-2">
                 <label>Ingrese el número de cédula o nombre del beneficiario:</label>
 
-                <p-autocomplete [formControl]="identification"
-                                [suggestions]="userStates"
-                                (completeMethod)="findStatesByCedula($event)"
-                                field="nombres">
+                <p-autocomplete
+                    #search
+                    [formControl]="identification"
+                    [suggestions]="userStates"
+                    (completeMethod)="findStatesByCedula($event.query)"
+                    field="nombres">
                     <ng-template let-selectedItem #selectedItem>
                         asdasd
                     </ng-template>
@@ -20,6 +22,20 @@
                 </p-autocomplete>
 
             </div>
+
+            <div class="md:col-span-1 flex flex-col gap-2">
+
+            </div>
+
+            @if (userState?.transactionalCode) {
+                <div class="md:col-span-2 flex flex-col gap-2">
+                    <h6>Código de verificación:</h6>
+                    <p-tag (click)="findStatesByCedula(identification.value.cedula)"
+                           [icon]="PrimeIcons.SYNC"
+                           severity="info">{{ userState.transactionalCode }}
+                    </p-tag>
+                </div>
+            }
         </div>
     </div>
 </p-fluid>
@@ -58,7 +74,7 @@
                               [outlined]="true"
                               size="small"
                               label="Haga click aquí"
-                              (click)="op.toggle($event)"/>
+                              (click)="op.toggle($event)" />
                 </p>
             </div>
 
@@ -111,7 +127,6 @@
                 <div class="md:col-span-6 flex flex-col gap-2">
                     <p>Meta Mayo: <b>100</b></p>
                 </div>
-
             }
         </div>
     </div>

@@ -84,7 +84,7 @@
                 <div class="md:w-40 relative">
                     <div class="sticky-note">
                         <p>Curso en línea
-                            <p-divider/>
+                            <p-divider />
                             <p-button label="Reportar Inconvenientes en esta Actividad Aquí"
                                       [icon]="PrimeIcons.INFO_CIRCLE"
                                       [raised]="true"
@@ -118,7 +118,7 @@
                     <div class="md:w-40 relative">
                         <div class="sticky-note">
                             <p>Preservación Abril
-                                <p-divider/>
+                                <p-divider />
                                 <p-button label="Reportar Inconvenientes en esta Actividad Aquí"
                                           [icon]="PrimeIcons.INFO_CIRCLE"
                                           [raised]="true"
@@ -150,7 +150,7 @@
                     <div class="md:w-40 relative">
                         <div class="sticky-note">
                             <p>Preservación Mayo
-                                <p-divider/>
+                                <p-divider />
                                 <p-button label="Reportar Inconvenientes en esta Actividad Aquí"
                                           [icon]="PrimeIcons.INFO_CIRCLE"
                                           [raised]="true"
@@ -185,7 +185,7 @@
                     <div class="md:w-40 relative">
                         <div class="sticky-note">
                             <p>Gasolineras Abril
-                                <p-divider/>
+                                <p-divider />
                                 <p-button label="Reportar Inconvenientes en esta Actividad Aquí"
                                           [icon]="PrimeIcons.INFO_CIRCLE"
                                           [raised]="true"
@@ -219,7 +219,7 @@
                         <div class="sticky-note">
 
                             <p>Encuestas Turísticas Mayo
-                                <p-divider/>
+                                <p-divider />
                                 <p-button label="Reportar Inconvenientes en esta Actividad Aquí"
                                           [icon]="PrimeIcons.INFO_CIRCLE"
                                           [raised]="true"
@@ -281,6 +281,12 @@
     <ng-template #header>
         <h4>{{ filteredPhones?.label }}</h4>
     </ng-template>
+
+    <p style="font-size: 16px">
+        Para ser atendido por favor mencionar el siguiente código
+    </p>
+
+    <p>Código de verificación: <b>{{ transactionalCode }}</b></p>
 
     @for (phone of filteredPhones?.phones; track phone) {
         <p-inputgroup>
