@@ -23,12 +23,14 @@
 
             <div class="md:col-span-3 flex flex-col gap-2">
                 <h6>Estado (Unidad Registro Social):</h6>
-                {{ userState.habilitado }}
-                <p-button [icon]="PrimeIcons.INFO_CIRCLE"
-                          [outlined]="true"
-                          size="small"
-                          label="Haga click aquí"
-                          (click)="op.toggle($event)" />
+                <p>
+                    {{ userState.habilitado }}
+                    <p-button [icon]="PrimeIcons.INFO_CIRCLE"
+                              [outlined]="true"
+                              size="small"
+                              label="Información"
+                              (click)="op.toggle($event)" />
+                </p>
             </div>
 
             <div class="md:col-span-3 flex flex-col gap-2">
@@ -50,12 +52,11 @@
             <div class="md:col-span-5 flex flex-col gap-2">
                 <p-message severity="error" size="large">
                                 <span class="ml-2 mr-2">
-                                            <b>Atención:</b> Actualice su cuenta bancaria en el siguiente enlace
+                                            <b>Atención:</b> Si su cuenta bancaria es incorrecta actualice
+                    <p-button (onClick)="linkToEEA()" label="Aquí" [rounded]="true" class="m-4" severity="danger"
+                              [raised]="true">
+                        </p-button>
                                         </span>
-
-                    <p-button (onClick)="linkToEEA()" severity="danger" [raised]="true">
-                        Actualizar
-                    </p-button>
                 </p-message>
             </div>
         </div>
@@ -64,10 +65,11 @@
     <div class=" flex flex-col gap-6 w-full">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
             <div class="md:col-span-12 flex flex-col gap-2">
-                <p-message size="large" severity="error">
-                    <h4>Estimado beneficiario, contactese con nosotros desde el <b class="ml-1"> 30 de junio al 09 de
-                        julio de 2025</b>,
-                        de Lunes a Viernes en el horario de atención, 08:00 a 16:30
+                <p-message size="large" severity="secondary">
+                    <h4>Hemos creado esta plataforma para receptar sus inconvenientes. Atención
+                        desde el <b class="ml-1"> 30 de junio al 09 de
+                            julio de 2025</b>,
+                        de lunes a viernes en el horario de atención de 08:00 a 16:30.
                     </h4>
                 </p-message>
             </div>
@@ -75,16 +77,18 @@
     </div>
 
     <div class="grid grid-cols-12 gap-4 grid-nogutter">
-        <div class="col-span-3">
+        <div class="col-span-4">
             <div
                 class="flex flex-col sm:flex-row sm:items-center p-6 gap-4 border-t border-surface-200 dark:border-surface-700"
             >
                 <div class="md:w-40 relative">
                     <div class="sticky-note">
                         <p>Curso en línea
-                            <p-button label="Repotar Inconvenientes"
+                            <p-divider/>
+                            <p-button label="Reportar Inconvenientes en esta Actividad Aquí"
                                       [icon]="PrimeIcons.INFO_CIRCLE"
                                       [raised]="true"
+                                      [rounded]="true"
                                       (onClick)="filterPhones('curso')"></p-button>
                         </p>
                     </div>
@@ -107,16 +111,18 @@
 
         @if (userState.actividad == 'Actividades de preservación de sitios de interés turístico') {
 
-            <div class="col-span-3">
+            <div class="col-span-4">
                 <div
                     class="flex flex-col sm:flex-row sm:items-center p-6 gap-4 border-t border-surface-200 dark:border-surface-700"
                 >
                     <div class="md:w-40 relative">
                         <div class="sticky-note">
                             <p>Preservación Abril
-                                <p-button label="Repotar Inconvenientes"
+                                <p-divider/>
+                                <p-button label="Reportar Inconvenientes en esta Actividad Aquí"
                                           [icon]="PrimeIcons.INFO_CIRCLE"
                                           [raised]="true"
+                                          [rounded]="true"
                                           (onClick)="filterPhones('preservacion_abril')" />
                             </p>
                         </div>
@@ -137,16 +143,18 @@
                 </div>
             </div>
 
-            <div class="col-span-3">
+            <div class="col-span-4">
                 <div
                     class="flex flex-col sm:flex-row sm:items-center p-6 gap-4 border-t border-surface-200 dark:border-surface-700"
                 >
                     <div class="md:w-40 relative">
                         <div class="sticky-note">
                             <p>Preservación Mayo
-                                <p-button label="Repotar Inconvenientes"
+                                <p-divider/>
+                                <p-button label="Reportar Inconvenientes en esta Actividad Aquí"
                                           [icon]="PrimeIcons.INFO_CIRCLE"
                                           [raised]="true"
+                                          [rounded]="true"
                                           (onClick)="filterPhones('preservacion_mayo')" />
                             </p>
                         </div>
@@ -170,16 +178,18 @@
 
         @if (userState.actividad == 'Levantamiento de información') {
 
-            <div class="col-span-3">
+            <div class="col-span-4">
                 <div
                     class="flex flex-col sm:flex-row sm:items-center p-6 gap-4 border-t border-surface-200 dark:border-surface-700"
                 >
                     <div class="md:w-40 relative">
                         <div class="sticky-note">
                             <p>Gasolineras Abril
-                                <p-button label="Repotar Inconvenientes"
+                                <p-divider/>
+                                <p-button label="Reportar Inconvenientes en esta Actividad Aquí"
                                           [icon]="PrimeIcons.INFO_CIRCLE"
                                           [raised]="true"
+                                          [rounded]="true"
                                           (onClick)="filterPhones('levantamiento_abril')" />
                             </p>
                         </div>
@@ -200,7 +210,7 @@
                 </div>
             </div>
 
-            <div class="col-span-3">
+            <div class="col-span-4">
                 <div
                     class="flex flex-col sm:flex-row sm:items-center p-6 gap-4 border-t border-surface-200 dark:border-surface-700"
                 >
@@ -209,9 +219,11 @@
                         <div class="sticky-note">
 
                             <p>Encuestas Turísticas Mayo
-                                <p-button label="Repotar Inconvenientes"
+                                <p-divider/>
+                                <p-button label="Reportar Inconvenientes en esta Actividad Aquí"
                                           [icon]="PrimeIcons.INFO_CIRCLE"
                                           [raised]="true"
+                                          [rounded]="true"
                                           (onClick)="filterPhones('levantamiento_mayo')" />
                             </p>
                         </div>
