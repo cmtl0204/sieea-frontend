@@ -38,7 +38,7 @@ export const authenticationInterceptor: HttpInterceptorFn = (req, next) => {
             if (error.status === 503) {
                 _authService.removeLogin();
                 _coreService.serviceUnavailable = error.error.data;
-                _router.navigateByUrl(MY_ROUTES.login);
+                _router.navigateByUrl(MY_ROUTES.errorPages.unavailable.absolute);
             }
 
             return throwError(() => error);
