@@ -23,17 +23,17 @@
             </div>
 
 
-            @if (userState?.transactionalCode) {
-                <div class="md:col-span-2 flex flex-col gap-2">
-                    <label>Código de verificación:</label>
-                    <p-button (click)="findStatesByCedula(identification.value.cedula)"
-                              [icon]="PrimeIcons.SYNC"
-                              [label]="userState.transactionalCode"
-                              pTooltip="Refrescar"
-                              severity="info">
-                    </p-button>
-                </div>
-            }
+<!--            @if (userState?.transactionalCode) {-->
+<!--                <div class="md:col-span-2 flex flex-col gap-2">-->
+<!--                    <label>Código de verificación:</label>-->
+<!--                    <p-button (click)="findStatesByCedula(identification.value.cedula)"-->
+<!--                              [icon]="PrimeIcons.SYNC"-->
+<!--                              [label]="userState.transactionalCode"-->
+<!--                              pTooltip="Refrescar"-->
+<!--                              severity="info">-->
+<!--                    </p-button>-->
+<!--                </div>-->
+<!--            }-->
         </div>
     </div>
 </p-fluid>
