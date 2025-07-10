@@ -62,19 +62,19 @@
         </div>
     </div>
 
-    <div class=" flex flex-col gap-6 w-full">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-            <div class="md:col-span-12 flex flex-col gap-2">
-                <p-message size="large" severity="secondary">
-                    <h4>Hemos creado esta plataforma para receptar sus inconvenientes. Atención
-                        desde el <b class="ml-1"> 30 de junio al 09 de
-                            julio de 2025</b>,
-                        de lunes a viernes en el horario de atención de 08:00 a 16:30.
-                    </h4>
-                </p-message>
-            </div>
-        </div>
-    </div>
+    <!--    <div class=" flex flex-col gap-6 w-full">-->
+        <!--        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">-->
+        <!--            <div class="md:col-span-12 flex flex-col gap-2">-->
+        <!--                <p-message size="large" severity="secondary">-->
+        <!--                    <h4>Hemos creado esta plataforma para receptar sus inconvenientes. Atención-->
+        <!--                        desde el <b class="ml-1"> 30 de junio al 09 de-->
+        <!--                            julio de 2025</b>,-->
+        <!--                        de lunes a viernes en el horario de atención de 08:00 a 16:30.-->
+        <!--                    </h4>-->
+        <!--                </p-message>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </div>-->
 
     <div class="grid grid-cols-12 gap-4 grid-nogutter">
         <div class="col-span-4">
@@ -84,12 +84,12 @@
                 <div class="md:w-40 relative">
                     <div class="sticky-note">
                         <p>Curso en línea
-                            <p-divider />
-                            <p-button label="Reportar Inconvenientes en esta Actividad Aquí"
-                                      [icon]="PrimeIcons.INFO_CIRCLE"
-                                      [raised]="true"
-                                      [rounded]="true"
-                                      (onClick)="filterPhones('curso')"></p-button>
+                            <!--                            <p-divider />-->
+                            <!--                            <p-button label="Reportar Inconvenientes en esta Actividad Aquí"-->
+                            <!--                                      [icon]="PrimeIcons.INFO_CIRCLE"-->
+                            <!--                                      [raised]="true"-->
+                            <!--                                      [rounded]="true"-->
+                            <!--                                      (onClick)="filterPhones('curso')"></p-button>-->
                         </p>
                     </div>
 
@@ -118,12 +118,12 @@
                     <div class="md:w-40 relative">
                         <div class="sticky-note">
                             <p>Preservación Abril
-                                <p-divider />
-                                <p-button label="Reportar Inconvenientes en esta Actividad Aquí"
-                                          [icon]="PrimeIcons.INFO_CIRCLE"
-                                          [raised]="true"
-                                          [rounded]="true"
-                                          (onClick)="filterPhones('preservacion_abril')" />
+                                <!--                                <p-divider />-->
+                                <!--                                <p-button label="Reportar Inconvenientes en esta Actividad Aquí"-->
+                                <!--                                          [icon]="PrimeIcons.INFO_CIRCLE"-->
+                                <!--                                          [raised]="true"-->
+                                <!--                                          [rounded]="true"-->
+                                <!--                                          (onClick)="filterPhones('preservacion_abril')" />-->
                             </p>
                         </div>
 
@@ -150,12 +150,12 @@
                     <div class="md:w-40 relative">
                         <div class="sticky-note">
                             <p>Preservación Mayo
-                                <p-divider />
-                                <p-button label="Reportar Inconvenientes en esta Actividad Aquí"
-                                          [icon]="PrimeIcons.INFO_CIRCLE"
-                                          [raised]="true"
-                                          [rounded]="true"
-                                          (onClick)="filterPhones('preservacion_mayo')" />
+                                <!--                                <p-divider />-->
+                                <!--                                <p-button label="Reportar Inconvenientes en esta Actividad Aquí"-->
+                                <!--                                          [icon]="PrimeIcons.INFO_CIRCLE"-->
+                                <!--                                          [raised]="true"-->
+                                <!--                                          [rounded]="true"-->
+                                <!--                                          (onClick)="filterPhones('preservacion_mayo')" />-->
                             </p>
                         </div>
 
@@ -185,12 +185,12 @@
                     <div class="md:w-40 relative">
                         <div class="sticky-note">
                             <p>Gasolineras Abril
-                                <p-divider />
-                                <p-button label="Reportar Inconvenientes en esta Actividad Aquí"
-                                          [icon]="PrimeIcons.INFO_CIRCLE"
-                                          [raised]="true"
-                                          [rounded]="true"
-                                          (onClick)="filterPhones('levantamiento_abril')" />
+                                <!--                                <p-divider />-->
+                                <!--                                <p-button label="Reportar Inconvenientes en esta Actividad Aquí"-->
+                                <!--                                          [icon]="PrimeIcons.INFO_CIRCLE"-->
+                                <!--                                          [raised]="true"-->
+                                <!--                                          [rounded]="true"-->
+                                <!--                                          (onClick)="filterPhones('levantamiento_abril')" />-->
                             </p>
                         </div>
 
@@ -219,12 +219,12 @@
                         <div class="sticky-note">
 
                             <p>Encuestas Turísticas Mayo
-                                <p-divider />
-                                <p-button label="Reportar Inconvenientes en esta Actividad Aquí"
-                                          [icon]="PrimeIcons.INFO_CIRCLE"
-                                          [raised]="true"
-                                          [rounded]="true"
-                                          (onClick)="filterPhones('levantamiento_mayo')" />
+                                <!--                                <p-divider />-->
+                                <!--                                <p-button label="Reportar Inconvenientes en esta Actividad Aquí"-->
+                                <!--                                          [icon]="PrimeIcons.INFO_CIRCLE"-->
+                                <!--                                          [raised]="true"-->
+                                <!--                                          [rounded]="true"-->
+                                <!--                                          (onClick)="filterPhones('levantamiento_mayo')" />-->
                             </p>
                         </div>
 
@@ -282,11 +282,11 @@
         <h4>{{ filteredPhones?.label }}</h4>
     </ng-template>
 
-<!--    <p style="font-size: 16px">-->
-<!--        Para ser atendido por favor mencionar el siguiente código-->
-<!--    </p>-->
+    <!--    <p style="font-size: 16px">-->
+    <!--        Para ser atendido por favor mencionar el siguiente código-->
+    <!--    </p>-->
 
-<!--    <p>Código de verificación: <b>{{ transactionalCode }}</b></p>-->
+    <!--    <p>Código de verificación: <b>{{ transactionalCode }}</b></p>-->
 
     @for (phone of filteredPhones?.phones; track phone) {
         <p-inputgroup>
